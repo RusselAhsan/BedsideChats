@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".activities.MainActivity">
+
+    <TextView
+        android:id="@+id/title_textView"
+        android:layout_width="661dp"
+
+        android:layout_height="161dp"
+        android:background="@drawable/background"
+        android:text="Bedside Chats!"
+        android:textAlignment="center"
+        android:textColor="@color/whiteFont"
+        android:textSize="100sp"
+        app:fontFamily="@font/assistant"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.17" />
+
+
+    <TextView
+        android:id="@+id/select_textView"
+        android:layout_width="513dp"
+        android:layout_height="110dp"
+        android:text="Select an option"
+        android:textAlignment="center"
+        android:textColor="@color/whiteFont"
+        android:textSize="70sp"
+        app:fontFamily="@font/assistant"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.391" />
+
+    <Button
+        android:id="@+id/continueGuest_button"
+        android:layout_width="354dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Continue as Guest"
+        android:textColor="@color/whiteFont"
+        android:textSize="30sp"
+        app:fontFamily="@font/assistant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/select_textView" />
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="358dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="28dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Login"
+        android:textColor="@color/whiteFont"
+        android:textSize="30sp"
+        app:fontFamily="@font/assistant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/continueGuest_button" />
+
+    <Button
+        android:id="@+id/signup_button"
+        android:layout_width="358dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="36dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Sign Up"
+        android:textColor="@color/whiteFont"
+        android:textSize="30sp"
+        app:fontFamily="@font/assistant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_button" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

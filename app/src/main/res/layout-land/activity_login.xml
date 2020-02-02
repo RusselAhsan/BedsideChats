@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".activities.MainActivity">
+
+    <TextView
+        android:id="@+id/title_textView"
+        android:layout_width="661dp"
+
+        android:layout_height="161dp"
+        android:background="@drawable/background"
+        android:text="Bedside Chats!"
+        android:textAlignment="center"
+        android:textColor="@color/whiteFont"
+        android:textSize="100sp"
+        app:fontFamily="@font/assistant"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.17" />
+
+    <TextView
+        android:id="@+id/username_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="396dp"
+        android:layout_marginBottom="436dp"
+        android:text="Username:"
+        android:textColor="@color/whiteFont"
+        android:textSize="40sp"
+        app:fontFamily="@font/assistant"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="title_textView" />
+
+    <EditText
+        android:id="@+id/username_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:fontFamily="@font/assistant"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/whiteFont"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.552"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="316dp" />
+
+    <TextView
+        android:id="@+id/password_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="404dp"
+        android:layout_marginTop="4dp"
+        android:text="Password:"
+        android:textColor="@color/whiteFont"
+        android:textSize="40sp"
+        app:fontFamily="@font/assistant"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/username_textView" />
+
+    <EditText
+        android:id="@+id/password_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:fontFamily="@font/assistant"
+        android:inputType="textPassword"
+        android:textColor="@color/whiteFont"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="380dp" />
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="358dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="20sp"
+        android:layout_marginBottom="20sp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Login"
+        android:textColor="@color/whiteFont"
+        android:textSize="30sp"
+        app:fontFamily="@font/assistant"
+        app:layout_constraintBottom_toTopOf="@id/forgotPassword_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_textView"
+        app:layout_constraintVertical_bias="0.777" />
+
+    <Button
+        android:id="@+id/forgotPassword_button"
+        android:layout_width="358dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="588dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Forgot Password?"
+        android:textColor="@color/whiteFont"
+        android:textSize="30sp"
+        app:fontFamily="@font/assistant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
