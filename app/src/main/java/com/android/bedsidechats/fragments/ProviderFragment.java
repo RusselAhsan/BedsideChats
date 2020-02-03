@@ -15,8 +15,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.bedsidechats.R;
 
-public class LanguageFragment extends Fragment implements View.OnClickListener {
-    private String mLanguage = "English";
+public class ProviderFragment extends Fragment implements View.OnClickListener {
+    private String mProvider = "Default";
     //private FirebaseAuth mAuth;
     //private FirebaseFirestore mDatabase;
     private static String TAG = "LANG_FGMT";
@@ -26,24 +26,19 @@ public class LanguageFragment extends Fragment implements View.OnClickListener {
         View v;
 
         // TODO handle rotation
-        v = inflater.inflate(R.layout.fragment_language, container, false);
+        v = inflater.inflate(R.layout.activity_provider_selection, container, false);
 
-        Button englishButton = v.findViewById(R.id.english_button);
-        if (englishButton != null) {
-        englishButton.setOnClickListener(this);
+        Button defaultButton = v.findViewById(R.id.default_button);
+        if (defaultButton != null) {
+            defaultButton.setOnClickListener(this);
         }
-        Button spanishButton = v.findViewById(R.id.spanish_button);
-        if (spanishButton != null) {
-        spanishButton.setOnClickListener(this);
-        }
-
-        Button loginButton = v.findViewById(R.id.login_button);
-        if (loginButton != null) {
-        loginButton.setOnClickListener(this);
+        Button nurseButton = v.findViewById(R.id.nurse_button);
+        if (nurseButton != null) {
+            nurseButton.setOnClickListener(this);
         }
 
         return v;
-        }
+    }
 
     @Override
     public void onClick(View view) {
@@ -51,43 +46,32 @@ public class LanguageFragment extends Fragment implements View.OnClickListener {
 
         if (activity != null) {
             switch (view.getId()) {
-                case R.id.login_button:
+                case R.id.default_button:
+                    Log.d(TAG, "Provider: " + mProvider);
                     FragmentManager fragmentManager = getFragmentManager();
-                    Fragment fragment = new LoginFragment();
-                    if (fragmentManager != null) {
-                        fragmentManager.beginTransaction()
-                                .replace(R.id.fragment_container, fragment)
-                                .addToBackStack("language_fragment")
-                                .commit();
-                    }
-                    break;
-                case R.id.english_button:
-                    mLanguage = "English";
-                    Log.d(TAG, "Language: " + mLanguage);
-                    fragmentManager = getFragmentManager();
-                    fragment = new ProviderFragment();
+                    Fragment fragment = new InstructionsFragment();
                     Bundle args = new Bundle();
-                    args.putString("Language", mLanguage);
+                    args.putString("Provider", mProvider);
                     fragment.setArguments(args);
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.fragment_container, fragment)
-                                .addToBackStack("language_fragment")
+                                .addToBackStack("provider_fragment")
                                 .commit();
                     }
                     break;
-                case R.id.spanish_button:
-                    mLanguage = "Spanish";
-                    Log.d(TAG, "Language: " + mLanguage);
+                case R.id.nurse_button:
+                    mProvider = "Nurse";
+                    Log.d(TAG, "Provider: " + mProvider);
                     fragmentManager = getFragmentManager();
-                    fragment = new ProviderFragment();
+                    fragment = new InstructionsFragment();
                     args = new Bundle();
-                    args.putString("Language", mLanguage);
+                    args.putString("Provider", mProvider);
                     fragment.setArguments(args);
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.fragment_container, fragment)
-                                .addToBackStack("language_fragment")
+                                .addToBackStack("provider_fragment")
                                 .commit();
                     }
                     break;

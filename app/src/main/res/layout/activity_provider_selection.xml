@@ -8,24 +8,26 @@
     tools:context=".activities.MainActivity">
 
     <ImageView
-        android:id="@+id/topLeftLogo"
-        android:layout_width="40dp"
-        android:layout_height="80dp"
+        android:id="@+id/topRightLogo"
+        android:layout_width="80dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="4dp"
         android:layout_weight="1"
-        android:src="@drawable/Bedside_Chats_Card_Jacket_Logo"
-        app:layout_constraintBottom_toTopOf="title_textView"
+        android:src="@drawable/bedside_chats_card_back"
+        app:layout_constraintBottom_toTopOf="@id/title_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintHorizontal_bias="0.977"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/title_textView"
         android:layout_width="472dp"
 
-        android:layout_height="320dp"
+        android:layout_height="300dp"
         android:background="@drawable/background"
         android:text="Bedside Chats!"
         android:textAlignment="center"
@@ -39,12 +41,12 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.17"  />
+        app:layout_constraintVertical_bias="0.1"  />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="214dp"
-        android:layout_height="155dp"
+        android:id="@+id/default_button"
+        android:layout_width="200dp"
+        android:layout_height="120dp"
         android:layout_marginTop="32dp"
         android:background="@color/colorPrimaryDark"
         android:text="Default"
@@ -54,12 +56,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/description_textView" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="214dp"
-        android:layout_height="155dp"
+        android:id="@+id/nurse_button"
+        android:layout_width="200dp"
+        android:layout_height="120dp"
         android:layout_marginTop="24dp"
         android:background="@color/colorPrimaryDark"
         android:text="Nurse"
@@ -69,10 +71,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/default_button" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/description_textView"
         android:layout_width="480dp"
         android:layout_height="124dp"
         android:layout_marginTop="32dp"
@@ -84,6 +86,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/title_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
