@@ -1,4 +1,19 @@
 <resources>
-    <string name="app_name">Bedside Chats</string>
-    <string name="next_button">Next</string>
+    <string name="app_name">Bedside Chats!</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="continue_guest">Continue as Guest</string>
+    <string name="select_option">Select an option</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="password">Password:</string>
+    <string name="email">E-Mail:</string>
+    <string name="username">Username:</string>
+    <string name="select_provider">Select a card deck based on your healthcare provider</string>
+    <string name="_default">Default</string>
+    <string name="nurse">Nurse</string>z
+    <string name="instructions">Hi there! This deck of cards contains 29 questions and conversation topics. Take a few minutes to read different cards. Set aside and organize the cards that you’d like to discuss with your doctor based on your personal preferences and priorities. Your doctor will make opportunities to discuss 1-3 of the cards at a time.</string>
+    <string name="cards">Cards</string>
+    <string name="favorites">Favorites</string>
+    <string name="notes">Notes</string>
+    <string name="instruction_button">Instructions</string>
 </resources>
