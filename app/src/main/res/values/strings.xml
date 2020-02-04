@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Bedside Chats!</string>
+    <string name="app_name">Bedside Chats</string>
     <string name="login">Login</string>
     <string name="sign_up">Sign Up</string>
     <string name="continue_guest">Continue as Guest</string>
@@ -16,4 +16,6 @@
     <string name="favorites">Favorites</string>
     <string name="notes">Notes</string>
     <string name="instruction_button">Instructions</string>
+    <string name="next_button">Next</string>
+    <string name="new_user">New user? Sign up</string>
 </resources>

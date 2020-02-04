@@ -12,7 +12,6 @@
     <TextView
         android:id="@+id/title_textView"
         android:layout_width="661dp"
-
         android:layout_height="161dp"
         android:background="@drawable/background"
         android:text="@string/app_name"
