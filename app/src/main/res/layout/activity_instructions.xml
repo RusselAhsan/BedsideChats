@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
+    android:orientation="vertical"
     tools:context=".activities.MainActivity">
 
     <ImageView
@@ -26,19 +27,16 @@
     <TextView
         android:id="@+id/title_textView"
         android:layout_width="472dp"
-
         android:layout_height="300dp"
         android:background="@drawable/background"
-        android:text="Bedside Chats!"
+        android:text="@string/app_name"
         android:textAlignment="center"
         android:textColor="@color/whiteFont"
         android:textSize="100sp"
         app:fontFamily="@font/assistant"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.1" />
@@ -48,7 +46,7 @@
         android:layout_width="600dp"
         android:layout_height="500dp"
         android:background="@drawable/background"
-        android:text="Hi there! This deck of cards contains 29 questions and conversation topics. Take a few minutes to read different cards. Set aside and organize the cards that you’d like to discuss with your doctor based on your personal preferences and priorities. Your doctor will make opportunities to discuss 1-3 of the cards at a time."
+        android:text="@string/instructions"
         android:textAlignment="center"
         android:textColor="@color/whiteFont"
         android:textSize="35sp"
