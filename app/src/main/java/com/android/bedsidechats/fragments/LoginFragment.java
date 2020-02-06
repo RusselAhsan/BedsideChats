@@ -75,7 +75,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         if (activity != null) {
             switch (view.getId()) {
                 case R.id.login_button:
-                    checkLogin();
+                    // TODO: checkLogin();
+                    FragmentManager fragmentManager = getFragmentManager();
+                    Fragment fragment = new HomeFragment();
+                    if (fragmentManager != null) {
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, fragment)
+                                .addToBackStack("login_fragment")
+                                .commit();
+                    }
                     break;
                 case R.id.forgotPassword_button:
                     Log.d(TAG, "Forgot Password");
@@ -83,8 +91,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     // TODO: GIVE NEW PASSWORD? LINK TO PAGE WHERE THEY CHOOSE NEW PASSWORD?
                     break;
                 case R.id.signup_button:
-                    FragmentManager fragmentManager = getFragmentManager();
-                    Fragment fragment = new SignupFragment();
+                    fragmentManager = getFragmentManager();
+                    fragment = new SignupFragment();
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.fragment_container, fragment)
