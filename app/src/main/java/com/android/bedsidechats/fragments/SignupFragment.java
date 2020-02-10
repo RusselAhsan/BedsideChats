@@ -24,7 +24,7 @@ import android.widget.Toast;
 import android.view.Surface;
 
 import com.android.bedsidechats.R;
-import com.android.bedsidechats.helpers.Account;
+import com.android.bedsidechats.helpers.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -51,6 +51,12 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
     private static String TAG = "SIGNUP_FGMT";
     private static final int RC_SIGN_IN = 9001;
 
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v;
@@ -63,9 +69,9 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseFirestore.getInstance();
 
-        mEmailEditText = v.findViewById(R.id.email_editText);
-        mUsernameEditText = v.findViewById(R.id.username_editText);
-        mPasswordEditText = v.findViewById(R.id.password_editText);
+        mEmailEditText = v.findViewById(R.id.email_editText_signup_port);
+        mUsernameEditText = v.findViewById(R.id.username_editText_signup_port);
+        mPasswordEditText = v.findViewById(R.id.password_editText_signup_port);
 
         Button loginButton = v.findViewById(R.id.login_button);
         if (loginButton != null) {
@@ -96,34 +102,28 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
                     }
                     break;
                 case R.id.signup_button:
-                    //checkSignup();
+                    validateUser();
                     break;
             }
         }
     }
 
-
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onResume() {
+        super.onResume();
+        try {
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+            if (activity != null) {
+                ActionBar actionBar = activity.getSupportActionBar();
+                if (actionBar != null) {
+                    actionBar.setSubtitle(getResources().getString(R.string.account));
+                }
+            }
+        }
+        catch (NullPointerException npe) {
+            // TODO handle exception
+        }
     }
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        try {
-//            AppCompatActivity activity = (AppCompatActivity) getActivity();
-//            if (activity != null) {
-//                ActionBar actionBar = activity.getSupportActionBar();
-//                if (actionBar != null) {
-//                    actionBar.setSubtitle(getResources().getString(R.string.account));
-//                }
-//            }
-//        }
-//        catch (NullPointerException npe) {
-//            // TODO handle exception
-//        }
-//    }
 
 
     @Override
@@ -131,39 +131,40 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         super.onDetach();
     }
 
-//    private void validateUser() {
-//        final FragmentActivity activity = getActivity();
-//        final String email = mEmailEditText.getText().toString();
-//        final String username = mUsernameEditText.getText().toString();
-//        String password = mPasswordEditText.getText().toString();
-//        String passwordConfirm = mConfirmPassword.getText().toString();
-//        if (activity != null) {
-//            if (password.equals(passwordConfirm) && !email.equals("") &&
-//                    !password.equals("") && !username.equals("")) {
-//                Toast.makeText(activity.getApplicationContext(), "Loading... Please wait.",
-//                        Toast.LENGTH_LONG).show();
-//
-//                User user = new User(email, username, password);
-//                checkUniqueUsername(user);
-//
-//
-//            } else if ((email.equals("")) || (password.equals("")) || (passwordConfirm.equals(""))) {
-//                Toast.makeText(activity.getApplicationContext(), "One or more entries are blank.",
-//                        Toast.LENGTH_SHORT).show();
-//            } else if (!password.equals(passwordConfirm)) {
-//                Toast.makeText(activity.getApplicationContext(), "Passwords do not match.",
-//                        Toast.LENGTH_SHORT).show();
-//            } else {
-//                // TODO handle errors
-//            }
-//        }
-//    }
+    private void validateUser() {
+        final FragmentActivity activity = getActivity();
+        final String email = mEmailEditText.getText().toString();
+        final String username = mUsernameEditText.getText().toString();
+        String password = mPasswordEditText.getText().toString();
+        String passwordConfirm = mConfirmPassword.getText().toString();
+        if (activity != null) {
+            if (password.equals(passwordConfirm) && !email.equals("") &&
+                    !password.equals("") && !username.equals("")) {
+                Toast.makeText(activity.getApplicationContext(), "Loading... Please wait.",
+                        Toast.LENGTH_LONG).show();
 
-    private void addUserToFirebase(Account user) {
+                User user = new User(email, username, password);
+                //checkUniqueUsername(user);
+                createFirebaseUser(user);
+
+
+            } else if ((email.equals("")) || (password.equals("")) || (passwordConfirm.equals(""))) {
+                Toast.makeText(activity.getApplicationContext(), "One or more entries are blank.",
+                        Toast.LENGTH_SHORT).show();
+            } else if (!password.equals(passwordConfirm)) {
+                Toast.makeText(activity.getApplicationContext(), "Passwords do not match.",
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                // TODO handle errors
+            }
+        }
+    }
+
+    private void addUserToFirebase(User user) {
         Map<String, String> email = new HashMap<>();
         email.put("email", user.getEmail());
-        mDatabase.collection("users").document(user.getUsername())
-                .set(email)
+        mDatabase.collection("patients").document(user.getEmail())
+                .set(user.getUsername())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -179,7 +180,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
         Map<String, String> username = new HashMap<>();
         username.put("username", user.getUsername());
-        mDatabase.collection("user_emails").document(user.getEmail())
+        mDatabase.collection("patients").document(user.getUsername())
                 .set(username)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -195,34 +196,34 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
                 });
     }
 
-    private void checkUniqueUsername(Account user) {
-        DocumentReference docRef = mDatabase.collection("usernames")
-                .document(user.getUsername());
+//    private void checkUniqueUsername(final User user) {
+//        DocumentReference docRef = mDatabase.collection("patients")
+//                .document(user.getEmail());
+//
+//        final FragmentActivity activity = getActivity();
+//        if (activity == null) return;
+//        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    DocumentSnapshot document = task.getResult();
+//                    if (document.exists()) {
+//                        Log.d(TAG, "username is not unique");
+//                        Toast.makeText(activity.getApplicationContext(), "Username is taken!",
+//                                Toast.LENGTH_LONG).show();
+//                    } else {
+//                        Log.d(TAG, "creating firebase user");
+//                        createFirebaseUser(user);
+//                    }
+//                } else {
+//                    Log.d(TAG, "get failed with ", task.getException());
+//                }
+//            }
+//        });
+//    }
 
+    private void createFirebaseUser(final User user) {
         final FragmentActivity activity = getActivity();
-        if (activity == null) return;
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Log.d(TAG, "username is not unique");
-                        Toast.makeText(activity.getApplicationContext(), "Username is taken!",
-                                Toast.LENGTH_LONG).show();
-                    } else {
-                        Log.d(TAG, "creating firebase user");
-                        createFirebaseUser(user);
-                    }
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
-                }
-            }
-        });
-    }
-
-    private void createFirebaseUser(Account user) {
-        FragmentActivity activity = getActivity();
         if (activity == null) return;
         mAuth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {

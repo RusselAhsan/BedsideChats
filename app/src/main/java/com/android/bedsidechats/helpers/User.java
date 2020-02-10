@@ -1,16 +1,16 @@
 package com.android.bedsidechats.helpers;
 
-public class Account {
+public class User {
     private String mEmail;
     private String mUsername;
     private String mPassword;
 
 
-    public Account() {
+    public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public Account(String email, String name, String password) {
+    public User(String email, String name, String password) {
         mEmail = email;
         mUsername = name;
         mPassword = password;
