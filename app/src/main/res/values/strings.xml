@@ -6,16 +6,18 @@
     <string name="select_option">Select an option</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="password">Password:</string>
-    <string name="email">E-Mail:</string>
+    <string name="email">Email:</string>
     <string name="username">Username:</string>
     <string name="select_provider">Select a card deck based on your healthcare provider</string>
-    <string name="_default">Default</string>
+    <string name="physician">Physician</string>
     <string name="nurse">Nurse</string>z
     <string name="instructions">Hi there! This deck of cards contains 29 questions and conversation topics. Take a few minutes to read different cards. Set aside and organize the cards that you’d like to discuss with your doctor based on your personal preferences and priorities. Your doctor will make opportunities to discuss 1-3 of the cards at a time.</string>
     <string name="cards">Cards</string>
-    <string name="favorites">Favorites</string>
+    <string name="saved">Saved</string>
     <string name="notes">Notes</string>
+    <string name="providor">Notes</string>
     <string name="instruction_button">Instructions</string>
     <string name="next_button">Next</string>
     <string name="new_user">New user? Sign up</string>
+    <string name="account">Account</string>
 </resources>
