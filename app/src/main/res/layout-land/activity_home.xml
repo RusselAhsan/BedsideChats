@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@id/select_textView_home_land" />
 
     <Button
-        android:id="@+id/favorites_button_home_land"
+        android:id="@+id/saved_cards_button_home_land"
         android:layout_width="358dp"
         android:layout_height="66dp"
         android:layout_marginTop="60dp"
@@ -80,14 +80,14 @@
         android:layout_height="66dp"
         android:layout_marginTop="60dp"
         android:background="@color/colorPrimaryDark"
-        android:text="@string/notes"
+        android:text="@string/provider"
         android:textColor="@color/whiteFont"
         android:textSize="30sp"
         app:fontFamily="@font/assistant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/favorites_button_home_land" />
+        app:layout_constraintTop_toBottomOf="@+id/saved_cards_button_home_land" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

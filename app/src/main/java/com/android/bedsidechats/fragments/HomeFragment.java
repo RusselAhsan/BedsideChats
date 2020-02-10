@@ -79,7 +79,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //                                .commit();
 //                    }
                     break;
-                case R.id.favorites_button_home_port:
+                case R.id.saved_cards_button_home_port:
 //                    fragmentManager = getFragmentManager();
 //                    fragment = new FavoritesFragment();
                     //OR CARD FRAGMENT WITH FAVORITES PASSED IN
