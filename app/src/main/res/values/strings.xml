@@ -6,7 +6,7 @@
     <string name="select_option">Select an option</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="password">Password:</string>
-    <string name="email">E-Mail:</string>
+    <string name="email">Email:</string>
     <string name="username">Username:</string>
     <string name="select_provider">Select a card deck based on your healthcare provider</string>
     <string name="_default">Default</string>

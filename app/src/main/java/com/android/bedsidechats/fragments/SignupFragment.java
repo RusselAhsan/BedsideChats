@@ -8,7 +8,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
@@ -18,37 +21,48 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.view.Surface;
 
 import com.android.bedsidechats.R;
-//import com.google.android.gms.common.api.ApiException;
-//import com.google.android.gms.tasks.OnCompleteListener;
-//import com.google.android.gms.tasks.Task;
-//import com.google.firebase.auth.AuthCredential;
-//import com.google.firebase.auth.AuthResult;
-//import com.google.firebase.auth.FirebaseAuth;
-//import com.google.firebase.auth.GoogleAuthProvider;
-//import com.google.firebase.firestore.DocumentReference;
-//import com.google.firebase.firestore.DocumentSnapshot;
-//import com.google.firebase.firestore.FirebaseFirestore;
+import com.android.bedsidechats.helpers.Account;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.common.api.ApiException;
+import com.google.firebase.auth.AuthCredential;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class SignupFragment extends Fragment implements View.OnClickListener {
     private EditText mEmailEditText;
     private EditText mUsernameEditText;
     private EditText mPasswordEditText;
-    //private FirebaseAuth mAuth;
-    //private FirebaseFirestore mDatabase;
-    private static String TAG = "LOGIN_FGMT";
+    //private EditText mConfirmPassword;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore mDatabase;
+    private static String TAG = "SIGNUP_FGMT";
     private static final int RC_SIGN_IN = 9001;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v;
 
-        // TODO handle rotation
+//        Activity activity = getActivity();
+//        if (activity != null){
+//            int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
         v = inflater.inflate(R.layout.activity_sign_up, container, false);
 
-        //mAuth = FirebaseAuth.getInstance();
-        //mDatabase = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseFirestore.getInstance();
+
         mEmailEditText = v.findViewById(R.id.email_editText);
         mUsernameEditText = v.findViewById(R.id.username_editText);
         mPasswordEditText = v.findViewById(R.id.password_editText);
@@ -88,94 +102,147 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void checkSignup() {
-//        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-//        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-//                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-//            Log.d(TAG, "mobile " + connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState());
-//            Log.d(TAG, "wifi " + connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState());
-//        }
-//        else{
-//            Toast.makeText(getActivity(), "No network connection found.", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        final String email = mUsernameEditText.getText().toString();
-//        String password = mPasswordEditText.getText().toString();
-//        final Activity activity = getActivity();
-//        if (activity != null) {
-//            // check if fields are empty
-//            if (email.equals("") || password.equals("")) {
-//                Toast.makeText(activity.getApplicationContext(), "One or more fields are blank!",
-//                        Toast.LENGTH_SHORT).show();
-//                return;
-//            }
-//            mAuth.signInWithEmailAndPassword(email, password)
-//                    .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<AuthResult> task) {
-//                            if (task.isSuccessful()) {
-//                                // Sign in success, update UI with the signed-in user's information
-//                                Log.d(TAG, "signInWithEmail:success");
-//                                getUsername(email); // get username which will set shared preferences
-//                            } else {
-//                                // If sign in fails, display a message to the user.
-//                                //Log.w(TAG, "signInWithEmail:failure", task.getException());
-//                                Toast.makeText(activity, "Authentication failed.",
-//                                        Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    });
-//        } else {
-//            // TODO handle errors
-//        }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
     }
-//
-//
-//    private void getUsername(final String email) {
-//        DocumentReference userRef = mDatabase.collection("user_emails").document(email);
-//        userRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    DocumentSnapshot document = task.getResult();
-//                    if (document.exists()) {
-//                        String username = document.getString("username");
-//                        Log.d(TAG, "username: " + username);
-//                        setSharedPreferences(email, username); // store email & username in shared preferences
-//
-//                    } else {
-//                        Log.d(TAG, "No such document");
-//                    }
-//                } else {
-//                    Log.d(TAG, "get failed with ", task.getException());
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        try {
+//            AppCompatActivity activity = (AppCompatActivity) getActivity();
+//            if (activity != null) {
+//                ActionBar actionBar = activity.getSupportActionBar();
+//                if (actionBar != null) {
+//                    actionBar.setSubtitle(getResources().getString(R.string.account));
 //                }
 //            }
-//        });
-//    }
-//
-//    private void setSharedPreferences(String email, String username) {
-//        Activity activity = getActivity();
-//        if (activity != null) {
-//            SharedPreferences.Editor editor = activity.getSharedPreferences("LOGIN",
-//                    Context.MODE_PRIVATE).edit();
-//            editor.putString("email", email);
-//            editor.putString("username", username);
-//            editor.apply();
-//            Log.d("TEST", "here");
 //        }
-//
-//        startHomeActivity(username);
-//    }
-//
-//    private void startHomeActivity(String username) {
-//        Activity activity = getActivity();
-//        if (activity != null) {
-//            // start HomeActivity
-//            Intent intent = new Intent(activity, HomeActivity.class);
-//            Log.d(TAG, "inside startHomeActivity username: " + username);
-//            intent.putExtra("username", username);
-//            startActivity(intent);
-//            activity.finish();
+//        catch (NullPointerException npe) {
+//            // TODO handle exception
 //        }
 //    }
+
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
+//    private void validateUser() {
+//        final FragmentActivity activity = getActivity();
+//        final String email = mEmailEditText.getText().toString();
+//        final String username = mUsernameEditText.getText().toString();
+//        String password = mPasswordEditText.getText().toString();
+//        String passwordConfirm = mConfirmPassword.getText().toString();
+//        if (activity != null) {
+//            if (password.equals(passwordConfirm) && !email.equals("") &&
+//                    !password.equals("") && !username.equals("")) {
+//                Toast.makeText(activity.getApplicationContext(), "Loading... Please wait.",
+//                        Toast.LENGTH_LONG).show();
+//
+//                User user = new User(email, username, password);
+//                checkUniqueUsername(user);
+//
+//
+//            } else if ((email.equals("")) || (password.equals("")) || (passwordConfirm.equals(""))) {
+//                Toast.makeText(activity.getApplicationContext(), "One or more entries are blank.",
+//                        Toast.LENGTH_SHORT).show();
+//            } else if (!password.equals(passwordConfirm)) {
+//                Toast.makeText(activity.getApplicationContext(), "Passwords do not match.",
+//                        Toast.LENGTH_SHORT).show();
+//            } else {
+//                // TODO handle errors
+//            }
+//        }
+//    }
+
+    private void addUserToFirebase(Account user) {
+        Map<String, String> email = new HashMap<>();
+        email.put("email", user.getEmail());
+        mDatabase.collection("users").document(user.getUsername())
+                .set(email)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "User successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing user", e);
+                    }
+                });
+
+        Map<String, String> username = new HashMap<>();
+        username.put("username", user.getUsername());
+        mDatabase.collection("user_emails").document(user.getEmail())
+                .set(username)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "User email successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing user email", e);
+                    }
+                });
+    }
+
+    private void checkUniqueUsername(Account user) {
+        DocumentReference docRef = mDatabase.collection("usernames")
+                .document(user.getUsername());
+
+        final FragmentActivity activity = getActivity();
+        if (activity == null) return;
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d(TAG, "username is not unique");
+                        Toast.makeText(activity.getApplicationContext(), "Username is taken!",
+                                Toast.LENGTH_LONG).show();
+                    } else {
+                        Log.d(TAG, "creating firebase user");
+                        createFirebaseUser(user);
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+    }
+
+    private void createFirebaseUser(Account user) {
+        FragmentActivity activity = getActivity();
+        if (activity == null) return;
+        mAuth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
+                .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        // if successful, user is signed in
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            Toast.makeText(activity.getApplicationContext(), "User Created!",
+                                    Toast.LENGTH_SHORT).show();
+
+                            addUserToFirebase(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(activity.getApplicationContext(), "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
 }
