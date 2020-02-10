@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "136551276212",
+    "firebase_url": "https://bedside-chats.firebaseio.com",
+    "project_id": "bedside-chats",
+    "storage_bucket": "bedside-chats.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:136551276212:android:6d18407d586c3897cb01e1",
+        "android_client_info": {
+          "package_name": "com.android.bedsidechats"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "136551276212-3qc6t8be3m437aeon8vbme8q30nd223s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.bedsidechats",
+            "certificate_hash": "180e99c081bc0b196058d01c33baea050d3434e4"
+          }
+        },
+        {
+          "client_id": "136551276212-7pg7ui4p5spdcct1kdp9pi7k8bg8gnas.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUREPrbii-XzI1ZR3kPsMGQ93l3i8D3Ow"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "136551276212-7pg7ui4p5spdcct1kdp9pi7k8bg8gnas.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
