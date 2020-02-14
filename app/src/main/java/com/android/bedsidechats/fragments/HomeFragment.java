@@ -50,9 +50,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         if (cardsButton != null) {
             cardsButton.setOnClickListener(this);
         }
-        Button favoritesButton = v.findViewById(R.id.favorites_button_home_port);
-        if (favoritesButton != null) {
-            favoritesButton.setOnClickListener(this);
+        Button savedButton = v.findViewById(R.id.saved_cards_button_home_port);
+        if (savedButton != null) {
+            savedButton.setOnClickListener(this);
         }
 
         Button providerButton = v.findViewById(R.id.provider_button_home_port);
