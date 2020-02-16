@@ -126,7 +126,7 @@ public class LanguageFragment extends Fragment implements View.OnClickListener {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 languageOptions.add(document.getId());
-                                mAdapter = new LanguageAdapter(languageOptions);
+                                mAdapter = new LanguageAdapter(getActivity(), languageOptions, getFragmentManager());
                                 mLanguages.setAdapter(mAdapter);
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                             }
