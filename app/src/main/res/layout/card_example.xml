@@ -18,7 +18,8 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_margin="10dp"
-            android:background="@color/colorPrimary">
+            android:background="@color/colorPrimary"
+            >
 
 
             <ImageView
@@ -78,9 +79,11 @@
                 android:layout_below="@+id/question_content"
                 android:layout_centerHorizontal="true"
                 android:textSize="30sp"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:padding="30dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#22ff00"
+                />
 
             <View
                 android:id="@+id/card_divider_2"
