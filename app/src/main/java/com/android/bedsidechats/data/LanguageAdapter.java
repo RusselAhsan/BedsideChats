@@ -93,8 +93,8 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Langua
 
         }
 
-        public void updateAppLanguage(String string){
-            Log.d(TAG, "New Language: " + string);
+        public void updateAppLanguage(String language){
+            Log.d(TAG, "New Language: " + language);
         }
     }
 

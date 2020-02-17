@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.bedsidechats.R;
 import com.android.bedsidechats.fragments.InstructionsFragment;
-import com.android.bedsidechats.fragments.ProviderFragment;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -33,12 +32,14 @@ public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.Provid
     private String TAG = "PRVDR_ADPTR";;
     private static FirebaseFirestore mDatabase;
     private ArrayList<String> mProviders;
+    private String mLanguageChoice;
     private Activity mContext;
     private FragmentManager mFragmentManager;
 
-    public ProviderAdapter(Activity context, ArrayList<String> providers, FragmentManager fragmentManager) {
+    public ProviderAdapter(Activity context, ArrayList<String> providers, FragmentManager fragmentManager, String language) {
         mProviders = providers;
         mDatabase = FirebaseFirestore.getInstance();
+        mLanguageChoice =  language;
         mContext = context;
         mFragmentManager = fragmentManager;
     }
@@ -48,7 +49,7 @@ public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.Provid
         View view = LayoutInflater.from(group.getContext())
                 .inflate(R.layout.provider_holder, group, false);
 
-        return new ProviderViewHolder(view, mContext, mFragmentManager);
+        return new ProviderViewHolder(view, mContext, mFragmentManager, mLanguageChoice);
     }
 
     @Override
@@ -66,13 +67,15 @@ public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.Provid
         protected Button mProviderButton;
         private String TAG = "PRVDR_HLDR";
         public String mProviderChoice;
+        public String mLanguageChoice;
         private Activity mContext;
         private FragmentManager mFragmentManager;
 
-        public ProviderViewHolder(View itemView, Activity context, FragmentManager fragmentManager) {
+        public ProviderViewHolder(View itemView, Activity context, FragmentManager fragmentManager, String language) {
             super(itemView);
             mProviderButton = itemView.findViewById(R.id.provider_button_provider_port);
             mProviderButton.setOnClickListener(this);
+            mLanguageChoice =  language;
             mContext = context;
             mFragmentManager = fragmentManager;
         }
@@ -84,7 +87,7 @@ public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.Provid
             Fragment fragment = new InstructionsFragment();
             Bundle args = new Bundle();
             args.putString("Provider", mProviderChoice);
-            //args.putString("Language", mLanguageChoice); is this needed?
+            args.putString("Language", mLanguageChoice);
             fragment.setArguments(args);
             if (mFragmentManager != null) {
                 mFragmentManager.beginTransaction()
@@ -95,8 +98,8 @@ public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.Provid
 
         }
 
-        public void chooseProvider(String string){
-            Log.d(TAG, "Provider selected: " + string);
+        public void chooseProvider(String provider){
+            Log.d(TAG, "Provider selected: " + provider);
         }
     }
 

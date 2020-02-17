@@ -8,16 +8,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.bedsidechats.R;
+import com.android.bedsidechats.data.ProviderAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class InstructionsFragment extends Fragment implements View.OnClickListener {
-    //private FirebaseAuth mAuth;
-    //private FirebaseFirestore mDatabase;
+    private FirebaseFirestore mDatabase;
+    private String mLanguage;
+    private String mProvider;
+    private TextView mInstructionsTextView;
     private static String TAG = "INSTR_FGMT";
 
     @Override
@@ -26,6 +36,12 @@ public class InstructionsFragment extends Fragment implements View.OnClickListen
 
         // TODO handle rotation
         v = inflater.inflate(R.layout.activity_instructions, container, false);
+
+        mDatabase = FirebaseFirestore.getInstance();
+        mProvider =  getArguments().getString("Provider");
+        mLanguage = getArguments().getString("Language");
+        mInstructionsTextView = v.findViewById(R.id.instructions_textView_instructions_port);
+        getInstructions(mLanguage, mProvider);
 
         Button nextButton = v.findViewById(R.id.next_button);
         if (nextButton != null) {
@@ -55,5 +71,20 @@ public class InstructionsFragment extends Fragment implements View.OnClickListen
                     break;
             }
         }
+    }
+
+    public void getInstructions(String language, String provider){
+        mDatabase.collection("languages").document(language).collection("decks").document(provider).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            mInstructionsTextView.setText(task.getResult().getString("instructions"));
+                            Log.d(TAG, "Instructions: " + task.getResult().getString("instructions"));
+                        } else {
+                            Log.d(TAG, "Error getting data: ", task.getException());
+                        }
+                    }
+                });
     }
 }
