@@ -119,7 +119,7 @@ public class LanguageFragment extends Fragment implements View.OnClickListener {
     }
 
     public void getListOfLanguages(){
-        mDatabase.collection("languages")               .get()
+        mDatabase.collection("languages").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {

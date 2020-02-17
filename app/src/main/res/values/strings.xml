@@ -15,9 +15,10 @@
     <string name="cards">Cards</string>
     <string name="saved">Saved</string>
     <string name="notes">Notes</string>
-    <string name="providor">Notes</string>
+    <string name="provider">Notes</string>
     <string name="instruction_button">Instructions</string>
     <string name="next_button">Next</string>
-    <string name="new_user">New user? Sign up</string>
+    <string name="new_user_sign_up">New user? Sign up</string>
+    <string name="new_user_select_language">New user? Select a language</string>
     <string name="account">Account</string>
 </resources>
