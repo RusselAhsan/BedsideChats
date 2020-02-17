@@ -65,7 +65,7 @@
         android:layout_height="66dp"
         android:layout_marginTop="60dp"
         android:background="@color/colorPrimaryDark"
-        android:text="@string/favorites"
+        android:text="@string/saved"
         android:textColor="@color/whiteFont"
         android:textSize="30sp"
         app:fontFamily="@font/assistant"
