@@ -120,7 +120,7 @@
         android:layout_height="66dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/rounded_corner_button"
-        android:text="@string/new_user"
+        android:text="@string/new_user_sign_up"
         android:textColor="@color/whiteFont"
         android:textSize="30sp"
         app:fontFamily="@font/assistant"

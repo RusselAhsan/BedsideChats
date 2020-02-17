@@ -27,7 +27,7 @@
         app:layout_constraintVertical_bias="0.17" />
 
     <TextView
-        android:id="@+id/instructions_textView"
+        android:id="@+id/instructions_textView_instructions_land"
         android:layout_width="900dp"
         android:layout_height="300dp"
         android:layout_marginBottom="204dp"
@@ -57,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/instructions_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/instructions_textView_instructions_land" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
