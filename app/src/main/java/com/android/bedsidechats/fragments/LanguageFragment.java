@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -24,8 +25,20 @@ public class LanguageFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v;
+        Activity activity = getActivity();
 
-        // TODO handle rotation
+        if (activity != null)
+        {
+            int rotation = getActivity().getWindowManager().getDefaultDisplay().getRotation();
+            if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+                v = inflater.inflate(R.layout.fragment_language, container, false);
+            } else {
+                v = inflater.inflate(R.layout.fragment_language, container, false);
+            }
+        }
+        else{
+            v = inflater.inflate(R.layout.fragment_language, container, false);
+        }
         v = inflater.inflate(R.layout.fragment_language, container, false);
 
         Button englishButton = v.findViewById(R.id.english_button);

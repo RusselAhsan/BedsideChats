@@ -12,7 +12,7 @@
     <TextView
         android:id="@+id/title_textView"
         android:layout_width="900dp"
-        android:layout_height="230dp"
+        android:layout_height="210dp"
         android:background="@drawable/background"
         android:text="@string/app_name"
         android:textAlignment="center"
@@ -24,22 +24,21 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.03" />
 
     <TextView
         android:id="@+id/instructions_textView"
-        android:layout_width="1150dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="1210dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/background"
         android:text="@string/instructions"
         android:textAlignment="center"
         android:textColor="@color/whiteFont"
-        android:textSize="40sp"
+        android:textSize="35sp"
         app:fontFamily="@font/assistant"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_textView" />
 

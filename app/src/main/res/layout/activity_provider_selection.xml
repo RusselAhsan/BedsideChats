@@ -39,12 +39,12 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.08" />
+        app:layout_constraintVertical_bias="0.06" />
 
     <Button
         android:id="@+id/default_button"
-        android:layout_width="250dp"
-        android:layout_height="160dp"
+        android:layout_width="240dp"
+        android:layout_height="150dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/rounded_corner_button"
         android:text="@string/physician"
@@ -58,9 +58,9 @@
 
     <Button
         android:id="@+id/nurse_button"
-        android:layout_width="250dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="240dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/rounded_corner_button"
         android:text="@string/nurse"
         android:textColor="@color/whiteFont"
