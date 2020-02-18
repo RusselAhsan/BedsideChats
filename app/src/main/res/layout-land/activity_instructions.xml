@@ -10,6 +10,26 @@
 
 
     <TextView
+
+        android:id="@+id/instructions_textView_instructions_port"
+        android:layout_width="1200dp"
+
+        android:layout_height="300dp"
+        android:background="@drawable/background"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="@color/whiteFont"
+        android:textSize="40sp"
+        app:fontFamily="@font/assistant"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_textView"
+        app:layout_constraintVertical_bias="0.08" />
+
+    <TextView
         android:id="@+id/title_textView"
         android:layout_width="900dp"
         android:layout_height="210dp"
@@ -24,23 +44,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.03" />
-
-    <TextView
-        android:id="@+id/instructions_textView_instructions_land"
-        android:layout_width="1210dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/background"
-        android:text="@string/instructions"
-        android:textAlignment="center"
-        android:textColor="@color/whiteFont"
-        android:textSize="35sp"
-        app:fontFamily="@font/assistant"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_textView" />
+        app:layout_constraintVertical_bias="0.08" />
 
     <Button
         android:id="@+id/next_button"
@@ -54,7 +58,7 @@
         app:fontFamily="@font/assistant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/instructions_textView_instructions_land" />
+        app:layout_constraintTop_toBottomOf="@+id/instructions_textView_instructions_port" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
