@@ -41,11 +41,13 @@
         app:layout_constraintVertical_bias="0.05" />
 
     <TextView
-        android:id="@+id/instructions_textView"
+
+        android:id="@+id/instructions_textView_instructions_port"
         android:layout_width="650dp"
+
         android:layout_height="500dp"
         android:background="@drawable/background"
-        android:text="@string/instructions"
+        android:text=""
         android:textAlignment="center"
         android:textColor="@color/whiteFont"
         android:textSize="40sp"
@@ -71,6 +73,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/instructions_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/instructions_textView_instructions_port" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

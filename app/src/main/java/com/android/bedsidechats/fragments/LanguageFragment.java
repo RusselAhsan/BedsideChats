@@ -13,13 +13,27 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.bedsidechats.R;
+import com.android.bedsidechats.data.LanguageAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 public class LanguageFragment extends Fragment implements View.OnClickListener {
     private String mLanguage = "English";
-    //private FirebaseAuth mAuth;
-    //private FirebaseFirestore mDatabase;
+    private FirebaseFirestore mDatabase;
+    private ArrayList<String> languageOptions;
+    private RecyclerView mLanguages;
+    private RecyclerView.Adapter mAdapter;
+    private LinearLayoutManager mLinearLayoutManager;
     private static String TAG = "LANG_FGMT";
 
     @Override
@@ -41,18 +55,27 @@ public class LanguageFragment extends Fragment implements View.OnClickListener {
         }
         v = inflater.inflate(R.layout.fragment_language, container, false);
 
-        Button englishButton = v.findViewById(R.id.english_button);
-        if (englishButton != null) {
-        englishButton.setOnClickListener(this);
-        }
-        Button spanishButton = v.findViewById(R.id.spanish_button);
-        if (spanishButton != null) {
-        spanishButton.setOnClickListener(this);
-        }
+        mDatabase = FirebaseFirestore.getInstance();
+        languageOptions = new ArrayList<>();
+//        Button englishButton = v.findViewById(R.id.english_button);
+//        if (englishButton != null) {
+//        englishButton.setOnClickListener(this);
+//        }
+//        Button spanishButton = v.findViewById(R.id.spanish_button);
+//        if (spanishButton != null) {
+//        spanishButton.setOnClickListener(this);
+//        }
 
         Button loginButton = v.findViewById(R.id.login_button);
         if (loginButton != null) {
         loginButton.setOnClickListener(this);
+        }
+
+        mLanguages = v.findViewById(R.id.languages_list);
+        if (mLanguages != null){
+            mLinearLayoutManager =  new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+            mLanguages.setLayoutManager(mLinearLayoutManager);
+            getListOfLanguages();
         }
 
         return v;
@@ -74,37 +97,56 @@ public class LanguageFragment extends Fragment implements View.OnClickListener {
                                 .commit();
                     }
                     break;
-                case R.id.english_button:
-                    mLanguage = "English";
-                    Log.d(TAG, "Language: " + mLanguage);
-                    fragmentManager = getFragmentManager();
-                    fragment = new ProviderFragment();
-                    Bundle args = new Bundle();
-                    args.putString("Language", mLanguage);
-                    fragment.setArguments(args);
-                    if (fragmentManager != null) {
-                        fragmentManager.beginTransaction()
-                                .replace(R.id.fragment_container, fragment)
-                                .addToBackStack("language_fragment")
-                                .commit();
-                    }
-                    break;
-                case R.id.spanish_button:
-                    mLanguage = "Spanish";
-                    Log.d(TAG, "Language: " + mLanguage);
-                    fragmentManager = getFragmentManager();
-                    fragment = new ProviderFragment();
-                    args = new Bundle();
-                    args.putString("Language", mLanguage);
-                    fragment.setArguments(args);
-                    if (fragmentManager != null) {
-                        fragmentManager.beginTransaction()
-                                .replace(R.id.fragment_container, fragment)
-                                .addToBackStack("language_fragment")
-                                .commit();
-                    }
-                    break;
+//                case R.id.english_button:
+//                    mLanguage = "English";
+//                    Log.d(TAG, "Language: " + mLanguage);
+//                    fragmentManager = getFragmentManager();
+//                    fragment = new ProviderFragment();
+//                    Bundle args = new Bundle();
+//                    args.putString("Language", mLanguage);
+//                    fragment.setArguments(args);
+//                    if (fragmentManager != null) {
+//                        fragmentManager.beginTransaction()
+//                                .replace(R.id.fragment_container, fragment)
+//                                .addToBackStack("language_fragment")
+//                                .commit();
+//                    }
+//                    break;
+//                case R.id.spanish_button:
+//                    mLanguage = "Spanish";
+//                    Log.d(TAG, "Language: " + mLanguage);
+//                    fragmentManager = getFragmentManager();
+//                    fragment = new ProviderFragment();
+//                    args = new Bundle();
+//                    args.putString("Language", mLanguage);
+//                    fragment.setArguments(args);
+//                    if (fragmentManager != null) {
+//                        fragmentManager.beginTransaction()
+//                                .replace(R.id.fragment_container, fragment)
+//                                .addToBackStack("language_fragment")
+//                                .commit();
+//                    }
+//                    break;
             }
         }
+    }
+
+    public void getListOfLanguages(){
+        mDatabase.collection("languages").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                languageOptions.add(document.getId());
+                                mAdapter = new LanguageAdapter(getActivity(), languageOptions, getFragmentManager());
+                                mLanguages.setAdapter(mAdapter);
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
     }
 }

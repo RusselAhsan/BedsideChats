@@ -112,7 +112,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
                     }
                     break;
                 case R.id.signup_button:
-                    validateUser();
+                    //validateUser();
                     break;
             }
         }
@@ -141,34 +141,34 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         super.onDetach();
     }
 
-    private void validateUser() {
-        final FragmentActivity activity = getActivity();
-        final String email = mEmailEditText.getText().toString();
-        final String username = mUsernameEditText.getText().toString();
-        String password = mPasswordEditText.getText().toString();
-        String passwordConfirm = mConfirmPassword.getText().toString();
-        if (activity != null) {
-            if (password.equals(passwordConfirm) && !email.equals("") &&
-                    !password.equals("") && !username.equals("")) {
-                Toast.makeText(activity.getApplicationContext(), "Loading... Please wait.",
-                        Toast.LENGTH_LONG).show();
-
-                User user = new User(email, username, password);
-                //checkUniqueUsername(user);
-                createFirebaseUser(user);
-
-
-            } else if ((email.equals("")) || (password.equals("")) || (passwordConfirm.equals(""))) {
-                Toast.makeText(activity.getApplicationContext(), "One or more entries are blank.",
-                        Toast.LENGTH_SHORT).show();
-            } else if (!password.equals(passwordConfirm)) {
-                Toast.makeText(activity.getApplicationContext(), "Passwords do not match.",
-                        Toast.LENGTH_SHORT).show();
-            } else {
-                // TODO handle errors
-            }
-        }
-    }
+//    private void validateUser() {
+//        final FragmentActivity activity = getActivity();
+//        final String email = mEmailEditText.getText().toString();
+//        final String username = mUsernameEditText.getText().toString();
+//        String password = mPasswordEditText.getText().toString();
+//        String passwordConfirm = mConfirmPassword.getText().toString();
+//        if (activity != null) {
+//            if (password.equals(passwordConfirm) && !email.equals("") &&
+//                    !password.equals("") && !username.equals("")) {
+//                Toast.makeText(activity.getApplicationContext(), "Loading... Please wait.",
+//                        Toast.LENGTH_LONG).show();
+//
+//                User user = new User(email, username, password);
+//                //checkUniqueUsername(user);
+//                createFirebaseUser(user);
+//
+//
+//            } else if ((email.equals("")) || (password.equals("")) || (passwordConfirm.equals(""))) {
+//                Toast.makeText(activity.getApplicationContext(), "One or more entries are blank.",
+//                        Toast.LENGTH_SHORT).show();
+//            } else if (!password.equals(passwordConfirm)) {
+//                Toast.makeText(activity.getApplicationContext(), "Passwords do not match.",
+//                        Toast.LENGTH_SHORT).show();
+//            } else {
+//                // TODO handle errors
+//            }
+//        }
+//    }
 
     private void addUserToFirebase(User user) {
         Map<String, String> email = new HashMap<>();
