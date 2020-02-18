@@ -20,8 +20,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 public class InstructionsFragment extends Fragment implements View.OnClickListener {
     private FirebaseFirestore mDatabase;
@@ -61,6 +59,8 @@ public class InstructionsFragment extends Fragment implements View.OnClickListen
                     FragmentManager fragmentManager = getFragmentManager();
                     Fragment fragment = new CardsFragment();
                     Bundle args = new Bundle();
+                    args.putString("Language", mLanguage);
+                    args.putString("Provider", mProvider);
                     fragment.setArguments(args);
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()

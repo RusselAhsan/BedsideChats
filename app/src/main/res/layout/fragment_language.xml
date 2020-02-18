@@ -31,6 +31,7 @@
         android:layout_height="400dp"
         android:layout_weight="1"
         android:divider="#00000000"
+        android:scrollbars="vertical"
         app:layout_constraintTop_toBottomOf="@+id/language_textView"
         />
 <!--    <Button-->
