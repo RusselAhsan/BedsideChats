@@ -54,7 +54,7 @@ public class ExpressoTest {
         ViewInteraction button5 = onView(allOf(withId(R.id.nurse_button)));
         button5.check(matches(isDisplayed()));
 
-        ViewInteraction appCompatButton2 = onView(allOf(withId(R.id.default_button), withText("Default")));
+        ViewInteraction appCompatButton2 = onView(allOf(withId(R.id.default_button), withText("Physician")));
         appCompatButton2.perform(click());
 
         ViewInteraction button6 = onView(allOf(withId(R.id.next_button)));

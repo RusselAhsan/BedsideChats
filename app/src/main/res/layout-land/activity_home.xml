@@ -10,23 +10,21 @@
 
     <TextView
         android:id="@+id/title_textView_home_land"
-        android:layout_width="661dp"
-        android:layout_height="161dp"
+        android:layout_width="900dp"
+        android:layout_height="210dp"
         android:background="@drawable/background"
         android:text="@string/app_name"
         android:textAlignment="center"
         android:textColor="@color/whiteFont"
-        android:textSize="100sp"
+        android:textSize="130sp"
         app:fontFamily="@font/assistant"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintTop_toBottomOf="@id/select_textView_home_land"
-        app:layout_constraintVertical_bias="0.17" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.03" />
 
     <TextView
         android:id="@+id/select_textView_home_land"
@@ -35,59 +33,55 @@
         android:text="@string/select_option"
         android:textAlignment="center"
         android:textColor="@color/whiteFont"
-        android:textSize="70sp"
+        android:textSize="100sp"
         app:fontFamily="@font/assistant"
-        app:layout_constraintBottom_toTopOf="@+id/cards_button_home_land"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_textView_home_land" />
 
     <Button
         android:id="@+id/cards_button_home_land"
-        android:layout_width="358dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="30dp"
-        android:background="@color/colorPrimaryDark"
+        android:layout_width="250dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/rounded_corner_button"
         android:text="@string/cards"
         android:textColor="@color/whiteFont"
-        android:textSize="30sp"
+        android:textSize="50sp"
         app:fontFamily="@font/assistant"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/select_textView_home_land" />
 
     <Button
         android:id="@+id/favorites_button_home_land"
-        android:layout_width="358dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="60dp"
-        android:background="@color/colorPrimaryDark"
+        android:layout_width="250dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/rounded_corner_button"
         android:text="@string/saved"
         android:textColor="@color/whiteFont"
-        android:textSize="30sp"
+        android:textSize="50sp"
         app:fontFamily="@font/assistant"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/provider_button_home_land"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cards_button_home_land" />
+        app:layout_constraintStart_toEndOf="@+id/cards_button_home_land"
+        app:layout_constraintTop_toBottomOf="@+id/select_textView_home_land" />
 
     <Button
         android:id="@+id/provider_button_home_land"
-        android:layout_width="358dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="60dp"
-        android:background="@color/colorPrimaryDark"
+        android:layout_width="250dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="96dp"
+        android:background="@drawable/rounded_corner_button"
         android:text="@string/notes"
         android:textColor="@color/whiteFont"
-        android:textSize="30sp"
+        android:textSize="50sp"
         app:fontFamily="@font/assistant"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/favorites_button_home_land" />
+        app:layout_constraintTop_toBottomOf="@+id/select_textView_home_land" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
