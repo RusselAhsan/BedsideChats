@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.08" />
 
     <TextView
         android:id="@+id/select_textView_home_port"
@@ -46,7 +46,7 @@
     <Button
         android:id="@+id/cards_button_home_port"
         android:layout_width="240dp"
-        android:layout_height="150dp"
+        android:layout_height="160dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/rounded_corner_button"
         android:text="@string/cards"
@@ -60,7 +60,7 @@
     <Button
         android:id="@+id/favorites_button_home_port"
         android:layout_width="240dp"
-        android:layout_height="150dp"
+        android:layout_height="160dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/rounded_corner_button"
         android:text="@string/saved"
@@ -75,7 +75,7 @@
     <Button
         android:id="@+id/provider_button_home_port"
         android:layout_width="240dp"
-        android:layout_height="150dp"
+        android:layout_height="160dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/rounded_corner_button"
         android:text="@string/notes"
