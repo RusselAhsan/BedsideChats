@@ -62,7 +62,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
         mCards = v.findViewById(R.id.cards_list);
         if (mCards != null){
-            mLinearLayoutManager =  new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+            mLinearLayoutManager =  new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             mCards.setLayoutManager(mLinearLayoutManager);
             getCardDeck();
         }

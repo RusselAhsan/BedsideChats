@@ -85,7 +85,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/email_editText" />
 
-    <Button
+    <carbon.widget.Button
         android:id="@+id/login_button"
         android:layout_width="200dp"
         android:layout_height="120dp"
@@ -99,9 +99,10 @@
         app:layout_constraintBottom_toTopOf="@id/forgotPassword_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_textView" />
+        app:layout_constraintTop_toBottomOf="@id/password_textView"
+       />
 
-    <Button
+    <carbon.widget.Button
         android:id="@+id/forgotPassword_button"
         android:layout_width="200dp"
         android:layout_height="120dp"
@@ -117,7 +118,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_button" />
 
-    <Button
+    <carbon.widget.Button
         android:id="@+id/signup_button"
         android:layout_width="200dp"
         android:layout_height="120dp"
