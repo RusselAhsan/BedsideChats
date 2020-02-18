@@ -45,7 +45,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
     private EditText mEmailEditText;
     private EditText mUsernameEditText;
     private EditText mPasswordEditText;
-    //private EditText mConfirmPassword;
+    private EditText mConfirmPassword;
     private FirebaseAuth mAuth;
     private FirebaseFirestore mDatabase;
     private static String TAG = "SIGNUP_FGMT";
@@ -60,10 +60,20 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v;
+        Activity activity = getActivity();
 
-//        Activity activity = getActivity();
-//        if (activity != null){
-//            int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+        if (activity != null)
+        {
+            int rotation = getActivity().getWindowManager().getDefaultDisplay().getRotation();
+            if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+                v = inflater.inflate(R.layout.activity_sign_up, container, false);
+            } else {
+                v = inflater.inflate(R.layout.activity_sign_up, container, false);
+            }
+        }
+        else{
+            v = inflater.inflate(R.layout.activity_sign_up, container, false);
+        }
         v = inflater.inflate(R.layout.activity_sign_up, container, false);
 
         mAuth = FirebaseAuth.getInstance();
