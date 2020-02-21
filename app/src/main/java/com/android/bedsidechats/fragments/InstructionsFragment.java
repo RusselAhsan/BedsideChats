@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,8 +21,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 public class InstructionsFragment extends Fragment implements View.OnClickListener {
     private FirebaseFirestore mDatabase;
@@ -33,8 +32,20 @@ public class InstructionsFragment extends Fragment implements View.OnClickListen
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v;
+        Activity activity = getActivity();
 
-        // TODO handle rotation
+        if (activity != null)
+        {
+            int rotation = getActivity().getWindowManager().getDefaultDisplay().getRotation();
+            if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+                v = inflater.inflate(R.layout.activity_instructions, container, false);
+            } else {
+                v = inflater.inflate(R.layout.activity_instructions, container, false);
+            }
+        }
+        else{
+            v = inflater.inflate(R.layout.activity_instructions, container, false);
+        }
         v = inflater.inflate(R.layout.activity_instructions, container, false);
 
         mDatabase = FirebaseFirestore.getInstance();
@@ -61,6 +72,8 @@ public class InstructionsFragment extends Fragment implements View.OnClickListen
                     FragmentManager fragmentManager = getFragmentManager();
                     Fragment fragment = new CardsFragment();
                     Bundle args = new Bundle();
+                    args.putString("Language", mLanguage);
+                    args.putString("Provider", mProvider);
                     fragment.setArguments(args);
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()

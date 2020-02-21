@@ -18,7 +18,8 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_margin="10dp"
-            android:background="@color/colorPrimary">
+            android:background="@color/colorPrimary"
+            >
 
 
             <ImageView
@@ -32,7 +33,7 @@
             </ImageView>
 
             <TextView
-                android:id="@+id/question_number"
+                android:id="@+id/questionNumber_textView_card_port"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -47,27 +48,23 @@
                 android:id="@+id/card_divider"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_below="@+id/question_number"
+                android:layout_below="@+id/questionNumber_textView_card_port"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@android:color/white" />
 
 
             <TextView
-                android:id="@+id/question_content"
+                android:id="@+id/question_textView_card_port"
                 android:layout_width="match_parent"
                 android:layout_height="600dp"
                 android:layout_below="@+id/card_divider"
                 android:layout_marginHorizontal="50dp"
+                android:text="@string/error"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:text="Where do you anticipate I will be discharged to?"
                 android:textColor="@android:color/white"
-                android:textSize="62sp">
-
-
-
-            </TextView>
+                android:textSize="62sp"/>
 
             <Button
                 android:background="@drawable/rounded_corner_button"
@@ -75,12 +72,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Saved"
-                android:layout_below="@+id/question_content"
+                android:layout_below="@+id/question_textView_card_port"
                 android:layout_centerHorizontal="true"
                 android:textSize="30sp"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:padding="30dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#22ff00"
+                />
 
             <View
                 android:id="@+id/card_divider_2"
@@ -92,7 +91,7 @@
                 android:background="@android:color/white" />
 
             <EditText
-                android:id="@+id/notes_section"
+                android:id="@+id/notes_EditText_card_port"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:layout_below="@+id/card_divider_2"
@@ -100,6 +99,7 @@
                 android:hint="Write Notes Here:"
                 android:textSize="50sp"
                 android:inputType="textMultiLine"
+                android:scrollbars="vertical"
                 android:layout_marginHorizontal="20dp"
                 android:textColorHint="@android:color/white"></EditText>
 
