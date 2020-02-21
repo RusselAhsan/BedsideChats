@@ -1,4 +1,4 @@
-package com.android.bedsidechats.helpers;
+package com.android.bedsidechats;
 
 public class User {
     private String mEmail;

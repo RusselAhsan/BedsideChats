@@ -37,7 +37,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private FirebaseAuth mAuth;
     private FirebaseFirestore mDatabase;
     private static String TAG = "LOGIN_FGMT";
-    private static final int RC_SIGN_IN = 9001;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,21 +59,22 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseFirestore.getInstance();
-        mEmailEditText = v.findViewById(R.id.email_editText);
-        mPasswordEditText = v.findViewById(R.id.password_editText);
+        mEmailEditText = v.findViewById(R.id.email_editText_login_port);
+        mPasswordEditText = v.findViewById(R.id.password_editText_login_port);
 
-        Button loginButton = v.findViewById(R.id.login_button);
+        Button loginButton = v.findViewById(R.id.login_button_login_port);
         if (loginButton != null) {
             loginButton.setOnClickListener(this);
         }
-        Button signUpButton = v.findViewById(R.id.signup_button);
-        if (signUpButton != null) {
-            signUpButton.setOnClickListener(this);
-        }
 
-        Button forgotPasswordButton = v.findViewById(R.id.forgotPassword_button);
+        Button forgotPasswordButton = v.findViewById(R.id.forgotPassword_button_login_port);
         if (forgotPasswordButton != null) {
             forgotPasswordButton.setOnClickListener(this);
+        }
+
+        Button signUpButton = v.findViewById(R.id.signup_button_login_port);
+        if (signUpButton != null) {
+            signUpButton.setOnClickListener(this);
         }
 
         return v;
@@ -86,15 +86,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         if (activity != null) {
             switch (view.getId()) {
-                case R.id.login_button:
+                case R.id.login_button_login_port:
                     checkLogin();
                     break;
-                case R.id.forgotPassword_button:
+                case R.id.forgotPassword_button_login_port:
                     Log.d(TAG, "Forgot Password");
                     forgotPasswordSendEmail();
                     // TODO: GIVE NEW PASSWORD? LINK TO PAGE WHERE THEY CHOOSE NEW PASSWORD?
                     break;
-                case R.id.signup_button:
+                case R.id.signup_button_login_port:
                     FragmentManager fragmentManager = getFragmentManager();
                     Fragment fragment = new SignupFragment();
                     if (fragmentManager != null) {
@@ -112,16 +112,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void checkLogin() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-            Log.d(TAG, "mobile " + connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState());
-            Log.d(TAG, "wifi " + connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState());
-        }
-        else{
-            Toast.makeText(getActivity(), "No network connection found.", Toast.LENGTH_SHORT).show();
-            return;
-        }
+//        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+//        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+//                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+//            Log.d(TAG, "mobile " + connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState());
+//            Log.d(TAG, "wifi " + connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState());
+//        }
+//        else{
+//            Toast.makeText(getActivity(), "No network connection found.", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
         final String email = mEmailEditText.getText().toString();
         String password = mPasswordEditText.getText().toString();
         final Activity activity = getActivity();
