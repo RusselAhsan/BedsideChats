@@ -15,7 +15,7 @@
         android:background="@color/colorPrimaryDark"
         android:text=""
         android:textColor="@color/whiteFont"
-        android:textSize="30sp" />
+        android:textSize="50sp" />
 
 
 </LinearLayout>

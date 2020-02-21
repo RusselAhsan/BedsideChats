@@ -21,4 +21,5 @@
     <string name="new_user_sign_up">New user? Sign up</string>
     <string name="new_user_select_language">New user? Select a language</string>
     <string name="account">Account</string>
+    <string name="error">Check your Internet connection.</string>
 </resources>

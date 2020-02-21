@@ -57,7 +57,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     public void onBindViewHolder(CardViewHolder holder, int position) {
         Log.d(TAG, "inside onBindViewHolder");
         String key = mQuestionMap.keySet().toArray()[position].toString();
-        holder.mQuestionNumberTextView.setText(key);
+        holder.mQuestionNumberTextView.setText("Question " + key.substring(1));
         holder.mQuestionTextView.setText(mQuestionMap.get(key));
     }
 

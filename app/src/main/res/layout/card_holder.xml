@@ -60,15 +60,11 @@
                 android:layout_height="600dp"
                 android:layout_below="@+id/card_divider"
                 android:layout_marginHorizontal="50dp"
+                android:text="@string/error"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:text="Where do you anticipate I will be discharged to?"
                 android:textColor="@android:color/white"
-                android:textSize="62sp">
-
-
-
-            </TextView>
+                android:textSize="62sp"/>
 
             <Button
                 android:background="@drawable/rounded_corner_button"

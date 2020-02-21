@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
+import androidx.recyclerview.widget.PagerSnapHelper;
 
 import com.android.bedsidechats.R;
 //import com.android.bedsidechats.data.CardAdapter;
@@ -62,7 +64,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
         mCards = v.findViewById(R.id.cards_list);
         if (mCards != null){
-            mLinearLayoutManager =  new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+            mLinearLayoutManager =  new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             mCards.setLayoutManager(mLinearLayoutManager);
             getCardDeck();
         }
@@ -132,6 +134,8 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                             Log.d(TAG, "" + mQuestionMap);
                             mAdapter = new CardAdapter(getActivity(), mQuestionMap, getFragmentManager(), mLanguageChoice, mProviderChoice);
                             mCards.setAdapter(mAdapter);
+                            SnapHelper snapHelper = new PagerSnapHelper();
+                            snapHelper.attachToRecyclerView(mCards);
                             Log.d(TAG, task.getResult().getId() + " => " + task.getResult().getData());
                         }
                         else {
