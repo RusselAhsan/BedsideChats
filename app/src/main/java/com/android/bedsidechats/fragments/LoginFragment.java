@@ -186,17 +186,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             Log.d(TAG, "in setSharedPreferences");
         }
 
-        transferToHome(username);
+        transferToHome(email, username);
     }
 
-    private void transferToHome(String username) {
+    private void transferToHome(String email, String username) {
         Activity activity = getActivity();
         if (activity != null) {
             // load HomeFragment
             FragmentManager fragmentManager = getFragmentManager();
             Fragment fragment = new HomeFragment();
             Bundle args = new Bundle();
-            args.putString("username", username);
+            args.putString("Username", username);
+            args.putString("Email", email);
             fragment.setArguments(args);
             if (fragmentManager != null) {
                 fragmentManager.beginTransaction()

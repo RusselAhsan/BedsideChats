@@ -20,20 +20,24 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.bedsidechats.R;
-//import com.google.android.gms.common.api.ApiException;
-//import com.google.android.gms.tasks.OnCompleteListener;
-//import com.google.android.gms.tasks.Task;
-//import com.google.firebase.auth.AuthCredential;
-//import com.google.firebase.auth.AuthResult;
-//import com.google.firebase.auth.FirebaseAuth;
-//import com.google.firebase.auth.GoogleAuthProvider;
-//import com.google.firebase.firestore.DocumentReference;
-//import com.google.firebase.firestore.DocumentSnapshot;
-//import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
-    //private FirebaseAuth mAuth;
-    //private FirebaseFirestore mDatabase;
+    private String mLanguage = "";
+    private String mProvider = "";
+    private String mUsername = "";
+    private String mSavedCards = "";
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore mDatabase;
     private static String TAG = "LOGIN_FGMT";
     private static final int RC_SIGN_IN = 9001;
 
@@ -56,22 +60,26 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
         v = inflater.inflate(R.layout.activity_home, container, false);
 
-        //mAuth = FirebaseAuth.getInstance();
-        //mDatabase = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseFirestore.getInstance();
 
         Button cardsButton = v.findViewById(R.id.cards_button_home_port);
         if (cardsButton != null) {
             cardsButton.setOnClickListener(this);
         }
-        Button favoritesButton = v.findViewById(R.id.favorites_button_home_port);
-        if (favoritesButton != null) {
-            favoritesButton.setOnClickListener(this);
+        Button savedButton = v.findViewById(R.id.saved_button_home_port);
+        if (savedButton != null) {
+            savedButton.setOnClickListener(this);
         }
 
         Button providerButton = v.findViewById(R.id.provider_button_home_port);
         if (providerButton != null) {
             providerButton.setOnClickListener(this);
         }
+
+        String email = getArguments().getString("Email");
+        mUsername = getArguments().getString("Username");
+        getUserPreferences(email);
 
         return v;
     }
@@ -83,38 +91,64 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         if (activity != null) {
             switch (view.getId()) {
                 case R.id.cards_button_home_port:
-//                    FragmentManager fragmentManager = getFragmentManager();
-//                    Fragment fragment = new CardsFragment();
-//                    if (fragmentManager != null) {
-//                        fragmentManager.beginTransaction()
-//                                .replace(R.id.fragment_container, fragment)
-//                                .addToBackStack("home_fragment")
-//                                .commit();
-//                    }
+                    FragmentManager fragmentManager = getFragmentManager();
+                    Fragment fragment = new CardsFragment();
+                    Bundle args = new Bundle();
+                    args.putString("Language", mLanguage);
+                    args.putString("Provider", mProvider);
+                    fragment.setArguments(args);
+                    if (fragmentManager != null) {
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, fragment)
+                                .addToBackStack("home_fragment")
+                                .commit();
+                    }
                     break;
-                case R.id.favorites_button_home_port:
-//                    fragmentManager = getFragmentManager();
-//                    fragment = new FavoritesFragment();
+                case R.id.saved_button_home_port:
+                    fragmentManager = getFragmentManager();
+                    fragment = new SavedFragment();
                     //OR CARD FRAGMENT WITH FAVORITES PASSED IN
-//                    if (fragmentManager != null) {
-//                        fragmentManager.beginTransaction()
-//                                .replace(R.id.fragment_container, fragment)
-//                                .addToBackStack("home_fragment")
-//                                .commit();
-//                    }
+                    args = new Bundle();
+                    args.putString("Username", mUsername);
+                    args.putString("Language", mLanguage);
+                    args.putString("Provider", mProvider);
+                    args.putString("Saved_Cards", mSavedCards);
+                    fragment.setArguments(args);
+                    if (fragmentManager != null) {
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, fragment)
+                                .addToBackStack("home_fragment")
+                                .commit();
+                    }
                     break;
                 case R.id.provider_button_home_port:
-//                    fragmentManager = getFragmentManager();
-//                    fragment = new ProviderFragment();
-//                    if (fragmentManager != null) {
-//                        fragmentManager.beginTransaction()
-//                                .replace(R.id.fragment_container, fragment)
-//                                .addToBackStack("home_fragment")
-//                                .commit();
-//                    }
+                    fragmentManager = getFragmentManager();
+                    fragment = new ProviderFragment();
+                    if (fragmentManager != null) {
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, fragment)
+                                .addToBackStack("home_fragment")
+                                .commit();
+                    }
                     break;
             }
         }
     }
 
+    public void getUserPreferences(String email){
+        mDatabase.collection("patients").document(email).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            mLanguage = (task.getResult().getString("language"));
+                            mProvider = (task.getResult().getString("recent_deck"));
+                            mSavedCards = (task.getResult().getString("saved_cards"));
+                            Log.d(TAG, "Instructions: " + task.getResult().getString("instructions"));
+                        } else {
+                            Log.d(TAG, "Error getting data: ", task.getException());
+                        }
+                    }
+                });
+    }
 }
