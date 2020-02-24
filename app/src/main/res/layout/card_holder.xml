@@ -10,9 +10,9 @@
 
         <LinearLayout
             android:id="@+id/card_inside"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/card_no_border"
             android:orientation="vertical"
             >
 

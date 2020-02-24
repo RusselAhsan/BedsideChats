@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -88,6 +89,11 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                                 .commit();
                     }
                     break;
+                case R.id.card_save_button:
+                    Log.d(TAG, "border change.");
+                    view.findViewById((R.id.card_inside)).setBackgroundResource(R.drawable.card_border);
+                    break;
+
 //                case R.id.english_button:
 //                    mLanguage = "English";
 //                    Log.d(TAG, "Language: " + mLanguage);
@@ -122,7 +128,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public void getCardDeck(){
+    public void getCardDeck() {
         mDatabase.collection("languages").document(mLanguageChoice).collection("decks").document(mProviderChoice).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -137,11 +143,11 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                             SnapHelper snapHelper = new PagerSnapHelper();
                             snapHelper.attachToRecyclerView(mCards);
                             Log.d(TAG, task.getResult().getId() + " => " + task.getResult().getData());
-                        }
-                        else {
+                        } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                     }
                 });
     }
+
 }
