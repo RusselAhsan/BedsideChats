@@ -1,7 +1,6 @@
 package com.android.bedsidechats.fragments;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +17,6 @@ import androidx.recyclerview.widget.SnapHelper;
 import androidx.recyclerview.widget.PagerSnapHelper;
 
 import com.android.bedsidechats.R;
-//import com.android.bedsidechats.data.CardAdapter;
 import com.android.bedsidechats.data.CardAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -30,6 +28,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.HashMap;
 import java.util.TreeMap;
 
+import me.relex.circleindicator.CircleIndicator2;
+
 public class CardsFragment extends Fragment implements View.OnClickListener {
     private String mLanguageChoice = "";
     private String mProviderChoice = "";
@@ -38,6 +38,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     private RecyclerView mCards;
     private RecyclerView.Adapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
+    private CircleIndicator2 indicator;
     private static String TAG = "CRD_FGMT";
 
     @Override
@@ -52,15 +53,8 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
         mLanguageChoice = getArguments() != null ? getArguments().getString("Language") : "";
         mProviderChoice = getArguments().getString("Provider");
-//        Button leftButton = v.findViewById(R.id.left_button_card_port);
-//        if (leftButton != null) {
-//            leftButton.setOnClickListener(this);
-//        }
-//
-//        Button rightButton = v.findViewById(R.id.right_button_card_port);
-//        if (rightButton != null) {
-//            rightButton.setOnClickListener(this);
-//        }
+
+        indicator = v.findViewById(R.id.slider_cards_port);
 
         mCards = v.findViewById(R.id.cards_list);
         if (mCards != null){
@@ -88,36 +82,6 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                                 .commit();
                     }
                     break;
-//                case R.id.english_button:
-//                    mLanguage = "English";
-//                    Log.d(TAG, "Language: " + mLanguage);
-//                    fragmentManager = getFragmentManager();
-//                    fragment = new ProviderFragment();
-//                    Bundle args = new Bundle();
-//                    args.putString("Language", mLanguage);
-//                    fragment.setArguments(args);
-//                    if (fragmentManager != null) {
-//                        fragmentManager.beginTransaction()
-//                                .replace(R.id.fragment_container, fragment)
-//                                .addToBackStack("language_fragment")
-//                                .commit();
-//                    }
-//                    break;
-//                case R.id.spanish_button:
-//                    mLanguage = "Spanish";
-//                    Log.d(TAG, "Language: " + mLanguage);
-//                    fragmentManager = getFragmentManager();
-//                    fragment = new ProviderFragment();
-//                    args = new Bundle();
-//                    args.putString("Language", mLanguage);
-//                    fragment.setArguments(args);
-//                    if (fragmentManager != null) {
-//                        fragmentManager.beginTransaction()
-//                                .replace(R.id.fragment_container, fragment)
-//                                .addToBackStack("language_fragment")
-//                                .commit();
-//                    }
-//                    break;
             }
         }
     }
@@ -136,6 +100,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                             mCards.setAdapter(mAdapter);
                             SnapHelper snapHelper = new PagerSnapHelper();
                             snapHelper.attachToRecyclerView(mCards);
+                            indicator.attachToRecyclerView(mCards, snapHelper);
                             Log.d(TAG, task.getResult().getId() + " => " + task.getResult().getData());
                         }
                         else {
