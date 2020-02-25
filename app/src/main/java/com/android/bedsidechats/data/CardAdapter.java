@@ -117,9 +117,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
                     Log.d(TAG, "" + mBackground.getBackground());
                     if(saved){
                         mBackground.setBackgroundResource(mUnsavedBorder);
+                        mSavedButton.setText("Tap to Save");
                         saved = false;
                     }else{
                         mBackground.setBackgroundResource(mSavedBorder);
+                        mSavedButton.setText("Tap to Unsave");
                         saved = true;
                     }
 
