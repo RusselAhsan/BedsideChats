@@ -55,7 +55,7 @@
         app:layout_constraintTop_toBottomOf="@id/select_textView_home_land" />
 
     <Button
-        android:id="@+id/favorites_button_home_land"
+        android:id="@+id/saved_button_home_land"
         android:layout_width="250dp"
         android:layout_height="160dp"
         android:layout_marginTop="100dp"

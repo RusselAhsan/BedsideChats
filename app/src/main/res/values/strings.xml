@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">Bedside Chats</string>
+    <string name="title_height">550dp</string>
+    <string name="title_width">360dp</string>
     <string name="login">Login</string>
     <string name="sign_up">Sign Up</string>
     <string name="continue_guest">Continue as Guest</string>
     <string name="select_option">Select an option</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="password">Password:</string>
+    <string name="confirmPassword">Confirm Password:</string>
     <string name="email">Email:</string>
     <string name="username">Username:</string>
     <string name="select_provider">Select a card deck based on your healthcare provider</string>

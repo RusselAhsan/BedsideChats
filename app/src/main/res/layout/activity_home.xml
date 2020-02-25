@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@id/select_textView_home_port" />
 
     <Button
-        android:id="@+id/favorites_button_home_port"
+        android:id="@+id/saved_button_home_port"
         android:layout_width="240dp"
         android:layout_height="160dp"
         android:layout_marginTop="60dp"
@@ -85,7 +85,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/favorites_button_home_port" />
+        app:layout_constraintTop_toBottomOf="@+id/saved_button_home_port" />
 
 <!--    <Button-->
 <!--        android:id="@+id/instruction_button"-->
