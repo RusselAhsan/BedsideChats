@@ -13,10 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/card_no_border"
-            android:orientation="vertical"
-            >
-
-
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/questionNumber_textView_card_port"
@@ -25,7 +22,7 @@
                 android:text="Question"
                 android:gravity="center_horizontal"
                 android:textColor="@android:color/white"
-                android:textSize="70sp"
+                android:textSize="60sp"
                 android:textStyle="bold"
                 android:layout_marginVertical="20dp"></TextView>
 
@@ -41,25 +38,25 @@
             <TextView
                 android:id="@+id/question_textView_card_port"
                 android:layout_width="match_parent"
-                android:layout_height="600dp"
+                android:layout_height="500dp"
                 android:layout_marginHorizontal="50dp"
                 android:text="@string/error"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
-                android:textSize="62sp"/>
+                android:textSize="52sp"/>
 
             <Button
                 android:background="@drawable/rounded_corner_button"
                 android:id="@+id/card_save_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/saved"
+                android:text=""
                 android:layout_centerHorizontal="true"
-                android:textSize="50sp"
+                android:textSize="40sp"
                 android:textColor="@android:color/black"
                 android:padding="30dp"
-                android:layout_marginHorizontal="125dp"
+                android:layout_marginHorizontal="90dp"
                 android:layout_marginVertical="20dp"
                 android:backgroundTint="@color/savedColor"
                 />
@@ -72,18 +69,27 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="20dp"/>
 
-            <EditText
-                android:id="@+id/notes_EditText_card_port"
+            <LinearLayout
+                android:id="@+id/linlayouttest"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_below="@+id/card_divider_2"
                 android:gravity="top"
-                android:hint="Write Notes Here:"
-                android:textSize="50sp"
-                android:inputType="textMultiLine"
-                android:scrollbars="vertical"
-                android:layout_marginHorizontal="20dp"
-                android:textColorHint="@android:color/white"
-                android:layout_marginBottom="20dp"></EditText>
+                >
+                <EditText
+                    android:id="@+id/notes_EditText_card_port"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/card_divider_2"
+                    android:gravity="top"
+                    android:hint="Write Notes Here:"
+                    android:textSize="45sp"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:layout_marginHorizontal="20dp"
+                    android:textColorHint="@android:color/white"
+                    android:textColor="@android:color/white"></EditText>
+            </LinearLayout>
         </LinearLayout>
 
     <ImageView
@@ -92,7 +98,7 @@
         android:layout_gravity="top"
         android:alpha="0.1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="120dp"
         android:src="@drawable/logo"/>
 
 </androidx.cardview.widget.CardView>
