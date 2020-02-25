@@ -2,6 +2,8 @@
     <string name="app_name">Bedside Chats</string>
     <string name="title_height">550dp</string>
     <string name="title_width">360dp</string>
+    <string name="font">sans-serif-condensed-light</string>
+    <string name="fontTitle">sans-serif-condensed</string>
     <string name="login">Login</string>
     <string name="sign_up">Sign Up</string>
     <string name="continue_guest">Continue as Guest</string>

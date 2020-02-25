@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="portrait_margin_top">40dp</dimen>
+    <dimen name="landscape_margin_top">20dp</dimen>
+    <dimen name="landscape_margin_bottom">20dp</dimen>
+    <dimen name="margin_right_logo">20dp</dimen>
+</resources>
