@@ -2,6 +2,11 @@ package com.android.bedsidechats.data;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import java.util.Locale;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +23,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.bedsidechats.R;
+import com.android.bedsidechats.activities.MainActivity;
 import com.android.bedsidechats.fragments.ProviderFragment;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -94,7 +100,28 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Langua
         }
 
         public void updateAppLanguage(String language){
+            switch(language){
+                case "English":
+                    setLocale("en");
+                    break;
+                case "Español":
+                    setLocale("es");
+                    break;
+            }
+
             Log.d(TAG, "New Language: " + language);
+        }
+
+        public void setLocale(String lang){
+            Locale newLocale = new Locale(lang);
+            Resources res = mContext.getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = newLocale;
+            res.updateConfiguration(conf, dm);
+            Intent refresh = new Intent(mContext, MainActivity.class);
+            mContext.finish();
+            mContext.startActivity(refresh);
         }
     }
 

@@ -76,7 +76,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginEnd="96dp"
         android:background="@drawable/rounded_corner_button"
-        android:text="@string/notes"
+        android:text="@string/provider"
         android:textColor="@color/whiteFont"
         android:textSize="50sp"
         app:fontFamily="@font/assistant"

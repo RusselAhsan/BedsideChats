@@ -60,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/portrait_margin_top"
-        android:text="Already have an account?"
+        android:text="@string/already_have_an_account"
         android:textAlignment="center"
         android:textColor="@color/whiteFont"
         android:textSize="60sp"

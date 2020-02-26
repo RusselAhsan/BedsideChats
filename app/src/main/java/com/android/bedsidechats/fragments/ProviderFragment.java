@@ -85,35 +85,6 @@ public class ProviderFragment extends Fragment implements View.OnClickListener {
 
         if (activity != null) {
             switch (view.getId()) {
-//                case R.id.default_button:
-//                    Log.d(TAG, "Provider: " + mProvider);
-//                    FragmentManager fragmentManager = getFragmentManager();
-//                    Fragment fragment = new InstructionsFragment();
-//                    Bundle args = new Bundle();
-//                    args.putString("Provider", mProvider);
-//                    fragment.setArguments(args);
-//                    if (fragmentManager != null) {
-//                        fragmentManager.beginTransaction()
-//                                .replace(R.id.fragment_container, fragment)
-//                                .addToBackStack("provider_fragment")
-//                                .commit();
-//                    }
-//                    break;
-//                case R.id.nurse_button:
-//                    mProvider = "Nurse";
-//                    Log.d(TAG, "Provider: " + mProvider);
-//                    fragmentManager = getFragmentManager();
-//                    fragment = new InstructionsFragment();
-//                    args = new Bundle();
-//                    args.putString("Provider", mProvider);
-//                    fragment.setArguments(args);
-//                    if (fragmentManager != null) {
-//                        fragmentManager.beginTransaction()
-//                                .replace(R.id.fragment_container, fragment)
-//                                .addToBackStack("provider_fragment")
-//                                .commit();
-//                    }
-//                    break;
                 default:
                     break;
             }
