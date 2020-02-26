@@ -10,89 +10,64 @@
 
     <ImageView
         android:id="@+id/topRightLogo"
-        android:layout_width="80dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="150dp"
+        android:layout_height="210dp"
+        android:layout_marginTop="@dimen/portrait_margin_top"
+        android:layout_marginRight="@dimen/margin_right_logo"
         android:layout_weight="1"
         android:src="@drawable/bedside_chats_card_back"
-        app:layout_constraintBottom_toTopOf="@id/title_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.977"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
+        <!--app:layout_constraintBottom_toTopOf="@id/title_textView"-->
 
-    <TextView
-        android:id="@+id/title_textView"
-        android:layout_width="550dp"
-        android:layout_height="400dp"
-        android:background="@drawable/background"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textColor="@color/whiteFont"
-        android:textSize="130sp"
-        app:fontFamily="@font/assistant"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.08" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/title_textView"-->
+<!--        android:layout_width="550dp"-->
+<!--        android:layout_height="400dp"-->
+<!--        android:background="@drawable/background"-->
+<!--        android:text="@string/app_name"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textColor="@color/whiteFont"-->
+<!--        android:textSize="130sp"-->
+<!--        app:fontFamily="@font/assistant"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.5"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.08" />-->
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/providers_list"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="600dp"
+        android:layout_marginTop="@dimen/portrait_margin_top"
+        android:layout_marginHorizontal="100dp"
         android:layout_weight="1"
         android:divider="#00000000"
+        android:scrollbars="vertical"
+        android:scrollbarThumbVertical="@android:color/white"
+        android:scrollbarSize="10dp"
         app:layout_constraintTop_toBottomOf="@+id/description_textView"
         />
-<!--    <Button-->
-<!--        android:id="@+id/default_button"-->
-<!--        android:layout_width="200dp"-->
-<!--        android:layout_height="120dp"-->
-<!--        android:layout_marginTop="32dp"-->
-<!--        android:background="@drawable/rounded_corner_button"-->
-<!--        android:text="@string/physician"-->
-<!--        android:textColor="@color/whiteFont"-->
-<!--        android:textSize="30sp"-->
-<!--        app:fontFamily="@font/assistant"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.5"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/description_textView" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/nurse_button"-->
-<!--        android:layout_width="200dp"-->
-<!--        android:layout_height="120dp"-->
-<!--        android:layout_marginTop="24dp"-->
-<!--        android:background="@drawable/rounded_corner_button"-->
-<!--        android:text="@string/nurse"-->
-<!--        android:textColor="@color/whiteFont"-->
-<!--        android:textSize="30sp"-->
-<!--        app:fontFamily="@font/assistant"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.5"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/default_button" />-->
 
     <TextView
         android:id="@+id/description_textView"
-        android:layout_width="600dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="32dp"
-        android:text="Select a card deck based on your healthcare provider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/portrait_margin_top"
+        android:text="@string/select_provider"
         android:textAlignment="center"
         android:textColor="@color/whiteFont"
         android:textSize="50sp"
-        app:fontFamily="@font/assistant"
+        app:fontFamily="@string/font"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/topRightLogo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
