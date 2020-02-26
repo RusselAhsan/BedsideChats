@@ -33,6 +33,8 @@
         android:layout_weight="1"
         android:divider="#00000000"
         android:scrollbars="vertical"
+        android:scrollbarThumbVertical="@android:color/white"
+        android:scrollbarSize="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/language_textView" />
 

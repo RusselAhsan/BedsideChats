@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -118,10 +119,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
                     if(saved){
                         mBackground.setBackgroundResource(mUnsavedBorder);
                         mSavedButton.setText("Tap to Save");
+                        mSavedButton.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.unsavedColor));
                         saved = false;
                     }else{
                         mBackground.setBackgroundResource(mSavedBorder);
                         mSavedButton.setText("Tap to Unsave");
+                        mSavedButton.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.savedColor));
                         saved = true;
                     }
 
