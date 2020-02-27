@@ -40,13 +40,41 @@ public class LanguageTest {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class, true, true);
 
 
-
     @Test
-    public void languageButtonTest() {
-        onView(withId(R.id.languages_list))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+    public void languageViewTest() {
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.title_textView), withText("Bedside Chats")));
+        textView.check(matches(isDisplayed()));
 
+        ViewInteraction textView2 = onView(
+                allOf(withId(R.id.title_textView), withText("Bedside Chats")));
+        textView2.check(matches(withText("Bedside Chats")));
+
+        ViewInteraction textView3 = onView(
+                allOf(withId(R.id.language_textView), withText("New user? Select a language")));
+        textView3.check(matches(isDisplayed()));
+
+        ViewInteraction textView4 = onView(
+                allOf(withId(R.id.language_textView), withText("New user? Select a language")));
+        textView4.check(matches(withText("New user? Select a language")));
+
+        ViewInteraction recyclerView = onView(
+                allOf(withId(R.id.languages_list)));
+        recyclerView.check(matches(isDisplayed()));
+
+        ViewInteraction textView5 = onView(
+                allOf(withId(R.id.login_text), withText("Already have an account?")));
+        textView5.check(matches(isDisplayed()));
+
+        ViewInteraction textView6 = onView(
+                allOf(withId(R.id.login_text), withText("Already have an account?")));
+        textView6.check(matches(withText("Already have an account?")));
+
+        ViewInteraction button = onView(
+                allOf(withId(R.id.login_button)));
+        button.check(matches(isDisplayed()));
     }
+
 
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {

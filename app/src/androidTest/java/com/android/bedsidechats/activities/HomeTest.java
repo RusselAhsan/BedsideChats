@@ -29,20 +29,53 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class ExpressoTest {
+public class HomeTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<HomeActivity> mActivityTestRule = new ActivityTestRule<>(HomeActivity.class, true, true);
 
     @Test
-    public void expressoTest() {
-        ViewInteraction button = onView(allOf(withId(R.id.login_button)));
+    public void HomeTest() {
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.title_textView_home_port), withText("Bedside Chats")));
+        textView.check(matches(isDisplayed()));
+
+        ViewInteraction textView2 = onView(
+                allOf(withId(R.id.select_textView_home_port), withText("Select an option")));
+        textView2.check(matches(isDisplayed()));
+
+        ViewInteraction button = onView(
+                allOf(withId(R.id.cards_button_home_port)));
         button.check(matches(isDisplayed()));
 
+        ViewInteraction button2 = onView(
+                allOf(withId(R.id.favorites_button_home_port)));
+        button2.check(matches(isDisplayed()));
 
-        ViewInteraction appCompatButton = onView(allOf(withId(R.id.login_button), withText("Login")));
-        appCompatButton.perform(click());
+        ViewInteraction button3 = onView(
+                allOf(withId(R.id.provider_button_home_port)));
+        button3.check(matches(isDisplayed()));
+    }
 
+    @Test
+    public void homeButtonCardsTest() {
+        ViewInteraction appCompatButton2 = onView(
+                allOf(withId(R.id.cards_button_home_port), withText("Cards")));
+        appCompatButton2.perform(click());
+    }
+
+    @Test
+    public void homeButtonFavouritesTest() {
+        ViewInteraction appCompatButton3 = onView(
+                allOf(withId(R.id.favorites_button_home_port), withText("Saved")));
+        appCompatButton3.perform(click());
+    }
+
+    @Test
+    public void homeButtonProviderTest() {
+        ViewInteraction appCompatButton3 = onView(
+                allOf(withId(R.id.provider_button_home_port), withText("Notes")));
+        appCompatButton3.perform(click());
     }
 
     private static Matcher<View> childAtPosition(

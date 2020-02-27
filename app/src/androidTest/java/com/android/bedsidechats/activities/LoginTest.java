@@ -32,13 +32,10 @@ import static org.hamcrest.Matchers.allOf;
 public class LoginTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class, true, true);
 
     @Test
     public void loginViewTest() {
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.login_button), withText("Login")));
-        appCompatButton.perform(click());
 
         ViewInteraction textView = onView(
                 allOf(withId(R.id.title_textView), withText("Bedside Chats"),
@@ -78,6 +75,46 @@ public class LoginTest {
                 allOf(withId(R.id.signup_button)));
         button3.check(matches(isDisplayed()));
     }
+
+    @Test
+    public void loginButtonLoginTest() {
+        ViewInteraction button = onView(
+                allOf(withId(R.id.login_button), withText("Login"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.fragment_container),
+                                        0),
+                                5),
+                        isDisplayed()));
+        button.perform(click());
+    }
+
+    @Test
+    public void loginButtonForgotPasswordTest() {
+        ViewInteraction button2 = onView(
+                allOf(withId(R.id.forgotPassword_button), withText("Forgot Password?"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.fragment_container),
+                                        0),
+                                6),
+                        isDisplayed()));
+        button2.perform(click());
+    }
+
+    @Test
+    public void loginButtonSignUpTest() {
+        ViewInteraction button3 = onView(
+                allOf(withId(R.id.signup_button), withText("New user? Sign up"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.fragment_container),
+                                        0),
+                                7),
+                        isDisplayed()));
+        button3.perform(click());
+    }
+
 
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
