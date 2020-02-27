@@ -40,4 +40,21 @@
         app:ci_drawable="@drawable/blue_radius"
         app:ci_drawable_unselected="@drawable/blue_radius"/>
 
+    <!--placeholder text for button names EDIT SOON with images -->
+<!--    <Button-->
+<!--        android:id="@+id/card_view_left_button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerVertical="true"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:text="left"/>-->
+<!--    <Button-->
+<!--        android:id="@+id/card_view_right_button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerVertical="true"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_marginRight="10dp"-->
+<!--        android:text="right"/>-->
+
 </RelativeLayout>

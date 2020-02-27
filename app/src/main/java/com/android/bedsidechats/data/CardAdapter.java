@@ -121,18 +121,15 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
                         mBackground.setBackgroundResource(mUnsavedBorder);
                         mSavedButton.setBackgroundResource(mContext.getResources().getIdentifier("save_prompt_button", "drawable", mContext.getPackageName()));
                         mSavedButton.setText("Tap to Save");
-                        mSavedButton.setTextColor(Color.WHITE);
                         saved = false;
                     }else{
                         mBackground.setBackgroundResource(mSavedBorder);
                         mSavedButton.setBackgroundResource(mContext.getResources().getIdentifier("unsave_prompt_button", "drawable", mContext.getPackageName()));
                         mSavedButton.setText("Tap to Unsave");
-                        mSavedButton.setTextColor(Color.BLACK);
                         saved = true;
                     }
-
-
                     break;
+
             }
         }
 
