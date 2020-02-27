@@ -32,18 +32,10 @@ import static org.hamcrest.Matchers.allOf;
 public class SignUpTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<SignUpActivity> mActivityTestRule = new ActivityTestRule<>(SignUpActivity.class, true, true);
 
     @Test
     public void signUpViewTest() {
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.login_button), withText("Login")));
-        appCompatButton.perform(click());
-
-        ViewInteraction button = onView(
-                allOf(withId(R.id.signup_button), withText("New user? Sign up")));
-        button.perform(click());
-
         ViewInteraction textView = onView(
                 allOf(withId(R.id.title_textView_signup_port), withText("Bedside Chats")));
         textView.check(matches(withText("Bedside Chats")));
@@ -79,6 +71,32 @@ public class SignUpTest {
         ViewInteraction button3 = onView(
                 allOf(withId(R.id.login_button)));
         button3.check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void signUpButtonSignUpTest() {
+        ViewInteraction appCompatButton2 = onView(
+                allOf(withId(R.id.signup_button_signup_port), withText("Sign Up"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.fragment_container),
+                                        0),
+                                7),
+                        isDisplayed()));
+        appCompatButton2.perform(click());
+    }
+
+    @Test
+    public void signUpButtonLoginTest() {
+        ViewInteraction appCompatButton3 = onView(
+                allOf(withId(R.id.login_button), withText("Login"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.fragment_container),
+                                        0),
+                                8),
+                        isDisplayed()));
+        appCompatButton3.perform(click());
     }
 
     private static Matcher<View> childAtPosition(
