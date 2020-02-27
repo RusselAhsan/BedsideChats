@@ -60,7 +60,6 @@
         android:layout_marginTop="10dp"
         android:ems="15"
         android:fontFamily="@font/assistant"
-        android:inputType="textPassword"
         android:textColor="@color/whiteFont"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"

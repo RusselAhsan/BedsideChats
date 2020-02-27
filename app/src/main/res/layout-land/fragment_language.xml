@@ -26,8 +26,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/languages_list"
-        android:layout_width="771dp"
-        android:layout_height="420dp"
+        android:layout_width="770dp"
+        android:layout_height="400dp"
         android:layout_marginTop="@dimen/landscape_margin_top"
         android:layout_marginBottom="@dimen/landscape_margin_bottom"
         android:layout_weight="1"
