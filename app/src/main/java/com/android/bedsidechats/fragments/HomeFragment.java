@@ -77,9 +77,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             providerButton.setOnClickListener(this);
         }
 
-        String email = getArguments().getString("Email");
-        mUsername = getArguments().getString("Username");
-        getUserPreferences(email);
+        //String email = getArguments().getString("Email");
+        //mUsername = getArguments().getString("Username");
+        //getUserPreferences(email);
 
         return v;
     }

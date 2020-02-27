@@ -69,33 +69,21 @@ public class SignUpTest {
         button2.check(matches(isDisplayed()));
 
         ViewInteraction button3 = onView(
-                allOf(withId(R.id.login_button)));
+                allOf(withId(R.id.login_button_signup_port)));
         button3.check(matches(isDisplayed()));
     }
 
     @Test
     public void signUpButtonSignUpTest() {
         ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.signup_button_signup_port), withText("Sign Up"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.fragment_container),
-                                        0),
-                                7),
-                        isDisplayed()));
+                allOf(withId(R.id.signup_button_signup_port), withText("Sign Up")));
         appCompatButton2.perform(click());
     }
 
     @Test
     public void signUpButtonLoginTest() {
         ViewInteraction appCompatButton3 = onView(
-                allOf(withId(R.id.login_button), withText("Login"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.fragment_container),
-                                        0),
-                                8),
-                        isDisplayed()));
+                allOf(withId(R.id.login_button_signup_port), withText("Login")));
         appCompatButton3.perform(click());
     }
 
