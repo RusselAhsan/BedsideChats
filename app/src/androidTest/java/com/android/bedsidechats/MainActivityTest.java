@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class MainActivityTest extends ActivityTestRule<MainActivity> {
     private MainActivity mMainActivity;
@@ -36,6 +37,21 @@ public class MainActivityTest extends ActivityTestRule<MainActivity> {
     public void testFragmentExists() {
         assertNotNull(mLanguageFragment);
     }
+
+    @Test
+    public void testLanguageRecyclerViewNotNull() {
+        assertNotNull(mLanguageFragment.getRecyclerView());
+    }
+
+    @Test
+    public void testProviderArrayListNotNull() {
+        assertNotNull(mLanguageFragment.getLanguageList());
+    }
+
+//    @Test
+//    public void testLanguageArrayListSize() {
+//        assertTrue(mLanguageFragment.getLanguageListSize() > 0);
+//    }
 
     protected void afterActivityFinished() {
         super.afterActivityFinished();

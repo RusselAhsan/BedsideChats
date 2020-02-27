@@ -35,28 +35,39 @@ public class HomeTest {
     public ActivityTestRule<HomeActivity> mActivityTestRule = new ActivityTestRule<>(HomeActivity.class, true, true);
 
     @Test
-    public void HomeTest() {
+    public void HomeTestTitle() {
         ViewInteraction textView = onView(
                 allOf(withId(R.id.title_textView_home_port), withText("Bedside Chats")));
         textView.check(matches(isDisplayed()));
+    }
 
+    @Test
+    public void HomeTestSelectTextView() {
         ViewInteraction textView2 = onView(
                 allOf(withId(R.id.select_textView_home_port), withText("Select an option")));
         textView2.check(matches(isDisplayed()));
+    }
 
+    @Test
+    public void HomeTestCardsButton() {
         ViewInteraction button = onView(
                 allOf(withId(R.id.cards_button_home_port)));
         button.check(matches(isDisplayed()));
+    }
 
+    @Test
+    public void HomeTestSavedButton() {
         ViewInteraction button2 = onView(
                 allOf(withId(R.id.saved_button_home_port)));
         button2.check(matches(isDisplayed()));
+    }
 
+    @Test
+    public void HomeTestProvidersButton() {
         ViewInteraction button3 = onView(
                 allOf(withId(R.id.provider_button_home_port)));
         button3.check(matches(isDisplayed()));
     }
-
 
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {

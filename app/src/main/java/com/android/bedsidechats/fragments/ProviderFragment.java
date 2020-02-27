@@ -28,11 +28,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 public class ProviderFragment extends Fragment implements View.OnClickListener {
-    private String mProvider = "Physician";
-    private String mLanguage = "English";
+    public String mLanguage = "English";
     private FirebaseFirestore mDatabase;
-    private ArrayList<String> providerOptions;
-    private RecyclerView mProviders;
+    public ArrayList<String> providerOptions;
+    public RecyclerView mProviders;
     private RecyclerView.Adapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
     private static String TAG = "PRVDR_FGMT";
@@ -58,14 +57,6 @@ public class ProviderFragment extends Fragment implements View.OnClickListener {
 
         mDatabase = FirebaseFirestore.getInstance();
         providerOptions =  new ArrayList<>();
-//        Button defaultButton = v.findViewById(R.id.default_button);
-//        if (defaultButton != null) {
-//            defaultButton.setOnClickListener(this);
-//        }
-//        Button nurseButton = v.findViewById(R.id.nurse_button);
-//        if (nurseButton != null) {
-//            nurseButton.setOnClickListener(this);
-//        }
 
         mLanguage =  getArguments().getString("Language");
 
@@ -73,7 +64,7 @@ public class ProviderFragment extends Fragment implements View.OnClickListener {
         if (mProviders != null){
             mLinearLayoutManager =  new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
             mProviders.setLayoutManager(mLinearLayoutManager);
-            getListOfProviders();
+            getListOfProviders(mLanguage);
         }
 
         return v;
@@ -91,8 +82,8 @@ public class ProviderFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public void getListOfProviders(){
-        mDatabase.collection("languages").document(mLanguage).collection("decks").get()
+    public void getListOfProviders(String language){
+        mDatabase.collection("languages").document(language).collection("decks").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -108,5 +99,21 @@ public class ProviderFragment extends Fragment implements View.OnClickListener {
                         }
                     }
                 });
+    }
+
+    public int getProviderListSize(){
+        return providerOptions.size();
+    }
+
+    public String getLanguage(){
+        return mLanguage;
+    }
+
+    public RecyclerView getRecyclerView(){
+        return mProviders;
+    }
+
+    public ArrayList<String> getProviderList(){
+        return providerOptions;
     }
 }

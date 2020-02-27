@@ -35,43 +35,68 @@ public class SignUpTest {
     public ActivityTestRule<SignUpActivity> mActivityTestRule = new ActivityTestRule<>(SignUpActivity.class, true, true);
 
     @Test
-    public void signUpViewTest() {
+    public void signUpViewTestTitlTextView() {
         ViewInteraction textView = onView(
                 allOf(withId(R.id.title_textView_signup_port), withText("Bedside Chats")));
         textView.check(matches(withText("Bedside Chats")));
+    }
 
+    @Test
+    public void signUpViewTestEmailTextView() {
         ViewInteraction textView2 = onView(
                 allOf(withId(R.id.email_textView_signup_port), withText("Email:")));
         textView2.check(matches(withText("Email:")));
+    }
 
+    @Test
+    public void signUpViewTestEmailEditText() {
         ViewInteraction editText = onView(
                 allOf(withId(R.id.email_editText_signup_port)));
         editText.check(matches(withText("")));
+    }
 
+    @Test
+    public void signUpViewTestUsernameEditText() {
         ViewInteraction editText2 = onView(
                 allOf(withId(R.id.username_editText_signup_port)));
-        editText2.check(matches(withText("")));
+        editText2.check(matches(withText("")));;
+    }
 
-        ViewInteraction textView3 = onView(
-                allOf(withId(R.id.username_textView_signup_port), withText("Username:")));
-        textView3.check(matches(withText("Username:")));
+    @Test
+    public void signUpViewTestUsernameTextView() {
+        ViewInteraction editText2 = onView(
+                allOf(withId(R.id.username_editText_signup_port)));
+        editText2.check(matches(withText("")));;
+    }
 
+    @Test
+    public void signUpViewTestPasswordTextView() {
         ViewInteraction textView4 = onView(
                 allOf(withId(R.id.password_textView_signup_port), withText("Password:")));
         textView4.check(matches(withText("Password:")));
+    }
 
+    @Test
+    public void signUpViewTestPasswordEditText() {
         ViewInteraction editText3 = onView(
                 allOf(withId(R.id.password_editText_signup_port)));
         editText3.check(matches(withText("")));
+    }
 
+    @Test
+    public void signUpViewTestSignupButton() {
         ViewInteraction button2 = onView(
                 allOf(withId(R.id.signup_button_signup_port)));
         button2.check(matches(isDisplayed()));
+    }
 
+    @Test
+    public void signUpViewTestLoginButton() {
         ViewInteraction button3 = onView(
                 allOf(withId(R.id.login_button_signup_port)));
         button3.check(matches(isDisplayed()));
     }
+
 
     @Test
     public void signUpButtonSignUpTest() {
