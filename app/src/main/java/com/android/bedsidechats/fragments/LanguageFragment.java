@@ -28,7 +28,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 public class LanguageFragment extends Fragment implements View.OnClickListener {
-    private String mLanguage = "English";
     private FirebaseFirestore mDatabase;
     private ArrayList<String> languageOptions;
     private RecyclerView mLanguages;
@@ -101,14 +100,26 @@ public class LanguageFragment extends Fragment implements View.OnClickListener {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 languageOptions.add(document.getId());
-                                mAdapter = new LanguageAdapter(getActivity(), languageOptions, getFragmentManager());
-                                mLanguages.setAdapter(mAdapter);
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                             }
+                            mAdapter = new LanguageAdapter(getActivity(), languageOptions, getFragmentManager());
+                            mLanguages.setAdapter(mAdapter);
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                     }
                 });
+    }
+
+    public int getLanguageListSize(){
+        return languageOptions.size();
+    }
+
+    public RecyclerView getRecyclerView(){
+        return mLanguages;
+    }
+
+    public ArrayList<String> getLanguageList(){
+        return languageOptions;
     }
 }

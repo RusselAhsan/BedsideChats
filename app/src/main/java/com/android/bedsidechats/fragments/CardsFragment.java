@@ -98,20 +98,43 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
                             mQuestionList = (HashMap) task.getResult().getData();
-                            mQuestionList.remove("instructions");
-                            TreeMap<String, String> mQuestionMap = new TreeMap<>(mQuestionList);
-                            Log.d(TAG, "" + mQuestionMap);
-                            mAdapter = new CardAdapter(getActivity(), mQuestionMap, getFragmentManager(), mLanguageChoice, mProviderChoice);
-                            mCards.setAdapter(mAdapter);
-                            SnapHelper snapHelper = new PagerSnapHelper();
-                            snapHelper.attachToRecyclerView(mCards);
-                            indicator.attachToRecyclerView(mCards, snapHelper);
-                            Log.d(TAG, task.getResult().getId() + " => " + task.getResult().getData());
+                            if(mQuestionList != null) {
+                                mQuestionList.remove("instructions");
+                                TreeMap<String, String> mQuestionMap = new TreeMap<>(mQuestionList);
+                                Log.d(TAG, "" + mQuestionMap);
+                                mAdapter = new CardAdapter(getActivity(), mQuestionMap, getFragmentManager(), mLanguageChoice, mProviderChoice);
+                                mCards.setAdapter(mAdapter);
+                                SnapHelper snapHelper = new PagerSnapHelper();
+                                snapHelper.attachToRecyclerView(mCards);
+                                indicator.attachToRecyclerView(mCards, snapHelper);
+                                Log.d(TAG, task.getResult().getId() + " => " + task.getResult().getData());
+                            }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                     }
                 });
+    }
+
+
+    public int getCardDeckSize(){
+        return mQuestionList.size();
+    }
+
+    public String getLanguage(){
+        return mLanguageChoice;
+    }
+
+    public String getProvider(){
+        return mProviderChoice;
+    }
+
+    public RecyclerView getRecyclerView(){
+        return mCards;
+    }
+
+    public HashMap<String, String> getCardDeckMap(){
+        return mQuestionList;
     }
 
 }

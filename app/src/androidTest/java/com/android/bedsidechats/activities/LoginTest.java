@@ -35,7 +35,7 @@ public class LoginTest {
     public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class, true, true);
 
     @Test
-    public void loginViewTest() {
+    public void loginViewTestTitle() {
 
         ViewInteraction textView = onView(
                 allOf(withId(R.id.title_textView_login_port), withText("Bedside Chats"),
@@ -46,31 +46,52 @@ public class LoginTest {
                                 0),
                         isDisplayed()));
         textView.check(matches(withText("Bedside Chats")));
+    }
 
+    @Test
+    public void loginViewTestEmailTextView() {
         ViewInteraction textView2 = onView(
                 allOf(withId(R.id.email_textView_login_port), withText("Email:")));
         textView2.check(matches(withText("Email:")));
+    }
 
+    @Test
+    public void loginViewTestEmailEditText() {
         ViewInteraction editText = onView(
                 allOf(withId(R.id.email_editText_login_port)));
         editText.check(matches(withText("")));
+    }
 
+    @Test
+    public void loginViewTestPasswordTextView() {
         ViewInteraction textView3 = onView(
                 allOf(withId(R.id.password_textView_login_port), withText("Password:")));
         textView3.check(matches(withText("Password:")));
+    }
 
+    @Test
+    public void loginViewTestPasswordEditText() {
         ViewInteraction editText2 = onView(
                 allOf(withId(R.id.password_editText_login_port)));
         editText2.check(matches(withText("")));
+    }
 
+    @Test
+    public void loginViewTestLoginButton() {
         ViewInteraction button = onView(
                 allOf(withId(R.id.login_button_login_port)));
         button.check(matches(isDisplayed()));
+    }
 
+    @Test
+    public void loginViewTestForgotPasswordButton() {
         ViewInteraction button2 = onView(
                 allOf(withId(R.id.forgotPassword_button_login_port)));
         button2.check(matches(isDisplayed()));
+    }
 
+    @Test
+    public void loginViewTestSignupButton() {
         ViewInteraction button3 = onView(
                 allOf(withId(R.id.signup_button_login_port)));
         button3.check(matches(isDisplayed()));
