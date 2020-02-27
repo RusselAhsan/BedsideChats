@@ -38,7 +38,7 @@ public class LoginTest {
     public void loginViewTest() {
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.title_textView), withText("Bedside Chats"),
+                allOf(withId(R.id.title_textView_login_port), withText("Bedside Chats"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.fragment_container),
@@ -48,38 +48,38 @@ public class LoginTest {
         textView.check(matches(withText("Bedside Chats")));
 
         ViewInteraction textView2 = onView(
-                allOf(withId(R.id.email_textView), withText("Email:")));
+                allOf(withId(R.id.email_textView_login_port), withText("Email:")));
         textView2.check(matches(withText("Email:")));
 
         ViewInteraction editText = onView(
-                allOf(withId(R.id.email_editText)));
+                allOf(withId(R.id.email_editText_login_port)));
         editText.check(matches(withText("")));
 
         ViewInteraction textView3 = onView(
-                allOf(withId(R.id.password_textView), withText("Password:")));
+                allOf(withId(R.id.password_textView_login_port), withText("Password:")));
         textView3.check(matches(withText("Password:")));
 
         ViewInteraction editText2 = onView(
-                allOf(withId(R.id.password_editText)));
+                allOf(withId(R.id.password_editText_login_port)));
         editText2.check(matches(withText("")));
 
         ViewInteraction button = onView(
-                allOf(withId(R.id.login_button)));
+                allOf(withId(R.id.login_button_login_port)));
         button.check(matches(isDisplayed()));
 
         ViewInteraction button2 = onView(
-                allOf(withId(R.id.forgotPassword_button)));
+                allOf(withId(R.id.forgotPassword_button_login_port)));
         button2.check(matches(isDisplayed()));
 
         ViewInteraction button3 = onView(
-                allOf(withId(R.id.signup_button)));
+                allOf(withId(R.id.signup_button_login_port)));
         button3.check(matches(isDisplayed()));
     }
 
     @Test
     public void loginButtonLoginTest() {
         ViewInteraction button = onView(
-                allOf(withId(R.id.login_button), withText("Login"),
+                allOf(withId(R.id.login_button_login_port), withText("Login"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.fragment_container),
@@ -92,7 +92,7 @@ public class LoginTest {
     @Test
     public void loginButtonForgotPasswordTest() {
         ViewInteraction button2 = onView(
-                allOf(withId(R.id.forgotPassword_button), withText("Forgot Password?"),
+                allOf(withId(R.id.forgotPassword_button_login_port), withText("Forgot Password?"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.fragment_container),
@@ -105,7 +105,7 @@ public class LoginTest {
     @Test
     public void loginButtonSignUpTest() {
         ViewInteraction button3 = onView(
-                allOf(withId(R.id.signup_button), withText("New user? Sign up"),
+                allOf(withId(R.id.signup_button_login_port), withText("New user? Sign up"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.fragment_container),

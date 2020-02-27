@@ -9,120 +9,117 @@
     tools:context=".activities.MainActivity">
 
     <TextView
-        android:id="@+id/title_textView"
-        android:layout_width="550dp"
-        android:layout_height="400dp"
+        android:id="@+id/title_textView_login_port"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/background"
+        android:layout_marginTop="@dimen/portrait_margin_top"
+        android:padding="5dp"
         android:text="@string/app_name"
         android:textAlignment="center"
         android:textColor="@color/whiteFont"
-        android:textSize="130sp"
-        app:fontFamily="@font/assistant"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="120sp"
+        app:fontFamily="@string/fontTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.08" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
-        android:id="@+id/email_editText"
+        android:id="@+id/email_editText_login_port"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="124dp"
-        android:ems="10"
+        android:layout_marginTop="@dimen/portrait_margin_top"
+        android:ems="15"
         android:inputType="textEmailAddress"
         android:textColor="@color/whiteFont"
         android:textSize="30sp"
-        app:fontFamily="@font/assistant"
+        app:fontFamily="@string/font"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_textView" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/email_textView_login_port" />
 
     <TextView
-        android:id="@+id/email_textView"
+        android:id="@+id/email_textView_login_port"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="172dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:text="@string/email"
         android:textColor="@color/whiteFont"
         android:textSize="45sp"
-        app:fontFamily="@font/assistant"
-        app:layout_constraintEnd_toStartOf="@+id/email_editText"
+        app:fontFamily="@string/font"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_textView" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_textView_login_port" />
 
     <EditText
-        android:id="@+id/password_editText"
+        android:id="@+id/password_editText_login_port"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="124dp"
-        android:ems="10"
+        android:layout_marginTop="@dimen/portrait_margin_top"
+        android:ems="15"
         android:inputType="textPassword"
         android:textColor="@color/whiteFont"
         android:textSize="30sp"
-        app:fontFamily="@font/assistant"
+        app:fontFamily="@string/font"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email_editText" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_textView_login_port" />
 
     <TextView
-        android:id="@+id/password_textView"
+        android:id="@+id/password_textView_login_port"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="@dimen/portrait_margin_top"
         android:text="@string/password"
         android:textColor="@color/whiteFont"
         android:textSize="45sp"
-        app:fontFamily="@font/assistant"
-        app:layout_constraintEnd_toStartOf="@+id/password_editText"
+        app:fontFamily="@string/font"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email_textView" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/email_editText_login_port" />
 
-    <carbon.widget.Button
-        android:id="@+id/login_button"
-        android:layout_width="240dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="30dp"
+    <Button
+        android:id="@+id/login_button_login_port"
+        android:layout_width="500dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/rounded_corner_button"
         android:text="@string/login"
         android:textColor="@color/whiteFont"
         android:textSize="50sp"
-        app:fontFamily="@font/assistant"
+        app:fontFamily="sans-serif-condensed-light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_editText" />
+        app:layout_constraintTop_toBottomOf="@id/password_editText_login_port" />
 
-    <carbon.widget.Button
-        android:id="@+id/forgotPassword_button"
-        android:layout_width="240dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="30dp"
+    <Button
+        android:id="@+id/forgotPassword_button_login_port"
+        android:layout_width="500dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="@dimen/portrait_margin_top"
         android:background="@drawable/rounded_corner_button"
         android:text="@string/forgot_password"
         android:textColor="@color/whiteFont"
-        android:textSize="40sp"
-        app:fontFamily="@font/assistant"
+        android:textSize="50sp"
+        app:fontFamily="@string/font"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_button" />
+        app:layout_constraintTop_toBottomOf="@id/login_button_login_port" />
 
-    <carbon.widget.Button
-        android:id="@+id/signup_button"
-        android:layout_width="240dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="30dp"
+    <Button
+        android:id="@+id/signup_button_login_port"
+        android:layout_width="500dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="@dimen/portrait_margin_top"
         android:background="@drawable/rounded_corner_button"
         android:text="@string/new_user_sign_up"
         android:textColor="@color/whiteFont"
-        android:textSize="40sp"
-        app:fontFamily="@font/assistant"
+        android:textSize="50sp"
+        app:fontFamily="@string/font"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/forgotPassword_button" />
+        app:layout_constraintTop_toBottomOf="@id/forgotPassword_button_login_port" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

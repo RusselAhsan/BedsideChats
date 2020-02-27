@@ -12,6 +12,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        resConfigs "en", "es"
     }
     buildTypes {
         release {
@@ -82,6 +83,7 @@ dependencies {
     //card view
     implementation 'com.android.support:recyclerview-v7:+'
     implementation 'com.android.support:cardview-v7:+'
+    implementation 'me.relex:circleindicator:2.1.4'
 
     //carbon
     api 'tk.zielony:carbon:0.16.0.1'

@@ -6,62 +6,58 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
-import androidx.recyclerview.widget.PagerSnapHelper;
 
 import com.android.bedsidechats.R;
-import com.android.bedsidechats.data.CardAdapter;
+import com.android.bedsidechats.data.SavedCardAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.TreeMap;
 
-import me.relex.circleindicator.CircleIndicator2;
-
-public class CardsFragment extends Fragment implements View.OnClickListener {
+public class SavedFragment extends Fragment implements View.OnClickListener {
     private String mLanguageChoice = "";
     private String mProviderChoice = "";
+    private String mSavedCards = "";
+    private String mUsername = "";
     private FirebaseFirestore mDatabase;
-    private HashMap<String, String> mQuestionList;
+    private TreeMap<String, String> mQuestionMap;
+    private TreeMap<String, String> mNoteMap;
     private RecyclerView mCards;
     private RecyclerView.Adapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
-    private CircleIndicator2 indicator;
-    private static String TAG = "CRD_FGMT";
+    private static String TAG = "SVD_FGMT";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v;
 
         // TODO handle rotation
-        v = inflater.inflate(R.layout.activity_cards, container, false);
+        v = inflater.inflate(R.layout.fragment_saved, container, false);
 
         mDatabase = FirebaseFirestore.getInstance();
-        mQuestionList = new HashMap<>();
+        mQuestionMap = new TreeMap<>();
+        mNoteMap = new TreeMap<>();
 
         mLanguageChoice = getArguments() != null ? getArguments().getString("Language") : "";
         mProviderChoice = getArguments().getString("Provider");
-
-        indicator = v.findViewById(R.id.slider_cards_port);
+        mUsername = getArguments().getString("Username");
 
         mCards = v.findViewById(R.id.cards_list);
         if (mCards != null){
             mLinearLayoutManager =  new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             mCards.setLayoutManager(mLinearLayoutManager);
-            getCardDeck();
+            getSavedCards();
         }
 
         return v;
@@ -83,31 +79,34 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                                 .commit();
                     }
                     break;
-                case R.id.card_save_button:
-                    Log.d(TAG, "border change.");
-                    view.findViewById((R.id.card_inside)).setBackgroundResource(R.drawable.card_border);
-                    break;
             }
         }
     }
 
-    public void getCardDeck() {
-        mDatabase.collection("languages").document(mLanguageChoice).collection("decks").document(mProviderChoice).get()
+    public void getSavedCards(){
+        mDatabase.collection("patient_decks").document(mSavedCards).collection("decks").document("questions").get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
-                            mQuestionList = (HashMap) task.getResult().getData();
-                            mQuestionList.remove("instructions");
-                            TreeMap<String, String> mQuestionMap = new TreeMap<>(mQuestionList);
+                            mQuestionMap = (TreeMap) task.getResult().getData();
                             Log.d(TAG, "" + mQuestionMap);
-                            mAdapter = new CardAdapter(getActivity(), mQuestionMap, getFragmentManager(), mLanguageChoice, mProviderChoice);
-                            mCards.setAdapter(mAdapter);
-                            SnapHelper snapHelper = new PagerSnapHelper();
-                            snapHelper.attachToRecyclerView(mCards);
-                            indicator.attachToRecyclerView(mCards, snapHelper);
-                            Log.d(TAG, task.getResult().getId() + " => " + task.getResult().getData());
-                        } else {
+                            mDatabase.collection("patient_decks").document(mSavedCards).collection("decks").document("notes").get()
+                                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            if(task.isSuccessful()) {
+                                                mNoteMap = (TreeMap) task.getResult().getData();
+                                                Log.d(TAG, "" + mNoteMap);
+                                                mAdapter = new SavedCardAdapter(getActivity(), mQuestionMap, mNoteMap, getFragmentManager(), mLanguageChoice, mProviderChoice);
+                                                mCards.setAdapter(mAdapter);
+                                                SnapHelper snapHelper = new PagerSnapHelper();
+                                                snapHelper.attachToRecyclerView(mCards);
+                                            }
+                                        }
+                                    });
+                        }
+                        else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                     }

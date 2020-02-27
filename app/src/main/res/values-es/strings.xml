@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Bedside Chats</string>
+    <string name="title_height">550dp</string>
+    <string name="title_width">360dp</string>
+    <string name="font">sans-serif-condensed-light</string>
+    <string name="fontTitle">sans-serif-condensed</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="sign_up">Regístrate</string>
+    <string name="already_have_an_account">¿Tienes una cuenta?</string>
+    <string name="continue_guest">Continuar como invitado</string>
+    <string name="select_option">Seleccione una opción</string>
+    <string name="forgot_password">¿Olvidó tu contraseña?</string>
+    <string name="password">Contraseña:</string>
+    <string name="confirmPassword">Confirmar contraseña:</string>
+    <string name="email">Email:</string>
+    <string name="username">Nombre de usuario:</string>
+    <string name="select_provider">Seleccione un mazo de cartas basado en su proveedor de atención médica</string>
+    <string name="cards">Tarjetas</string>
+    <string name="saved">Guardado</string>
+    <string name="notes">Notas</string>
+    <string name="provider">Proveedores</string>
+    <string name="instruction_button">Instrucciones</string>
+    <string name="next_button">Siguiente</string>
+    <string name="new_user_sign_up">¿Nuevo Usuario? Regístrate</string>
+    <string name="new_user_select_language">¿Nuevo Usuario? Selecciona un idioma</string>
+    <string name="account">Cuenta</string>
+    <string name="error">Falló al cargar.</string>
+</resources>
