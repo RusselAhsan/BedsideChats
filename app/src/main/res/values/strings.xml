@@ -25,4 +25,8 @@
     <string name="new_user_select_language">New user? Select a language</string>
     <string name="account">Account</string>
     <string name="error">Failed to load.</string>
+    <string name="recent_deck">Last deck used:</string>
+    <string name="all_questions">All questions</string>
+    <string name="saved_questions">Saved questions</string>
+    <string name="different_deck">Different deck</string>
 </resources>

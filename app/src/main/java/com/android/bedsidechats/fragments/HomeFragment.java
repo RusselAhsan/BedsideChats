@@ -17,6 +17,7 @@ import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.bedsidechats.R;
@@ -37,6 +38,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private String mUsername = "";
     private String mSavedCards = "";
     private FirebaseAuth mAuth;
+    private TextView lastDeck;
     private FirebaseFirestore mDatabase;
     private static String TAG = "LOGIN_FGMT";
     private static final int RC_SIGN_IN = 9001;
@@ -77,9 +79,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             providerButton.setOnClickListener(this);
         }
 
-        //String email = getArguments().getString("Email");
-        //mUsername = getArguments().getString("Username");
-        //getUserPreferences(email);
+        String email = getArguments().getString("Email");
+        mUsername = getArguments().getString("Username");
+        getUserPreferences(email);
+
+        TextView lastDeck = v.findViewById(R.id.lastDeck_textView_home_port);
+        if(mProvider != "")
+        lastDeck.setText(lastDeck.getText() + " " + mProvider);
 
         return v;
     }

@@ -40,50 +40,65 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_textView_home_land" />
 
+    <TextView
+        android:id="@+id/lastDeck_textView_home_land"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/landscape_margin_top"
+        android:text="@string/recent_deck"
+        android:textAlignment="center"
+        android:textColor="@color/whiteFont"
+        android:textSize="75sp"
+        app:fontFamily="@string/font"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/select_textView_home_land" />
+
     <Button
         android:id="@+id/cards_button_home_land"
         android:layout_width="250dp"
         android:layout_height="160dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="60dp"
         android:layout_marginRight="50dp"
         android:background="@drawable/rounded_corner_button"
-        android:text="@string/cards"
+        android:text="@string/all_questions"
         android:textColor="@color/whiteFont"
         android:textSize="50sp"
         app:fontFamily="@string/font"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/saved_button_home_land"
-        app:layout_constraintTop_toBottomOf="@id/select_textView_home_land" />
+        app:layout_constraintTop_toBottomOf="@id/lastDeck_textView_home_land" />
 
     <Button
         android:id="@+id/saved_button_home_land"
         android:layout_width="250dp"
         android:layout_height="160dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="60dp"
         android:layout_marginRight="50dp"
         android:background="@drawable/rounded_corner_button"
-        android:text="@string/saved"
+        android:text="@string/saved_questions"
         android:textColor="@color/whiteFont"
         android:textSize="50sp"
         app:fontFamily="@string/font"
         app:layout_constraintEnd_toStartOf="@+id/provider_button_home_land"
         app:layout_constraintStart_toEndOf="@+id/cards_button_home_land"
-        app:layout_constraintTop_toBottomOf="@+id/select_textView_home_land" />
+        app:layout_constraintTop_toBottomOf="@+id/lastDeck_textView_home_land" />
 
     <Button
         android:id="@+id/provider_button_home_land"
         android:layout_width="250dp"
         android:layout_height="160dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="96dp"
         android:background="@drawable/rounded_corner_button"
-        android:text="@string/provider"
+        android:text="@string/different_deck"
         android:textColor="@color/whiteFont"
         android:textSize="50sp"
         app:fontFamily="@string/font"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toRightOf="@id/saved_button_home_land"
-        app:layout_constraintTop_toBottomOf="@+id/select_textView_home_land" />
+        app:layout_constraintTop_toBottomOf="@+id/lastDeck_textView_home_land" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
