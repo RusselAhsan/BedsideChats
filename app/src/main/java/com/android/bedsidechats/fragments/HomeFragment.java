@@ -84,8 +84,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         getUserPreferences(email);
 
         TextView lastDeck = v.findViewById(R.id.lastDeck_textView_home_port);
-        if(mProvider != "")
-        lastDeck.setText(lastDeck.getText() + " " + mProvider);
+        if(mProvider != "") {
+            lastDeck.setText(lastDeck.getText().toString() + " " + mProvider);
+        }
+        else{
+            lastDeck.setText("No recently used deck");
+        }
 
         return v;
     }
@@ -147,10 +151,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
-                            mLanguage = (task.getResult().getString("language"));
-                            mProvider = (task.getResult().getString("recent_deck"));
-                            mSavedCards = (task.getResult().getString("saved_cards"));
-                            Log.d(TAG, "Instructions: " + task.getResult().getString("instructions"));
+                            mLanguage = (task.getResult().getString("language") != null ? task.getResult().getString("language") : "");
+                            mProvider = (task.getResult().getString("recent_deck") != null ? task.getResult().getString("recent_deck") : "");
+                            mSavedCards = (task.getResult().getString("saved_cards") != null ? task.getResult().getString("saved_cards") : "");
                         } else {
                             Log.d(TAG, "Error getting data: ", task.getException());
                         }
