@@ -81,15 +81,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         String email = getArguments().getString("Email");
         mUsername = getArguments().getString("Username");
-        getUserPreferences(email);
-
-        TextView lastDeck = v.findViewById(R.id.lastDeck_textView_home_port);
-        if(mProvider != "") {
-            lastDeck.setText(lastDeck.getText().toString() + " " + mProvider);
-        }
-        else{
-            lastDeck.setText("No recently used deck");
-        }
+        getUserPreferences(email, v);
 
         return v;
     }
@@ -101,39 +93,53 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         if (activity != null) {
             switch (view.getId()) {
                 case R.id.cards_button_home_port:
-                    FragmentManager fragmentManager = getFragmentManager();
-                    Fragment fragment = new CardsFragment();
-                    Bundle args = new Bundle();
-                    args.putString("Language", mLanguage);
-                    args.putString("Provider", mProvider);
-                    fragment.setArguments(args);
-                    if (fragmentManager != null) {
-                        fragmentManager.beginTransaction()
-                                .replace(R.id.fragment_container, fragment)
-                                .addToBackStack("home_fragment")
-                                .commit();
+                    if(mProvider == ""){
+                        Toast.makeText(activity, "You have no recently selected deck!",
+                                Toast.LENGTH_SHORT).show();
+                    }else {
+                        FragmentManager fragmentManager = getFragmentManager();
+                        Fragment fragment = new CardsFragment();
+                        Bundle args = new Bundle();
+                        args.putString("Language", mLanguage);
+                        args.putString("Provider", mProvider);
+                        fragment.setArguments(args);
+                        if (fragmentManager != null) {
+                            fragmentManager.beginTransaction()
+                                    .replace(R.id.fragment_container, fragment)
+                                    .addToBackStack("home_fragment")
+                                    .commit();
+                        }
                     }
                     break;
                 case R.id.saved_button_home_port:
-                    fragmentManager = getFragmentManager();
-                    fragment = new SavedFragment();
-                    //OR CARD FRAGMENT WITH FAVORITES PASSED IN
-                    args = new Bundle();
-                    args.putString("Username", mUsername);
-                    args.putString("Language", mLanguage);
-                    args.putString("Provider", mProvider);
-                    args.putString("Saved_Cards", mSavedCards);
-                    fragment.setArguments(args);
-                    if (fragmentManager != null) {
-                        fragmentManager.beginTransaction()
-                                .replace(R.id.fragment_container, fragment)
-                                .addToBackStack("home_fragment")
-                                .commit();
+                    if(mProvider == ""){
+                        Toast.makeText(activity, "You have no saved questions!",
+                                Toast.LENGTH_SHORT).show();
+                    }else {
+                        FragmentManager fragmentManager = getFragmentManager();
+                        Fragment fragment = new SavedFragment();
+                        //OR CARD FRAGMENT WITH FAVORITES PASSED IN
+                        Bundle args = new Bundle();
+                        args.putString("Username", mUsername);
+                        args.putString("Language", mLanguage);
+                        args.putString("Provider", mProvider);
+                        args.putString("Saved_Cards", mSavedCards);
+                        fragment.setArguments(args);
+                        if (fragmentManager != null) {
+                            fragmentManager.beginTransaction()
+                                    .replace(R.id.fragment_container, fragment)
+                                    .addToBackStack("home_fragment")
+                                    .commit();
+                        }
                     }
                     break;
                 case R.id.provider_button_home_port:
-                    fragmentManager = getFragmentManager();
-                    fragment = new ProviderFragment();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    Fragment fragment = new ProviderFragment();
+                    Bundle args = new Bundle();
+                    args.putString("Username", mUsername);
+                    args.putString("Language", mLanguage);
+                    fragment.setArguments(args);
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.fragment_container, fragment)
@@ -145,15 +151,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public void getUserPreferences(String email){
+    public void getUserPreferences(String email, View v){
         mDatabase.collection("patients").document(email).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
-                            mLanguage = (task.getResult().getString("language") != null ? task.getResult().getString("language") : "");
+                            mLanguage = (task.getResult().getString("language") != null ? task.getResult().getString("language") : "English");
                             mProvider = (task.getResult().getString("recent_deck") != null ? task.getResult().getString("recent_deck") : "");
                             mSavedCards = (task.getResult().getString("saved_cards") != null ? task.getResult().getString("saved_cards") : "");
+                            lastDeck = v.findViewById(R.id.lastDeck_textView_home_port);
+                            if(mProvider != "") {
+                                lastDeck.setText(lastDeck.getText().toString() + " " + mProvider);
+                            }
+                            else{
+                                lastDeck.setText("No recently used deck");
+                            }
                         } else {
                             Log.d(TAG, "Error getting data: ", task.getException());
                         }

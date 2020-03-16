@@ -58,7 +58,7 @@ public class ProviderFragment extends Fragment implements View.OnClickListener {
         mDatabase = FirebaseFirestore.getInstance();
         providerOptions =  new ArrayList<>();
 
-        mLanguage =  getArguments().getString("Language");
+        mLanguage =  getArguments().getString("Language") != null ? getArguments().getString("Language") : "English";
 
         mProviders = v.findViewById(R.id.providers_list);
         if (mProviders != null){
