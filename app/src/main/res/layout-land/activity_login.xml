@@ -10,33 +10,32 @@
 
     <TextView
         android:id="@+id/title_textView"
-        android:layout_width="661dp"
-        android:layout_height="161dp"
+        android:layout_width="900dp"
+        android:layout_height="210dp"
         android:background="@drawable/background"
         android:text="@string/app_name"
         android:textAlignment="center"
         android:textColor="@color/whiteFont"
-        android:textSize="100sp"
+        android:textSize="130sp"
         app:fontFamily="@font/assistant"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.08" />
 
     <TextView
         android:id="@+id/email_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="472dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="32dp"
         android:text="@string/email"
         android:textColor="@color/whiteFont"
-        android:textSize="40sp"
+        android:textSize="45sp"
         app:fontFamily="@font/assistant"
-        app:layout_constraintBottom_toTopOf="@id/password_textView"
+        app:layout_constraintEnd_toStartOf="@+id/email_editText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_textView" />
 
@@ -44,15 +43,14 @@
         android:id="@+id/email_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="360dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:textColor="@color/whiteFont"
-        android:textSize="20sp"
+        android:textSize="30sp"
         app:fontFamily="@font/assistant"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.566"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_textView" />
 
     <TextView
@@ -60,72 +58,70 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="404dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="4dp"
         android:text="@string/password"
         android:textColor="@color/whiteFont"
-        android:textSize="40sp"
+        android:textSize="45sp"
         app:fontFamily="@font/assistant"
+        app:layout_constraintEnd_toStartOf="@+id/password_editText"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/email_textView" />
 
     <EditText
         android:id="@+id/password_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="352dp"
         android:ems="10"
         android:inputType="textPassword"
         android:textColor="@color/whiteFont"
-        android:textSize="20sp"
+        android:textSize="30sp"
         app:fontFamily="@font/assistant"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.566"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/email_editText" />
 
     <Button
         android:id="@+id/login_button"
-        android:layout_width="358dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="250dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="68dp"
         android:background="@drawable/rounded_corner_button"
         android:text="@string/login"
         android:textColor="@color/whiteFont"
-        android:textSize="30sp"
+        android:textSize="50sp"
         app:fontFamily="@font/assistant"
-        app:layout_constraintBottom_toTopOf="@id/forgotPassword_button"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/password_textView" />
 
     <Button
         android:id="@+id/forgotPassword_button"
-        android:layout_width="358dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="250dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="68dp"
         android:background="@drawable/rounded_corner_button"
         android:text="@string/forgot_password"
         android:textColor="@color/whiteFont"
-        android:textSize="30sp"
+        android:textSize="45sp"
         app:fontFamily="@font/assistant"
-        app:layout_constraintBottom_toTopOf="@id/signup_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_button" />
+        app:layout_constraintEnd_toStartOf="@+id/signup_button"
+        app:layout_constraintStart_toEndOf="@+id/login_button"
+        app:layout_constraintTop_toBottomOf="@+id/password_textView" />
 
     <Button
         android:id="@+id/signup_button"
-        android:layout_width="358dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="250dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="96dp"
         android:background="@drawable/rounded_corner_button"
-        android:text="@string/new_user"
+        android:text="@string/new_user_sign_up"
         android:textColor="@color/whiteFont"
-        android:textSize="30sp"
+        android:textSize="45sp"
         app:fontFamily="@font/assistant"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/forgotPassword_button" />
+        app:layout_constraintTop_toBottomOf="@+id/password_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,16 @@
     android:orientation="horizontal"
     tools:context=".activities.MainActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/providers_list"
+        android:layout_width="1277dp"
+        android:layout_height="340dp"
+        android:layout_weight="1"
+        android:divider="#00000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description_textView" />
+
     <ImageView
         android:id="@+id/topRightLogo"
         android:layout_width="80dp"
@@ -20,67 +30,36 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/title_textView"
-        android:layout_width="661dp"
-        android:layout_height="161dp"
+        android:layout_width="900dp"
+        android:layout_height="210dp"
         android:background="@drawable/background"
         android:text="@string/app_name"
         android:textAlignment="center"
         android:textColor="@color/whiteFont"
-        android:textSize="100sp"
+        android:textSize="130sp"
         app:fontFamily="@font/assistant"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.17" />
-
-    <Button
-        android:id="@+id/default_button"
-        android:layout_width="358dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="48dp"
-        android:background="@drawable/rounded_corner_button"
-        android:text="@string/physician"
-        android:textColor="@color/whiteFont"
-        android:textSize="30sp"
-        app:fontFamily="@font/assistant"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description_textView" />
-
-    <Button
-        android:id="@+id/nurse_button"
-        android:layout_width="358dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/rounded_corner_button"
-        android:text="@string/nurse"
-        android:textColor="@color/whiteFont"
-        android:textSize="30sp"
-        app:fontFamily="@font/assistant"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/default_button" />
+        app:layout_constraintVertical_bias="0.08" />
 
     <TextView
         android:id="@+id/description_textView"
-        android:layout_width="790dp"
-        android:layout_height="106dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="1000dp"
+        android:layout_height="200dp"
         android:text="@string/select_provider"
         android:textAlignment="center"
         android:textColor="@color/whiteFont"
-        android:textSize="40sp"
+        android:textSize="70sp"
         app:fontFamily="@font/assistant"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_textView" />
 

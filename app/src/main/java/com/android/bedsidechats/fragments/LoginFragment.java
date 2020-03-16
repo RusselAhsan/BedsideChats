@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -41,8 +42,20 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v;
+        Activity activity = getActivity();
 
-        // TODO handle rotation
+        if (activity != null)
+        {
+            int rotation = getActivity().getWindowManager().getDefaultDisplay().getRotation();
+            if (rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) {
+                v = inflater.inflate(R.layout.activity_login, container, false);
+            } else {
+                v = inflater.inflate(R.layout.activity_login, container, false);
+            }
+        }
+        else{
+            v = inflater.inflate(R.layout.activity_login, container, false);
+        }
         v = inflater.inflate(R.layout.activity_login, container, false);
 
         mAuth = FirebaseAuth.getInstance();
