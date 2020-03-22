@@ -133,9 +133,5 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             }
         }
 
-        public void chooseProvider(String provider){
-            Log.d(TAG, "Provider selected: " + provider);
-        }
-
     }
 }

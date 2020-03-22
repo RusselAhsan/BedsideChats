@@ -102,7 +102,7 @@ public class LanguageFragment extends Fragment implements View.OnClickListener {
                                 languageOptions.add(document.getId());
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                             }
-                            mAdapter = new LanguageAdapter(getActivity(), languageOptions, getFragmentManager());
+                            mAdapter = new LanguageAdapter(getActivity(), languageOptions, getActivity().getSupportFragmentManager());
                             mLanguages.setAdapter(mAdapter);
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());

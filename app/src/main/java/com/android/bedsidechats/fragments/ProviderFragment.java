@@ -90,7 +90,7 @@ public class ProviderFragment extends Fragment implements View.OnClickListener {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 providerOptions.add(document.getId());
-                                mAdapter = new ProviderAdapter(getActivity(), providerOptions, getFragmentManager(), mLanguage);
+                                mAdapter = new ProviderAdapter(getActivity(), providerOptions, getActivity().getSupportFragmentManager(), mLanguage);
                                 mProviders.setAdapter(mAdapter);
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                             }

@@ -73,20 +73,16 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
         if (activity != null) {
             switch (view.getId()) {
-                case R.id.login_button:
-                    FragmentManager fragmentManager = getFragmentManager();
-                    Fragment fragment = new LoginFragment();
-                    if (fragmentManager != null) {
-                        fragmentManager.beginTransaction()
-                                .replace(R.id.fragment_container, fragment)
-                                .addToBackStack("language_fragment")
-                                .commit();
-                    }
-                    break;
-                case R.id.card_save_button:
-                    Log.d(TAG, "border change.");
-                    view.findViewById((R.id.card_inside)).setBackgroundResource(R.drawable.card_border);
-                    break;
+                //case R.id.done_button:
+//                    FragmentManager fragmentManager = getFragmentManager();
+//                    Fragment fragment = new LoginFragment();
+//                    if (fragmentManager != null) {
+//                        fragmentManager.beginTransaction()
+//                                .replace(R.id.fragment_container, fragment)
+//                                .addToBackStack("language_fragment")
+//                                .commit();
+//                    }
+//                    break;
             }
         }
     }
@@ -102,7 +98,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                                 mQuestionList.remove("instructions");
                                 TreeMap<String, String> mQuestionMap = new TreeMap<>(mQuestionList);
                                 Log.d(TAG, "" + mQuestionMap);
-                                mAdapter = new CardAdapter(getActivity(), mQuestionMap, getFragmentManager(), mLanguageChoice, mProviderChoice);
+                                mAdapter = new CardAdapter(getActivity(), mQuestionMap, getActivity().getSupportFragmentManager(), mLanguageChoice, mProviderChoice);
                                 mCards.setAdapter(mAdapter);
                                 SnapHelper snapHelper = new PagerSnapHelper();
                                 snapHelper.attachToRecyclerView(mCards);
