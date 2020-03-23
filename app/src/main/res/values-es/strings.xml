@@ -29,4 +29,7 @@
     <string name="all_questions">Todas las preguntas</string>
     <string name="saved_questions">Preguntas guardadas</string>
     <string name="different_deck">Baraja diferente</string>
+    <string name="tap_to_save">Toca para guardar</string>
+    <string name="tap_to_unsave">Toca para cancelar</string>
+    <string name="done">Hecho</string>
 </resources>

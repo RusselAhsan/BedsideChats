@@ -34,8 +34,10 @@ import me.relex.circleindicator.CircleIndicator2;
 public class CardsFragment extends Fragment implements View.OnClickListener {
     private String mLanguageChoice = "";
     private String mProviderChoice = "";
+    private String mUsername = "";
     private FirebaseFirestore mDatabase;
     private HashMap<String, String> mQuestionList;
+    private TreeMap<String, String> mSavedQuestions;
     private RecyclerView mCards;
     private RecyclerView.Adapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
@@ -51,9 +53,11 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
         mDatabase = FirebaseFirestore.getInstance();
         mQuestionList = new HashMap<>();
+        mSavedQuestions = new TreeMap<>();
 
-        mLanguageChoice = getArguments() != null ? getArguments().getString("Language") : "";
-        mProviderChoice = getArguments().getString("Provider");
+        mLanguageChoice = getArguments().getString("Language") != null ? getArguments().getString("Language") : "";
+        mProviderChoice = getArguments().getString("Provider") != null ? getArguments().getString("Provider") : "";
+        mUsername = getArguments().getString("Username") != null ? getArguments().getString("Username") : "";
 
         indicator = v.findViewById(R.id.slider_cards_port);
 
@@ -73,16 +77,20 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
         if (activity != null) {
             switch (view.getId()) {
-                //case R.id.done_button:
-//                    FragmentManager fragmentManager = getFragmentManager();
-//                    Fragment fragment = new LoginFragment();
-//                    if (fragmentManager != null) {
-//                        fragmentManager.beginTransaction()
-//                                .replace(R.id.fragment_container, fragment)
-//                                .addToBackStack("language_fragment")
-//                                .commit();
-//                    }
-//                    break;
+                case R.id.done_button_cards_port:
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    Fragment fragment = new GuestFragment();
+                    if(mUsername != "") {
+                        fragment = new HomeFragment();
+                    }
+                        Bundle args = new Bundle();
+                        if (fragmentManager != null) {
+                            fragmentManager.beginTransaction()
+                                    .replace(R.id.fragment_container, fragment)
+                                    .addToBackStack("language_fragment")
+                                    .commit();
+                        }
+                    break;
             }
         }
     }
@@ -98,7 +106,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                                 mQuestionList.remove("instructions");
                                 TreeMap<String, String> mQuestionMap = new TreeMap<>(mQuestionList);
                                 Log.d(TAG, "" + mQuestionMap);
-                                mAdapter = new CardAdapter(getActivity(), mQuestionMap, getActivity().getSupportFragmentManager(), mLanguageChoice, mProviderChoice);
+                                mAdapter = new CardAdapter(getActivity(), mQuestionMap, getActivity().getSupportFragmentManager(), mLanguageChoice, mSavedQuestions);
                                 mCards.setAdapter(mAdapter);
                                 SnapHelper snapHelper = new PagerSnapHelper();
                                 snapHelper.attachToRecyclerView(mCards);
