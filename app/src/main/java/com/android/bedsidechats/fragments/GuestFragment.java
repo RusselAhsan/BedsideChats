@@ -55,7 +55,6 @@ public class GuestFragment extends Fragment implements View.OnClickListener {
         if (signupButton != null) {
             signupButton.setOnClickListener(this);
         }
-
         return v;
     }
 
@@ -65,10 +64,38 @@ public class GuestFragment extends Fragment implements View.OnClickListener {
 
         if (activity != null) {
             switch (view.getId()) {
-                case R.id.next_button:
-                    FragmentManager fragmentManager = getFragmentManager();
-                    Fragment fragment = new CardsFragment();
+                case R.id.continueGuest_button_guest_port:
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    Fragment fragment = new HomeFragment();
                     Bundle args = new Bundle();
+                    args.putString("Language", mLanguage);
+                    args.putString("Provider", mProvider);
+                    fragment.setArguments(args);
+                    if (fragmentManager != null) {
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, fragment)
+                                .addToBackStack("provider_fragment")
+                                .commit();
+                    }
+                    break;
+                case R.id.login_button_guest_port:
+                    fragmentManager = getActivity().getSupportFragmentManager();
+                    fragment = new LoginFragment();
+                    args = new Bundle();
+                    args.putString("Language", mLanguage);
+                    args.putString("Provider", mProvider);
+                    fragment.setArguments(args);
+                    if (fragmentManager != null) {
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, fragment)
+                                .addToBackStack("provider_fragment")
+                                .commit();
+                    }
+                    break;
+                case R.id.signup_button_guest_port:
+                    fragmentManager = getActivity().getSupportFragmentManager();
+                    fragment = new SignupFragment();
+                    args = new Bundle();
                     args.putString("Language", mLanguage);
                     args.putString("Provider", mProvider);
                     fragment.setArguments(args);
