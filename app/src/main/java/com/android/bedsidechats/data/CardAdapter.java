@@ -104,6 +104,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             super(itemView);
             mQuestionNumberTextView = itemView.findViewById(R.id.questionNumber_textView_card_port);
             mQuestionTextView = itemView.findViewById(R.id.question_textView_card_port);
+            mNotesEditText = itemView.findViewById(R.id.notes_EditText_card_port);
             mLanguageChoice =  language;
             mContext = context;
             mFragmentManager = fragmentManager;

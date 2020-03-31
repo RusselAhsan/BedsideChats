@@ -88,6 +88,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                 case R.id.done_button_cards_port:
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     Fragment fragment = new GuestFragment();
+                    Log.d(TAG, mUsername);
                     if(mUsername != "") {
                         writeSavedQuestionsToDatabase();
                         fragment = new HomeFragment();
@@ -165,6 +166,42 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w(TAG, "Error saving notes.", e);
+                    }
+                });
+        writeLanguageToDatabase();
+    }
+
+    public void writeLanguageToDatabase() {
+        mDatabase.collection("patients").document(mEmail)
+                .update("language", mLanguageChoice)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "Language choice successfully saved!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error saving language choice.", e);
+                    }
+                });
+        writeRecentDeckToDatabase();
+    }
+
+    public void writeRecentDeckToDatabase() {
+        mDatabase.collection("patients").document(mEmail)
+                .update("recent_deck", mProviderChoice)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "Recent deck choice successfully saved!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error saving recent deck choice.", e);
                     }
                 });
 

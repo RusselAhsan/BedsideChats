@@ -40,8 +40,8 @@ public class GuestFragment extends Fragment implements View.OnClickListener {
         }
         v = inflater.inflate(R.layout.activity_instructions, container, false);
 
-        mProvider =  getArguments().getString("Provider");
-        mLanguage = getArguments().getString("Language");
+        mProvider =  getArguments().getString("Provider") != null ? getArguments().getString("Provider") : "";
+        mLanguage = getArguments().getString("Language") != null ? getArguments().getString("Language") : "";
 
         Button continueButton = v.findViewById(R.id.continueGuest_button_guest_port);
         if (continueButton != null) {
@@ -70,6 +70,7 @@ public class GuestFragment extends Fragment implements View.OnClickListener {
                     Bundle args = new Bundle();
                     args.putString("Language", mLanguage);
                     args.putString("Provider", mProvider);
+                    args.putString("Guest", "True");
                     fragment.setArguments(args);
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()

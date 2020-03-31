@@ -23,6 +23,8 @@ import android.widget.Toast;
 import com.android.bedsidechats.R;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -31,9 +33,14 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LoginFragment extends Fragment implements View.OnClickListener {
     private EditText mEmailEditText;
     private EditText mPasswordEditText;
+    private String mProviderChoice = "";
+    private String mLanguageChoice = "";
     private FirebaseAuth mAuth;
     private FirebaseFirestore mDatabase;
     private static String TAG = "LOGIN_FGMT";
@@ -61,6 +68,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         mDatabase = FirebaseFirestore.getInstance();
         mEmailEditText = v.findViewById(R.id.email_editText_login_port);
         mPasswordEditText = v.findViewById(R.id.password_editText_login_port);
+
+        mProviderChoice = getArguments().getString("Provider") != null ? getArguments().getString("Provider") : "";
+        mLanguageChoice = getArguments().getString("Language") != null ? getArguments().getString("Language") : "";
 
         Button loginButton = v.findViewById(R.id.login_button_login_port);
         if (loginButton != null) {
@@ -186,7 +196,89 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             Log.d(TAG, "in setSharedPreferences");
         }
 
-        transferToHome(email, username);
+        if(mProviderChoice != ""){
+            writeSavedQuestionsToDatabase(email, username);
+        }
+        else {
+            transferToHome(email, username);
+        }
+    }
+
+    public void writeSavedQuestionsToDatabase(String email, String username) {
+        Map<String, String> savedQuestions = new HashMap<>();
+        savedQuestions.put("q01", "Test question");
+        savedQuestions.put("q02", "Test question 2");
+        mDatabase.collection("patients").document(email).collection("saved").document(mProviderChoice).collection("data").document("questions")
+                .set(savedQuestions)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "Selected questions successfully saved!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error saving selected questions.", e);
+                    }
+                });
+        writeSavedNotesToDatabase(email, username);
+    }
+
+    public void writeSavedNotesToDatabase(String email, String username) {
+        Map<String, String> savedNotes = new HashMap<>();
+        savedNotes.put("n01", "Test note");
+        mDatabase.collection("patients").document(email).collection("saved").document(mProviderChoice).collection("data").document("notes")
+                .set(savedNotes)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "Notes successfully saved!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error saving notes.", e);
+                    }
+                });
+        writeLanguageToDatabase(email, username);
+    }
+
+    public void writeLanguageToDatabase(String email, String username) {
+        mDatabase.collection("patients").document(email)
+                .update("language", mLanguageChoice)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "Language choice successfully saved!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error saving language choice.", e);
+                    }
+                });
+        writeRecentDeckToDatabase(email, username);
+    }
+
+    public void writeRecentDeckToDatabase(String email, String username) {
+        mDatabase.collection("patients").document(email)
+                .update("recent_deck", mProviderChoice)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "Recent deck choice successfully saved!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error saving recent deck choice.", e);
+                    }
+                });
+    transferToHome(email, username);
     }
 
     private void transferToHome(String email, String username) {
