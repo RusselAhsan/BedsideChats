@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import com.android.bedsidechats.R;
 import com.android.bedsidechats.data.CardAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -27,17 +29,20 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeMap;
 
 import me.relex.circleindicator.CircleIndicator2;
 
 public class CardsFragment extends Fragment implements View.OnClickListener {
-    private String mLanguageChoice = "";
-    private String mProviderChoice = "";
-    private String mUsername = "";
+    private String mLanguageChoice;
+    private String mProviderChoice;
+    private String mUsername;
+    private String mEmail;
     private FirebaseFirestore mDatabase;
     private HashMap<String, String> mQuestionList;
     private TreeMap<String, String> mSavedQuestions;
+    private TreeMap<String, String> mSavedNotes;
     private RecyclerView mCards;
     private RecyclerView.Adapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
@@ -52,12 +57,15 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         v = inflater.inflate(R.layout.activity_cards, container, false);
 
         mDatabase = FirebaseFirestore.getInstance();
+
         mQuestionList = new HashMap<>();
         mSavedQuestions = new TreeMap<>();
+        mSavedNotes = new TreeMap<>();
 
         mLanguageChoice = getArguments().getString("Language") != null ? getArguments().getString("Language") : "";
         mProviderChoice = getArguments().getString("Provider") != null ? getArguments().getString("Provider") : "";
         mUsername = getArguments().getString("Username") != null ? getArguments().getString("Username") : "";
+        mEmail = getArguments().getString("Email") != null ? getArguments().getString("Email") : "";
 
         indicator = v.findViewById(R.id.slider_cards_port);
 
@@ -81,6 +89,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     Fragment fragment = new GuestFragment();
                     if(mUsername != "") {
+                        writeSavedQuestionsToDatabase();
                         fragment = new HomeFragment();
                     }
                         Bundle args = new Bundle();
@@ -120,6 +129,46 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                 });
     }
 
+    public void writeSavedQuestionsToDatabase() {
+        Map<String, String> savedQuestions = new HashMap<>();
+        savedQuestions.put("q01", "Test question");
+        savedQuestions.put("q02", "Test question 2");
+        mDatabase.collection("patients").document(mEmail).collection("saved").document(mProviderChoice).collection("data").document("questions")
+                .set(savedQuestions)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "Selected questions successfully saved!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error saving selected questions.", e);
+                    }
+                });
+        writeSavedNotesToDatabase();
+    }
+
+    public void writeSavedNotesToDatabase() {
+        Map<String, String> savedNotes = new HashMap<>();
+        savedNotes.put("n01", "Test note");
+        mDatabase.collection("patients").document(mEmail).collection("saved").document(mProviderChoice).collection("data").document("notes")
+                .set(savedNotes)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "Notes successfully saved!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error saving notes.", e);
+                    }
+                });
+
+    }
 
     public int getCardDeckSize(){
         return mQuestionList.size();

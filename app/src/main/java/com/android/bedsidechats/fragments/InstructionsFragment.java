@@ -26,6 +26,8 @@ public class InstructionsFragment extends Fragment implements View.OnClickListen
     private FirebaseFirestore mDatabase;
     private String mLanguage;
     private String mProvider;
+    private String mEmail = "";
+    private String mUsername = "";
     private TextView mInstructionsTextView;
     private static String TAG = "INSTR_FGMT";
 
@@ -51,6 +53,8 @@ public class InstructionsFragment extends Fragment implements View.OnClickListen
         mDatabase = FirebaseFirestore.getInstance();
         mProvider =  getArguments().getString("Provider");
         mLanguage = getArguments().getString("Language");
+        mEmail = getArguments().getString("Email") != null ? getArguments().getString("Email") : "";
+        mUsername = getArguments().getString("Username") != null ? getArguments().getString("Username") : "";
         mInstructionsTextView = v.findViewById(R.id.instructions_textView_instructions_port);
         getInstructions(mLanguage, mProvider);
 
@@ -72,6 +76,8 @@ public class InstructionsFragment extends Fragment implements View.OnClickListen
                     FragmentManager fragmentManager = getFragmentManager();
                     Fragment fragment = new CardsFragment();
                     Bundle args = new Bundle();
+                    args.putString("Username", mUsername);
+                    args.putString("Email", mEmail);
                     args.putString("Language", mLanguage);
                     args.putString("Provider", mProvider);
                     fragment.setArguments(args);

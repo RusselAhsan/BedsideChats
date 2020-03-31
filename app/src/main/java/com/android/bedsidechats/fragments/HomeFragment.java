@@ -36,6 +36,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private String mLanguage = "";
     private String mProvider = "";
     private String mUsername = "";
+    private String mEmail = "";
     private String mSavedCards = "";
     private FirebaseAuth mAuth;
     private TextView lastDeck;
@@ -79,9 +80,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             providerButton.setOnClickListener(this);
         }
 
-        String email = getArguments().getString("Email");
-        mUsername = getArguments().getString("Username");
-        getUserPreferences(email, v);
+        mEmail = getArguments().getString("Email") != null ? getArguments().getString("Email") : "";
+        mUsername = getArguments().getString("Username") != null ? getArguments().getString("Username") : "";
+        getUserPreferences(mEmail, v);
 
         return v;
     }
@@ -100,6 +101,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         FragmentManager fragmentManager = getFragmentManager();
                         Fragment fragment = new CardsFragment();
                         Bundle args = new Bundle();
+                        args.putString("Username", mUsername);
+                        args.putString("Email", mEmail);
                         args.putString("Language", mLanguage);
                         args.putString("Provider", mProvider);
                         fragment.setArguments(args);
@@ -121,6 +124,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         //OR CARD FRAGMENT WITH FAVORITES PASSED IN
                         Bundle args = new Bundle();
                         args.putString("Username", mUsername);
+                        args.putString("Email", mEmail);
                         args.putString("Language", mLanguage);
                         args.putString("Provider", mProvider);
                         args.putString("Saved_Cards", mSavedCards);
@@ -138,6 +142,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     Fragment fragment = new ProviderFragment();
                     Bundle args = new Bundle();
                     args.putString("Username", mUsername);
+                    args.putString("Email", mEmail);
                     args.putString("Language", mLanguage);
                     fragment.setArguments(args);
                     if (fragmentManager != null) {
