@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
+
+    <Button
+        android:id="@+id/collapse_button"
+        android:layout_width="300dp"
+        android:layout_height="120dp"
+        android:layout_below="@+id/lvExp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/rounded_corner_button"
+        android:text="@string/collapse"
+        android:textColor="@color/whiteFont"
+        android:textSize="50sp"
+        app:fontFamily="@string/font"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_text" />
+
+    <ExpandableListView
+        android:id="@+id/lvExp"
+        android:layout_width="match_parent"
+        android:layout_height="966dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="22dp" />
+
+    <Button
+        android:id="@+id/expand_button"
+        android:layout_width="300dp"
+        android:layout_height="120dp"
+        android:layout_below="@+id/lvExp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/rounded_corner_button"
+        android:text="@string/expand"
+        android:textColor="@color/whiteFont"
+        android:textSize="50sp"
+        app:fontFamily="@string/font"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_text" />
+
+</RelativeLayout>

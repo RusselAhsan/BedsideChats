@@ -1,101 +1,108 @@
 package com.android.bedsidechats.data;
 
-import android.app.Activity;
-import android.util.Log;
+import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.android.bedsidechats.R;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.TreeMap;
+import java.util.HashMap;
+import java.util.List;
 
+public class SavedCardAdapter extends BaseExpandableListAdapter {
 
-public class SavedCardAdapter extends RecyclerView.Adapter<SavedCardAdapter.SavedCardViewHolder> {
-    private String TAG = "CRD_ADPTR";;
-    private static FirebaseFirestore mDatabase;
-    private TreeMap<String, String> mQuestionMap;
-    private TreeMap<String, String> mNoteMap;
-    private String mLanguageChoice;
-    private String mProviderChoice;
-    private Activity mContext;
-    private FragmentManager mFragmentManager;
+    private Context _context;
+    private List<String> _listDataHeader; // header titles
+    // child data in format of header title, child title
+    private HashMap<String, List<String>> _listDataChild;
 
-    public SavedCardAdapter(Activity context, TreeMap<String, String> questions, TreeMap<String, String> notes, FragmentManager fragmentManager, String language, String provider) {
-        mQuestionMap = questions;
-        mNoteMap = notes;
-        mDatabase = FirebaseFirestore.getInstance();
-        mLanguageChoice =  language;
-        mProviderChoice =  provider;
-        mContext = context;
-        mFragmentManager = fragmentManager;
+    public SavedCardAdapter(Context context, List<String> listDataHeader,
+                                 HashMap<String, List<String>> listChildData) {
+        this._context = context;
+        this._listDataHeader = listDataHeader;
+        this._listDataChild = listChildData;
     }
 
     @Override
-    public SavedCardViewHolder onCreateViewHolder(ViewGroup group, int i){
-        View view = LayoutInflater.from(group.getContext())
-                .inflate(R.layout.card_holder, group, false);
-
-        return new SavedCardViewHolder(view, mContext, mFragmentManager, mLanguageChoice, mProviderChoice);
+    public Object getChild(int groupPosition, int childPosititon) {
+        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
+                .get(childPosititon);
     }
 
     @Override
-    public void onBindViewHolder(SavedCardViewHolder holder, int position) {
-        Log.d(TAG, "inside onBindViewHolder");
-        String key = mQuestionMap.keySet().toArray()[position].toString();
-        holder.mQuestionNumberTextView.setText("Question " + key.substring(1));
-        holder.mQuestionTextView.setText(mQuestionMap.get(key));
+    public long getChildId(int groupPosition, int childPosition) {
+        return childPosition;
     }
 
     @Override
-    public int getItemCount() {
-        return mQuestionMap != null ? mQuestionMap.size() : 0;
+    public View getChildView(int groupPosition, final int childPosition,
+                             boolean isLastChild, View convertView, ViewGroup parent) {
+
+        final String childText = (String) getChild(groupPosition, childPosition);
+
+        if (convertView == null) {
+            LayoutInflater infalInflater = (LayoutInflater) this._context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = infalInflater.inflate(R.layout.saved_cards_child, null);
+        }
+
+        TextView txtListChild = (TextView) convertView
+                .findViewById(R.id.lblListItem);
+
+        txtListChild.setText(childText);
+        return convertView;
     }
 
-    public class SavedCardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        protected TextView mQuestionNumberTextView;
-        protected TextView mQuestionTextView;
-        //protected EditText mNotesEditText;
-        private String TAG = "CRD_HLDR";
-        public String mProviderChoice;
-        public String mLanguageChoice;
-        private Activity mContext;
-        private FragmentManager mFragmentManager;
-
-        public SavedCardViewHolder(View itemView, Activity context, FragmentManager fragmentManager, String language, String provider) {
-            super(itemView);
-            mQuestionNumberTextView = itemView.findViewById(R.id.questionNumber_textView_card_port);
-            mQuestionTextView = itemView.findViewById(R.id.question_textView_card_port);
-            mLanguageChoice =  language;
-            mContext = context;
-            mFragmentManager = fragmentManager;
-        }
-
-        @Override
-        public void onClick(View v){
-//            chooseProvider(mProviderChoice);
-//            Fragment fragment = new InstructionsFragment();
-//            Bundle args = new Bundle();
-//            args.putString("Provider", mProviderChoice);
-//            args.putString("Language", mLanguageChoice);
-//            fragment.setArguments(args);
-//            if (mFragmentManager != null) {
-//                mFragmentManager.beginTransaction()
-//                        .replace(R.id.fragment_container, fragment)
-//                        .addToBackStack("provider_fragment")
-//                        .commit();
-//            }
-
-        }
-
-        public void chooseProvider(String provider){
-            Log.d(TAG, "Provider selected: " + provider);
-        }
+    @Override
+    public int getChildrenCount(int groupPosition) {
+        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
+                .size();
     }
 
+    @Override
+    public Object getGroup(int groupPosition) {
+        return this._listDataHeader.get(groupPosition);
+    }
+
+    @Override
+    public int getGroupCount() {
+        return this._listDataHeader.size();
+    }
+
+    @Override
+    public long getGroupId(int groupPosition) {
+        return groupPosition;
+    }
+
+    @Override
+    public View getGroupView(int groupPosition, boolean isExpanded,
+                             View convertView, ViewGroup parent) {
+        String headerTitle = (String) getGroup(groupPosition);
+        if (convertView == null) {
+            LayoutInflater infalInflater = (LayoutInflater) this._context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = infalInflater.inflate(R.layout.saved_cards_header, null);
+        }
+
+        TextView lblListHeader = (TextView) convertView
+                .findViewById(R.id.lblListHeader);
+        lblListHeader.setTypeface(null, Typeface.BOLD);
+        lblListHeader.setText(headerTitle);
+
+        return convertView;
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return false;
+    }
+
+    @Override
+    public boolean isChildSelectable(int groupPosition, int childPosition) {
+        return true;
+    }
 }
