@@ -25,4 +25,10 @@
     <string name="new_user_select_language">¿Nuevo Usuario? Selecciona un idioma</string>
     <string name="account">Cuenta</string>
     <string name="error">Falló al cargar.</string>
+    <string name="recent_deck">Última baraja usada:</string>
+    <string name="all_questions">Todas las preguntas</string>
+    <string name="saved_questions">Preguntas guardadas</string>
+    <string name="different_deck">Baraja diferente</string>
+    <string name="expand">Ampliar</string>
+    <string name="collapse">Colapso</string>
 </resources>
