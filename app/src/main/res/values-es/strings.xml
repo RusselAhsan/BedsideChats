@@ -14,7 +14,7 @@
     <string name="confirmPassword">Confirmar contraseña:</string>
     <string name="email">Email:</string>
     <string name="username">Nombre de usuario:</string>
-    <string name="select_provider">Seleccione una baraja de cartas basado en su proveedor de atención médica</string>
+    <string name="select_provider">Seleccione un mazo de cartas basado en su proveedor de atención médica</string>
     <string name="cards">Tarjetas</string>
     <string name="saved">Guardado</string>
     <string name="notes">Notas</string>
@@ -32,4 +32,6 @@
     <string name="tap_to_save">Toca para guardar</string>
     <string name="tap_to_unsave">Toca para cancelar</string>
     <string name="done">Hecho</string>
+    <string name="expand">Ampliar</string>
+    <string name="collapse">Colapso</string>
 </resources>
