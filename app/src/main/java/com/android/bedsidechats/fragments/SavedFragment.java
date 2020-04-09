@@ -18,11 +18,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class SavedFragment extends Fragment implements View.OnClickListener {
     private String mLanguageChoice = "";
     private String mProviderChoice = "";
     private String mUsername = "";
+    private String mEmail = "";
+    private String mSavedCards = "";
     SavedCardAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
@@ -44,18 +47,18 @@ public class SavedFragment extends Fragment implements View.OnClickListener {
         mDatabase = FirebaseFirestore.getInstance();
         mQuestionList = new HashMap<>();
 
+        mLanguageChoice = getArguments() != null ? getArguments().getString("Language") : "";
+        mProviderChoice = getArguments().getString("Provider");
+        mUsername = getArguments().getString("Username");
+        mEmail = getArguments().getString("Email") != null ? getArguments().getString("Email") : "";
+        mSavedCards = getArguments().getString("Saved_Cards");
+
         // get the listview
         expListView = (ExpandableListView) v.findViewById(R.id.lvExp);
 
         // preparing list data
         prepareListData();
 
-        listAdapter = new SavedCardAdapter(getContext(), listDataHeader, listDataChild);
-
-        // setting list adapter
-        expListView.setAdapter(listAdapter);
-
-        expandAll();
         return v;
     }
 
@@ -80,19 +83,26 @@ public class SavedFragment extends Fragment implements View.OnClickListener {
      */
     private void prepareListData() {
 
-        mDatabase.collection("patient_decks").document("saved_Russ").collection("decks").document("questions").get()
+        mDatabase.collection("patients").document(mEmail)
+                .collection("saved").document(mProviderChoice).collection("data")
+                .document("questions").get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
                             mQuestionList = (HashMap) task.getResult().getData();
                             if(mQuestionList != null) {
-                                for (Map.Entry<String, String> questions : mQuestionList.entrySet()) {
+                                TreeMap<String, String> mQuestionMap = new TreeMap<>(mQuestionList);
+                                for (Map.Entry<String, String> questions : mQuestionMap.entrySet()) {
                                     listDataHeader.add(questions.getKey());
                                     List<String> child = new ArrayList<String>();
                                     child.add(questions.getValue());
                                     listDataChild.put(questions.getKey(), child);
                                 }
+                                listAdapter = new SavedCardAdapter(getContext(), listDataHeader, listDataChild);
+
+                                // setting list adapter
+                                expListView.setAdapter(listAdapter);
                             }
                         }
                     }

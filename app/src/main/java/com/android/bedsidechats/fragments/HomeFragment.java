@@ -36,6 +36,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private String mLanguage = "";
     private String mProvider = "";
     private String mUsername = "";
+    private String mEmail = "";
     private String mSavedCards = "";
     private FirebaseAuth mAuth;
     private TextView lastDeck;
@@ -79,9 +80,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             providerButton.setOnClickListener(this);
         }
 
-        String email = getArguments().getString("Email");
+        mEmail = getArguments().getString("Email") != null ? getArguments().getString("Email") : "";
         mUsername = getArguments().getString("Username");
-        getUserPreferences(email, v);
+        getUserPreferences(mEmail, v);
 
         return v;
     }
@@ -113,13 +114,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     break;
                 case R.id.saved_button_home_port:
                     if(mProvider == ""){
-                        //Toast.makeText(activity, "You have no saved questions!",
-                                //Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, "You have no saved questions!",
+                                Toast.LENGTH_SHORT).show();
+                    }else {
                         FragmentManager fragmentManager = getFragmentManager();
                         Fragment fragment = new SavedFragment();
                         //OR CARD FRAGMENT WITH FAVORITES PASSED IN
                         Bundle args = new Bundle();
                         args.putString("Username", mUsername);
+                        args.putString("Email", mEmail);
                         args.putString("Language", mLanguage);
                         args.putString("Provider", mProvider);
                         args.putString("Saved_Cards", mSavedCards);
@@ -130,22 +133,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                     .addToBackStack("home_fragment")
                                     .commit();
                         }
-                    }else {
-                        /*FragmentManager fragmentManager = getFragmentManager();
-                        Fragment fragment = new SavedFragment();
-                        //OR CARD FRAGMENT WITH FAVORITES PASSED IN
-                        Bundle args = new Bundle();
-                        args.putString("Username", mUsername);
-                        args.putString("Language", mLanguage);
-                        args.putString("Provider", mProvider);
-                        args.putString("Saved_Cards", mSavedCards);
-                        fragment.setArguments(args);
-                        if (fragmentManager != null) {
-                            fragmentManager.beginTransaction()
-                                    .replace(R.id.fragment_container, fragment)
-                                    .addToBackStack("home_fragment")
-                                    .commit();
-                        }*/
                     }
                     break;
                 case R.id.provider_button_home_port:
