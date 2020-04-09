@@ -120,7 +120,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             Log.d(TAG, "inside onClick" + v.getId());
             switch(v.getId()){
                 case R.id.card_save_button:
-                    String question = mQuestionNumberTextView.getText().toString().substring(0, 11);
+                    String question = "q" + mQuestionNumberTextView.getText().toString().substring(9, 11);
                     Log.d(TAG, "" + mBackground.getBackground());
                     if(saved){
                         if(mSavedQuestions.containsKey(question)){
