@@ -81,7 +81,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
 
         mEmail = getArguments().getString("Email") != null ? getArguments().getString("Email") : "";
-        mUsername = getArguments().getString("Username");
+        mUsername = getArguments().getString("Username") != null ? getArguments().getString("Username") : "";
         getUserPreferences(mEmail, v);
 
         return v;
@@ -101,6 +101,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         FragmentManager fragmentManager = getFragmentManager();
                         Fragment fragment = new CardsFragment();
                         Bundle args = new Bundle();
+                        args.putString("Username", mUsername);
+                        args.putString("Email", mEmail);
                         args.putString("Language", mLanguage);
                         args.putString("Provider", mProvider);
                         fragment.setArguments(args);
@@ -140,6 +142,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     Fragment fragment = new ProviderFragment();
                     Bundle args = new Bundle();
                     args.putString("Username", mUsername);
+                    args.putString("Email", mEmail);
                     args.putString("Language", mLanguage);
                     fragment.setArguments(args);
                     if (fragmentManager != null) {

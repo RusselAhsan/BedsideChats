@@ -29,6 +29,8 @@ import java.util.ArrayList;
 
 public class ProviderFragment extends Fragment implements View.OnClickListener {
     public String mLanguage = "English";
+    private String mUsername = "";
+    private String mEmail = "";
     private FirebaseFirestore mDatabase;
     public ArrayList<String> providerOptions;
     public RecyclerView mProviders;
@@ -59,6 +61,8 @@ public class ProviderFragment extends Fragment implements View.OnClickListener {
         providerOptions =  new ArrayList<>();
 
         mLanguage =  getArguments().getString("Language") != null ? getArguments().getString("Language") : "English";
+        mEmail = getArguments().getString("Email") != null ? getArguments().getString("Email") : "";
+        mUsername = getArguments().getString("Username") != null ? getArguments().getString("Username") : "";
 
         mProviders = v.findViewById(R.id.providers_list);
         if (mProviders != null){
@@ -90,7 +94,7 @@ public class ProviderFragment extends Fragment implements View.OnClickListener {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 providerOptions.add(document.getId());
-                                mAdapter = new ProviderAdapter(getActivity(), providerOptions, getFragmentManager(), mLanguage);
+                                mAdapter = new ProviderAdapter(getActivity(), providerOptions, getActivity().getSupportFragmentManager(), mLanguage, mEmail, mUsername);
                                 mProviders.setAdapter(mAdapter);
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                             }

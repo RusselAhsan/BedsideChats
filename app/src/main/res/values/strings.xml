@@ -29,6 +29,9 @@
     <string name="all_questions">All questions</string>
     <string name="saved_questions">Saved questions</string>
     <string name="different_deck">Different deck</string>
+    <string name="tap_to_save">Tap to save</string>
+    <string name="tap_to_unsave">Tap to unsave</string>
+    <string name="done">Done</string>
     <string name="expand">Expand</string>
     <string name="collapse">Collapse</string>
 </resources>

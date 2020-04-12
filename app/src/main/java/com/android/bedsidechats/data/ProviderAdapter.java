@@ -33,13 +33,17 @@ public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.Provid
     private static FirebaseFirestore mDatabase;
     private ArrayList<String> mProviders;
     private String mLanguageChoice;
+    private String mEmail;
+    private String mUsername;
     private Activity mContext;
     private FragmentManager mFragmentManager;
 
-    public ProviderAdapter(Activity context, ArrayList<String> providers, FragmentManager fragmentManager, String language) {
+    public ProviderAdapter(Activity context, ArrayList<String> providers, FragmentManager fragmentManager, String language, String email, String username) {
         mProviders = providers;
         mDatabase = FirebaseFirestore.getInstance();
         mLanguageChoice =  language;
+        mEmail = email;
+        mUsername = username;
         mContext = context;
         mFragmentManager = fragmentManager;
     }
@@ -49,7 +53,7 @@ public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.Provid
         View view = LayoutInflater.from(group.getContext())
                 .inflate(R.layout.provider_holder, group, false);
 
-        return new ProviderViewHolder(view, mContext, mFragmentManager, mLanguageChoice);
+        return new ProviderViewHolder(view, mContext, mFragmentManager, mLanguageChoice, mEmail, mUsername);
     }
 
     @Override
@@ -68,14 +72,18 @@ public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.Provid
         private String TAG = "PRVDR_HLDR";
         public String mProviderChoice;
         public String mLanguageChoice;
+        public String mEmail;
+        public String mUsername;
         private Activity mContext;
         private FragmentManager mFragmentManager;
 
-        public ProviderViewHolder(View itemView, Activity context, FragmentManager fragmentManager, String language) {
+        public ProviderViewHolder(View itemView, Activity context, FragmentManager fragmentManager, String language, String email, String username) {
             super(itemView);
             mProviderButton = itemView.findViewById(R.id.provider_button_provider_port);
             mProviderButton.setOnClickListener(this);
             mLanguageChoice =  language;
+            mEmail = email;
+            mUsername = username;
             mContext = context;
             mFragmentManager = fragmentManager;
         }
@@ -86,6 +94,8 @@ public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.Provid
             chooseProvider(mProviderChoice);
             Fragment fragment = new InstructionsFragment();
             Bundle args = new Bundle();
+            args.putString("Username", mUsername);
+            args.putString("Email", mEmail);
             args.putString("Provider", mProviderChoice);
             args.putString("Language", mLanguageChoice);
             fragment.setArguments(args);

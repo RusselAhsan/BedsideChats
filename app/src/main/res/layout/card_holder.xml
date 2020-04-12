@@ -51,7 +51,7 @@
                 android:id="@+id/card_save_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tap to save"
+                android:text="@string/tap_to_save"
                 android:fontFamily="@string/fontTitle"
                 android:layout_centerHorizontal="true"
                 android:textSize="40sp"

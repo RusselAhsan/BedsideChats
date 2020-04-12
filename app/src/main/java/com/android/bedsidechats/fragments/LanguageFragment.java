@@ -81,6 +81,10 @@ public class LanguageFragment extends Fragment implements View.OnClickListener {
                 case R.id.login_button:
                     FragmentManager fragmentManager = getFragmentManager();
                     Fragment fragment = new LoginFragment();
+                    Bundle args = new Bundle();
+                    //Logging in directly upon opening app instead of using app as guest and then logging in later
+                    args.putString("DirectLogin", "True");
+                    fragment.setArguments(args);
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.fragment_container, fragment)
@@ -102,7 +106,7 @@ public class LanguageFragment extends Fragment implements View.OnClickListener {
                                 languageOptions.add(document.getId());
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                             }
-                            mAdapter = new LanguageAdapter(getActivity(), languageOptions, getFragmentManager());
+                            mAdapter = new LanguageAdapter(getActivity(), languageOptions, getActivity().getSupportFragmentManager());
                             mLanguages.setAdapter(mAdapter);
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());

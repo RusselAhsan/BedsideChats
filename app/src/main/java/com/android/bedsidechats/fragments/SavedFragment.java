@@ -34,6 +34,7 @@ public class SavedFragment extends Fragment implements View.OnClickListener {
 
     private FirebaseFirestore mDatabase;
     private HashMap<String, String> mQuestionList;
+    private HashMap<String, String> mSavedNotes;
 
     Button expand, collapse;
 
@@ -49,6 +50,7 @@ public class SavedFragment extends Fragment implements View.OnClickListener {
 
         mDatabase = FirebaseFirestore.getInstance();
         mQuestionList = new HashMap<>();
+        mSavedNotes = new HashMap<>();
 
         mLanguageChoice = getArguments() != null ? getArguments().getString("Language") : "";
         mProviderChoice = getArguments().getString("Provider");
@@ -100,22 +102,37 @@ public class SavedFragment extends Fragment implements View.OnClickListener {
                         if (task.isSuccessful()) {
                             mQuestionList = (HashMap) task.getResult().getData();
                             if(mQuestionList != null) {
-                                TreeMap<String, String> mQuestionMap = new TreeMap<>(mQuestionList);
-                                for (Map.Entry<String, String> questions : mQuestionMap.entrySet()) {
-                                    listDataHeader.add(questions.getKey());
-                                    List<String> child = new ArrayList<String>();
-                                    child.add(questions.getValue());
-                                    listDataChild.put(questions.getKey(), child);
-                                }
-                                listAdapter = new SavedCardAdapter(getContext(), listDataHeader, listDataChild);
+                                    mDatabase.collection("patients").document(mEmail)
+                                            .collection("saved").document(mProviderChoice).collection("data")
+                                            .document("notes").get()
+                                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                    if (task.isSuccessful()) {
+                                                        TreeMap<String, String> mQuestionMap = new TreeMap<>(mQuestionList);
+                                                        for (Map.Entry<String, String> questions : mQuestionMap.entrySet()) {
+                                                            listDataHeader.add(questions.getKey().toUpperCase() + ": " + questions.getValue());
+                                                            mSavedNotes = (HashMap) task.getResult().getData();
+                                                            if (mSavedNotes != null) {
+                                                                TreeMap<String, String> mNotesMap = new TreeMap<>(mSavedNotes);
+                                                                List<String> child = new ArrayList<String>();
+                                                                child.add(mNotesMap.get("n" + questions.getKey().substring(1)) != null ? mNotesMap.get("n" + questions.getKey().substring(1)) : "No notes added for this question.");
+                                                                listDataChild.put(questions.getKey().toUpperCase() + ": " + questions.getValue(), child);
+                                                            }
+                                                        }
+                                                        listAdapter = new SavedCardAdapter(getContext(), listDataHeader, listDataChild);
 
-                                // setting list adapter
-                                expListView.setAdapter(listAdapter);
+                                                        // setting list adapter
+                                                        expListView.setAdapter(listAdapter);
+                                                    }
+                                                }
+                                            });
+                                    }
                             }
                         }
-                    }
                 });
     }
+
 
     //method to expand all groups
     private void expandAll() {

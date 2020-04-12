@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,19 +37,22 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     private String TAG = "CRD_ADPTR";;
     private static FirebaseFirestore mDatabase;
     private TreeMap<String, String> mQuestionMap;
+    public TreeMap<String, String> mSavedQuestions;
+    public TreeMap<String, String> mSavedNotes;
     private String mLanguageChoice;
-    private String mProviderChoice;
     private Activity mContext;
     private FragmentManager mFragmentManager;
 
 
-    public CardAdapter(Activity context, TreeMap<String, String> questions, FragmentManager fragmentManager, String language, String provider) {
+
+    public CardAdapter(Activity context, TreeMap<String, String> questions, FragmentManager fragmentManager, String language, TreeMap<String, String> saved) {
         mQuestionMap = questions;
         mDatabase = FirebaseFirestore.getInstance();
         mLanguageChoice =  language;
-        mProviderChoice =  provider;
         mContext = context;
         mFragmentManager = fragmentManager;
+        mSavedQuestions = saved;
+        mSavedNotes = new TreeMap<>();
     }
 
     @Override
@@ -56,7 +60,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         View view = LayoutInflater.from(group.getContext())
                 .inflate(R.layout.card_holder, group, false);
 
-        return new CardViewHolder(view, mContext, mFragmentManager, mLanguageChoice, mProviderChoice);
+        return new CardViewHolder(view, mContext, mFragmentManager, mLanguageChoice);
     }
 
     @Override
@@ -85,11 +89,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     public class CardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         protected TextView mQuestionNumberTextView;
         protected TextView mQuestionTextView;
-        //protected EditText mNotesEditText;
+        protected EditText mNotesEditText;
         protected LinearLayout mBackground;
         protected Button mSavedButton;
         private String TAG = "CRD_HLDR";
-        public String mProviderChoice;
         public String mLanguageChoice;
         private Activity mContext;
         private FragmentManager mFragmentManager;
@@ -97,10 +100,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         protected int mUnsavedBorder;
         private boolean saved = false;
 
-        public CardViewHolder(View itemView, Activity context, FragmentManager fragmentManager, String language, String provider) {
+        public CardViewHolder(View itemView, Activity context, FragmentManager fragmentManager, String language) {
             super(itemView);
             mQuestionNumberTextView = itemView.findViewById(R.id.questionNumber_textView_card_port);
             mQuestionTextView = itemView.findViewById(R.id.question_textView_card_port);
+            mNotesEditText = itemView.findViewById(R.id.notes_EditText_card_port);
             mLanguageChoice =  language;
             mContext = context;
             mFragmentManager = fragmentManager;
@@ -116,25 +120,41 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             Log.d(TAG, "inside onClick" + v.getId());
             switch(v.getId()){
                 case R.id.card_save_button:
+                    String question = "q" + mQuestionNumberTextView.getText().toString().substring(9, 11);
                     Log.d(TAG, "" + mBackground.getBackground());
                     if(saved){
+                        if(mSavedQuestions.containsKey(question)){
+                            mSavedQuestions.remove(question);
+                        }
+                        if(mNotesEditText.getText().toString() == "") {
+                            if(mSavedNotes.containsKey(question)) {
+                                mSavedNotes.remove(question);
+                            }
+                        }
                         mBackground.setBackgroundResource(mUnsavedBorder);
                         mSavedButton.setBackgroundResource(mContext.getResources().getIdentifier("save_prompt_button", "drawable", mContext.getPackageName()));
-                        mSavedButton.setText("Tap to Save");
+                        mSavedButton.setText(R.string.tap_to_save);
                         saved = false;
                     }else{
+                        if(!mSavedQuestions.containsKey(question)) {
+                            mSavedQuestions.put(question, mQuestionTextView.getText().toString());
+                        }
+                        if(!mSavedNotes.containsKey(question) && mNotesEditText.getText().toString() != "") {
+                            mSavedNotes.put(question, mNotesEditText.getText().toString());
+                        }
+                        else{
+                            if(mSavedNotes.get(question) != mNotesEditText.getText().toString())
+                            mSavedNotes.remove(question);
+                            mSavedNotes.put(question, mNotesEditText.getText().toString());
+                        }
                         mBackground.setBackgroundResource(mSavedBorder);
                         mSavedButton.setBackgroundResource(mContext.getResources().getIdentifier("unsave_prompt_button", "drawable", mContext.getPackageName()));
-                        mSavedButton.setText("Tap to Unsave");
+                        mSavedButton.setText(R.string.tap_to_unsave);
                         saved = true;
                     }
                     break;
 
             }
-        }
-
-        public void chooseProvider(String provider){
-            Log.d(TAG, "Provider selected: " + provider);
         }
 
     }
