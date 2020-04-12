@@ -6,7 +6,7 @@
     android:background="@color/unsavedColor">
 
     <TextView
-        android:id="@+id/lblListItem"
+        android:id="@+id/saved_cards_notes"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"

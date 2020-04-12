@@ -51,7 +51,7 @@ public class SavedCardAdapter extends BaseExpandableListAdapter {
         }
 
         TextView txtListChild = (TextView) convertView
-                .findViewById(R.id.lblListItem);
+                .findViewById(R.id.saved_cards_notes);
 
         txtListChild.setText(childText);
         return convertView;
@@ -89,7 +89,7 @@ public class SavedCardAdapter extends BaseExpandableListAdapter {
         }
 
         TextView lblListHeader = (TextView) convertView
-                .findViewById(R.id.lblListHeader);
+                .findViewById(R.id.saved_cards_question);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
 

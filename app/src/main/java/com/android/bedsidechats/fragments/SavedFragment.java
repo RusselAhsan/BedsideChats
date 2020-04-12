@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -34,6 +35,8 @@ public class SavedFragment extends Fragment implements View.OnClickListener {
     private FirebaseFirestore mDatabase;
     private HashMap<String, String> mQuestionList;
 
+    Button expand, collapse;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v;
@@ -54,7 +57,13 @@ public class SavedFragment extends Fragment implements View.OnClickListener {
         mSavedCards = getArguments().getString("Saved_Cards");
 
         // get the listview
-        expListView = (ExpandableListView) v.findViewById(R.id.lvExp);
+        expListView = (ExpandableListView) v.findViewById(R.id.saved_cards_list);
+
+        expand = (Button) v.findViewById(R.id.expand_button);
+        collapse = (Button) v.findViewById(R.id.collapse_button);
+
+        expand.setOnClickListener(this);
+        collapse.setOnClickListener(this);
 
         // preparing list data
         prepareListData();
@@ -65,7 +74,6 @@ public class SavedFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         Activity activity = getActivity();
-
         if (activity != null) {
             switch (view.getId()) {
                 case R.id.expand_button:
