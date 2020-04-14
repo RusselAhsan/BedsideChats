@@ -38,6 +38,7 @@ import java.util.TreeMap;
 import me.relex.circleindicator.CircleIndicator2;
 
 public class CardsFragment extends Fragment implements View.OnClickListener {
+    //OnCardsSelectedListener callback;
     private String mLanguageChoice;
     private String mProviderChoice;
     private String mUsername;
@@ -91,16 +92,26 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                 case R.id.done_button_cards_port:
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     Fragment fragment = new GuestFragment();
+                    Bundle args = new Bundle();
                     Log.d(TAG, mUsername);
-                    if (mUsername != "") {
+                    writeAnalyticsToDatabase();
+                    if (mUsername != "") { // logged in
                         writeSavedQuestionsToDatabase();
                         fragment = new HomeFragment();
+                        args.putString("Username", mUsername);
+                        args.putString("Email", mEmail);
                     }
-                    Bundle args = new Bundle();
+                    else{ // guest
+                        args.putString("Provider", mProviderChoice);
+                        args.putString("Language", mLanguageChoice);
+                        args.putSerializable("Questions", mSavedQuestions);
+                        args.putSerializable("Notes", mSavedNotes);
+                    }
+                    fragment.setArguments(args);
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.fragment_container, fragment)
-                                .addToBackStack("language_fragment")
+                                .addToBackStack("cards_fragment")
                                 .commit();
                     }
                     break;
@@ -134,11 +145,8 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     }
 
     public void writeSavedQuestionsToDatabase() {
-        Map<String, String> savedQuestions = new HashMap<>();
-        savedQuestions.put("q01", "Test question");
-        savedQuestions.put("q02", "Test question 2");
         mDatabase.collection("patients").document(mEmail).collection("saved").document(mProviderChoice).collection("data").document("questions")
-                .set(savedQuestions)
+                .set(mSavedQuestions)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -155,10 +163,10 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     }
 
     public void writeSavedNotesToDatabase() {
-        Map<String, String> savedNotes = new HashMap<>();
-        savedNotes.put("n01", "Test note");
+//        Map<String, String> savedNotes = new HashMap<>();
+//        savedNotes.put("n01", "Test note");
         mDatabase.collection("patients").document(mEmail).collection("saved").document(mProviderChoice).collection("data").document("notes")
-                .set(savedNotes)
+                .set(mSavedNotes)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -207,7 +215,6 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                         Log.w(TAG, "Error saving recent deck choice.", e);
                     }
                 });
-        writeAnalyticsToDatabase();
     }
 
     /**

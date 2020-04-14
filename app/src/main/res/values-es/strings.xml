@@ -34,4 +34,7 @@
     <string name="done">Hecho</string>
     <string name="expand">Ampliar</string>
     <string name="collapse">Colapso</string>
+    <string name="no_recent_deck">¡No has seleccionado mazo recientemente!</string>
+    <string name="no_saved_questions">¡No tienes preguntas guardadas!</string>
+    <string name="no_saved_notes">No se agregaron notas para esta pregunta.</string>
 </resources>

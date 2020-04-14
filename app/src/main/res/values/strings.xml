@@ -34,4 +34,7 @@
     <string name="done">Done</string>
     <string name="expand">Expand</string>
     <string name="collapse">Collapse</string>
+    <string name="no_recent_deck">You have no recently selected deck!</string>
+    <string name="no_saved_questions">You have no saved questions!</string>
+    <string name="no_saved_notes">No notes added for this question.</string>
 </resources>

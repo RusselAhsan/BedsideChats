@@ -7,21 +7,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
 import com.android.bedsidechats.R;
 import com.android.bedsidechats.data.SavedCardAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class SavedFragment extends Fragment implements View.OnClickListener {
+public class GuestSavedFragment extends Fragment implements View.OnClickListener {
     private String mLanguageChoice = "";
     private String mProviderChoice = "";
     private String mUsername = "";

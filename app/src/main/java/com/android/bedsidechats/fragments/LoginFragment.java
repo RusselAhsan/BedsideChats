@@ -35,12 +35,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
     private EditText mEmailEditText;
     private EditText mPasswordEditText;
     private String mProviderChoice = "";
     private String mLanguageChoice = "";
+    private TreeMap<String, String> mSavedQuestions;
+    private TreeMap<String, String> mSavedNotes;
     private FirebaseAuth mAuth;
     private FirebaseFirestore mDatabase;
     private static String TAG = "LOGIN_FGMT";
@@ -71,6 +74,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         mProviderChoice = getArguments().getString("Provider") != null ? getArguments().getString("Provider") : "";
         mLanguageChoice = getArguments().getString("Language") != null ? getArguments().getString("Language") : "";
+        mSavedQuestions = getArguments().getSerializable("Questions") != null ? (TreeMap) getArguments().getSerializable("Questions") : new TreeMap<>();
+        mSavedNotes = getArguments().getSerializable("Notes") != null ? (TreeMap) getArguments().getSerializable("Notes") : new TreeMap<>();
+
 
         Button loginButton = v.findViewById(R.id.login_button_login_port);
         if (loginButton != null) {
@@ -105,8 +111,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     // TODO: GIVE NEW PASSWORD? LINK TO PAGE WHERE THEY CHOOSE NEW PASSWORD?
                     break;
                 case R.id.signup_button_login_port:
-                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     Fragment fragment = new SignupFragment();
+                    Bundle args = new Bundle();
+                    fragment.setArguments(args);
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.fragment_container, fragment)
@@ -205,11 +213,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     public void writeSavedQuestionsToDatabase(String email, String username) {
-        Map<String, String> savedQuestions = new HashMap<>();
-        savedQuestions.put("q01", "Test question");
-        savedQuestions.put("q02", "Test question 2");
         mDatabase.collection("patients").document(email).collection("saved").document(mProviderChoice).collection("data").document("questions")
-                .set(savedQuestions)
+                .set(mSavedQuestions)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -226,10 +231,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     public void writeSavedNotesToDatabase(String email, String username) {
-        Map<String, String> savedNotes = new HashMap<>();
-        savedNotes.put("n01", "Test note");
         mDatabase.collection("patients").document(email).collection("saved").document(mProviderChoice).collection("data").document("notes")
-                .set(savedNotes)
+                .set(mSavedNotes)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
