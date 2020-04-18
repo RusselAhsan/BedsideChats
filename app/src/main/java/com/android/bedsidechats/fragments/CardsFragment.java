@@ -1,6 +1,7 @@
 package com.android.bedsidechats.fragments;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,7 +60,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
         // TODO handle rotation
         v = inflater.inflate(R.layout.activity_cards, container, false);
-
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mDatabase = FirebaseFirestore.getInstance();
 
         mQuestionList = new HashMap<>();
@@ -72,6 +73,11 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         mEmail = getArguments().getString("Email") != null ? getArguments().getString("Email") : "";
 
         indicator = v.findViewById(R.id.slider_cards_port);
+
+        Button doneButton = v.findViewById(R.id.done_button_cards_port);
+        if(doneButton != null) {
+            doneButton.setOnClickListener(this);
+        }
 
         mCards = v.findViewById(R.id.cards_list);
         if (mCards != null) {

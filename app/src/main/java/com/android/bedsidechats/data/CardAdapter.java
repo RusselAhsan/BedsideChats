@@ -168,7 +168,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
                     }
                     break;
 
-                // If unsaved but notes exist, save question and save or update notes
+                // This probably wont work and will need to be updated to use some sort of onChange listener. If unsaved but notes exist, save question and save or update notes
                 case R.id.notes_EditText_card_port:
                     if(mNotesEditText.getText().toString() != ""){
                         if(!mSavedQuestions.containsKey(question)) {

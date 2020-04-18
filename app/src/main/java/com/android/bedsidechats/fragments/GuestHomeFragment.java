@@ -82,6 +82,7 @@ public class GuestHomeFragment extends Fragment implements View.OnClickListener 
             providerButton.setOnClickListener(this);
         }
 
+        lastDeck = v.findViewById(R.id.lastDeck_textView_guestHome_port);
         lastDeck.setText(lastDeck.getText().toString() + " " + mProviderChoice);
 
         return v;

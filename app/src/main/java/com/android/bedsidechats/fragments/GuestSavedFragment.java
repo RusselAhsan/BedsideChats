@@ -35,9 +35,8 @@ public class GuestSavedFragment extends Fragment implements View.OnClickListener
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
 
-    private FirebaseFirestore mDatabase;
-    private HashMap<String, String> mQuestionList;
-    private HashMap<String, String> mSavedNotes;
+    private TreeMap<String, String> mSavedQuestions;
+    private TreeMap<String, String> mSavedNotes;
 
     Button expand, collapse;
 
@@ -51,27 +50,28 @@ public class GuestSavedFragment extends Fragment implements View.OnClickListener
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
 
-        mDatabase = FirebaseFirestore.getInstance();
-        mQuestionList = new HashMap<>();
-        mSavedNotes = new HashMap<>();
+        mSavedQuestions = new TreeMap<>();
+        mSavedNotes = new TreeMap<>();
 
         mLanguageChoice = getArguments() != null ? getArguments().getString("Language") : "";
         mProviderChoice = getArguments().getString("Provider");
         mUsername = getArguments().getString("Username");
         mEmail = getArguments().getString("Email") != null ? getArguments().getString("Email") : "";
+        mSavedQuestions = getArguments().getSerializable("Questions") != null ? (TreeMap) getArguments().getSerializable("Questions") : new TreeMap<>();
+        mSavedNotes = getArguments().getSerializable("Notes") != null ? (TreeMap) getArguments().getSerializable("Notes") : new TreeMap<>();
         mSavedCards = getArguments().getString("Saved_Cards");
 
         // get the listview
-        expListView = (ExpandableListView) v.findViewById(R.id.saved_cards_list);
+        expListView = v.findViewById(R.id.saved_cards_list);
 
-        expand = (Button) v.findViewById(R.id.expand_button);
-        collapse = (Button) v.findViewById(R.id.collapse_button);
+        expand = v.findViewById(R.id.expand_button);
+        collapse = v.findViewById(R.id.collapse_button);
 
         expand.setOnClickListener(this);
         collapse.setOnClickListener(this);
 
         // preparing list data
-        prepareListData();
+        prepareGuestData();
 
         return v;
     }
@@ -92,48 +92,21 @@ public class GuestSavedFragment extends Fragment implements View.OnClickListener
     }
 
     /*
-     * Preparing the list data
+     * Preparing the guest saved card and notes data
      */
-    private void prepareListData() {
+    private void prepareGuestData() {
+        for (Map.Entry<String, String> questions : mSavedQuestions.entrySet()) {
+            listDataHeader.add(questions.getKey().toUpperCase() + ": " + questions.getValue());
+            if (mSavedNotes != null) {
+                List<String> child = new ArrayList<String>();
+                child.add(mSavedNotes.get("n" + questions.getKey().substring(1)) != null ? mSavedNotes.get("n" + questions.getKey().substring(1)) : getString(R.string.no_saved_notes));
+                listDataChild.put(questions.getKey().toUpperCase() + ": " + questions.getValue(), child);
+            }
+        }
+        listAdapter = new SavedCardAdapter(getContext(), listDataHeader, listDataChild);
 
-        mDatabase.collection("patients").document(mEmail)
-                .collection("saved").document(mProviderChoice).collection("data")
-                .document("questions").get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            mQuestionList = (HashMap) task.getResult().getData();
-                            if(mQuestionList != null) {
-                                    mDatabase.collection("patients").document(mEmail)
-                                            .collection("saved").document(mProviderChoice).collection("data")
-                                            .document("notes").get()
-                                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                    if (task.isSuccessful()) {
-                                                        TreeMap<String, String> mQuestionMap = new TreeMap<>(mQuestionList);
-                                                        for (Map.Entry<String, String> questions : mQuestionMap.entrySet()) {
-                                                            listDataHeader.add(questions.getKey().toUpperCase() + ": " + questions.getValue());
-                                                            mSavedNotes = (HashMap) task.getResult().getData();
-                                                            if (mSavedNotes != null) {
-                                                                TreeMap<String, String> mNotesMap = new TreeMap<>(mSavedNotes);
-                                                                List<String> child = new ArrayList<String>();
-                                                                child.add(mNotesMap.get("n" + questions.getKey().substring(1)) != null ? mNotesMap.get("n" + questions.getKey().substring(1)) : getString(R.string.no_saved_notes));
-                                                                listDataChild.put(questions.getKey().toUpperCase() + ": " + questions.getValue(), child);
-                                                            }
-                                                        }
-                                                        listAdapter = new SavedCardAdapter(getContext(), listDataHeader, listDataChild);
-
-                                                        // setting list adapter
-                                                        expListView.setAdapter(listAdapter);
-                                                    }
-                                                }
-                                            });
-                                    }
-                            }
-                        }
-                });
+        // setting list adapter
+        expListView.setAdapter(listAdapter);
     }
 
 

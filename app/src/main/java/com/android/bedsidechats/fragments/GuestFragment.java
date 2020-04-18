@@ -1,6 +1,7 @@
 package com.android.bedsidechats.fragments;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,9 +41,9 @@ public class GuestFragment extends Fragment implements View.OnClickListener {
             }
         }
         else{
-            v = inflater.inflate(R.layout.activity_instructions, container, false);
+            v = inflater.inflate(R.layout.activity_guest, container, false);
         }
-        v = inflater.inflate(R.layout.activity_instructions, container, false);
+        v = inflater.inflate(R.layout.activity_guest, container, false);
 
         mProvider =  getArguments().getString("Provider") != null ? getArguments().getString("Provider") : "";
         mLanguage = getArguments().getString("Language") != null ? getArguments().getString("Language") : "";
