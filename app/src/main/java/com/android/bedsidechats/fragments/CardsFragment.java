@@ -136,7 +136,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                                 mQuestionList.remove("instructions");
                                 TreeMap<String, String> mQuestionMap = new TreeMap<>(mQuestionList);
                                 Log.d(TAG, "" + mQuestionMap);
-                                mAdapter = new CardAdapter(getActivity(), mQuestionMap, getActivity().getSupportFragmentManager(), mLanguageChoice, mSavedQuestions);
+                                mAdapter = new CardAdapter(getActivity(), mQuestionMap, getActivity().getSupportFragmentManager(), mLanguageChoice, mSavedQuestions, mSavedNotes);
                                 mCards.setAdapter(mAdapter);
                                 SnapHelper snapHelper = new PagerSnapHelper();
                                 snapHelper.attachToRecyclerView(mCards);

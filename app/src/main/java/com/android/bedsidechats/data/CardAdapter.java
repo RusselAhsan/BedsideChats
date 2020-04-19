@@ -45,14 +45,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
 
 
 
-    public CardAdapter(Activity context, TreeMap<String, String> questions, FragmentManager fragmentManager, String language, TreeMap<String, String> saved) {
+    public CardAdapter(Activity context, TreeMap<String, String> questions, FragmentManager fragmentManager, String language, TreeMap<String, String> saved, TreeMap<String, String> savedNotes) {
         mQuestionMap = questions;
         mDatabase = FirebaseFirestore.getInstance();
         mLanguageChoice =  language;
         mContext = context;
         mFragmentManager = fragmentManager;
         mSavedQuestions = saved;
-        mSavedNotes = new TreeMap<>();
+        mSavedNotes = savedNotes;
     }
 
     @Override
@@ -92,7 +92,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         protected EditText mNotesEditText;
         protected LinearLayout mBackground;
         protected Button mSavedButton;
-        private String TAG = "CRD_HLDR";
+        private String TAG = "CRD_ADPTR";
         public String mLanguageChoice;
         private Activity mContext;
         private FragmentManager mFragmentManager;
@@ -119,23 +119,16 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         public void onClick(View v){
             Log.d(TAG, "inside onClick" + v.getId());
             String question = "q" + mQuestionNumberTextView.getText().toString().substring(9, 11);
+            String note = "n" + question.substring(1);
             switch(v.getId()){
                 case R.id.card_save_button:
-                    Log.d(TAG, "" + mBackground.getBackground());
+                    //Log.d(TAG, "" + mBackground.getBackground());
                     if(saved){ // Want to unsave
-//                        if(mSavedQuestions.containsKey(question)){
-//                            mSavedQuestions.remove(question);
-//                        }
-//                        if(mNotesEditText.getText().toString() == "") {
-//                            if(mSavedNotes.containsKey(question)) {
-//                                mSavedNotes.remove(question);
-//                            }
-//                        }
                         // Remove from maps if maps have them already and there are no notes
-                        if(mSavedQuestions.containsKey(question) && mNotesEditText.getText().toString() == ""){
+                        if(mSavedQuestions.containsKey(question) && mNotesEditText.getText().length() == 0){
                             mSavedQuestions.remove(question);
-                            if(mSavedNotes.containsKey(question)) {
-                                mSavedNotes.remove(question);
+                            if(mSavedNotes.containsKey(note)) {
+                                mSavedNotes.remove(note);
                             }
                         }
                         // Visual updates for unsaving
@@ -149,17 +142,20 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
                             mSavedQuestions.put(question, mQuestionTextView.getText().toString());
                         }
                         // Add to notes map if not already in map and if note exists
-                        if(!mSavedNotes.containsKey(question) && mNotesEditText.getText().toString() != "") {
-                            mSavedNotes.put(question, mNotesEditText.getText().toString());
-
+                        if(!mSavedNotes.containsKey(note) && mNotesEditText.getText().length() != 0) {
+                            mSavedNotes.put(note, mNotesEditText.getText().toString());
                         }
                         else{
                             // Update note in notes map if previous note existed for this question
-                            if(mSavedNotes.get(question) != mNotesEditText.getText().toString()) {
-                                mSavedNotes.remove(question);
-                                mSavedNotes.put(question, mNotesEditText.getText().toString());
+                            if(mSavedNotes.get(note) != mNotesEditText.getText().toString() && mNotesEditText.getText().length() != 0) {
+                                mSavedNotes.remove(note);
+                                mSavedNotes.put(note, mNotesEditText.getText().toString());
+                            }
+                            else if(mSavedNotes.get(note) != mNotesEditText.getText().toString()){
+                                mSavedNotes.remove(note);
                             }
                         }
+
                         // Visual updates for saving
                         mBackground.setBackgroundResource(mSavedBorder);
                         mSavedButton.setBackgroundResource(mContext.getResources().getIdentifier("unsave_prompt_button", "drawable", mContext.getPackageName()));
