@@ -3,15 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="55dip"
     android:orientation="vertical"
-    android:background="@color/unsavedColor">
+    android:background="@color/colorPrimaryDark">
 
     <TextView
         android:id="@+id/saved_cards_notes"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@string/fontTitle"
         android:textSize="30sp"
+        android:textColor="@android:color/white"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft" />
+        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+        />
 
 </LinearLayout>
