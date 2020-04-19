@@ -1,48 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout3"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/collapse_button"
-        android:layout_width="300dp"
+        android:layout_width="220dp"
         android:layout_height="120dp"
-        android:layout_below="@+id/saved_cards_list"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="68dp"
         android:background="@drawable/rounded_corner_button"
         android:text="@string/collapse"
         android:textColor="@color/whiteFont"
         android:textSize="50sp"
         app:fontFamily="@string/font"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saved_cards_list" />
+
+    <Button
+        android:id="@+id/done_button"
+        android:layout_width="220dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/rounded_corner_button"
+        android:text="@string/done"
+        android:textColor="@color/whiteFont"
+        android:textSize="50sp"
+        app:fontFamily="@string/font"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.965"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saved_cards_list" />
 
     <ExpandableListView
         android:id="@+id/saved_cards_list"
-        android:layout_width="match_parent"
-        android:layout_height="966dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="22dp" />
+        android:layout_width="747dp"
+        android:layout_height="965dp"
+        android:layout_marginTop="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/expand_button"
-        android:layout_width="300dp"
+        android:layout_width="220dp"
         android:layout_height="120dp"
-        android:layout_below="@+id/saved_cards_list"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="68dp"
         android:background="@drawable/rounded_corner_button"
         android:text="@string/expand"
         android:textColor="@color/whiteFont"
         android:textSize="50sp"
         app:fontFamily="@string/font"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintHorizontal_bias="0.013"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saved_cards_list" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

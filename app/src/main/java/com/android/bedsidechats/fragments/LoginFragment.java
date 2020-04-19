@@ -71,7 +71,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         mDatabase = FirebaseFirestore.getInstance();
         mEmailEditText = v.findViewById(R.id.email_editText_login_port);
         mPasswordEditText = v.findViewById(R.id.password_editText_login_port);
-
         mProviderChoice = getArguments().getString("Provider") != null ? getArguments().getString("Provider") : "";
         mLanguageChoice = getArguments().getString("Language") != null ? getArguments().getString("Language") : "";
         mSavedQuestions = getArguments().getSerializable("Questions") != null ? (TreeMap) getArguments().getSerializable("Questions") : new TreeMap<>();

@@ -1,4 +1,6 @@
 package com.android.bedsidechats;
+import android.content.Intent;
+
 import org.junit.Test;
 import androidx.test.rule.ActivityTestRule;
 import com.android.bedsidechats.activities.LoginActivity;
@@ -13,7 +15,10 @@ public class LoginUnitTest extends ActivityTestRule<LoginActivity> {
     public LoginUnitTest() {
         super(LoginActivity.class);
 
-        launchActivity(getActivityIntent());
+        Intent intent = new Intent();
+        intent.putExtra("Language", "English");
+        intent.putExtra("Provider", "Physician");
+        launchActivity(intent);
         mLoginActivity = getActivity();
         mLoginFragment = (LoginFragment) mLoginActivity.getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_container);
@@ -28,6 +33,8 @@ public class LoginUnitTest extends ActivityTestRule<LoginActivity> {
         assertNotNull(mLoginActivity);
         assertNotNull(mLoginFragment);
     }
+
+
 
     protected void afterActivityFinished() {
         super.afterActivityFinished();
