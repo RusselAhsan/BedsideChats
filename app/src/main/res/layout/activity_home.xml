@@ -8,12 +8,29 @@
     android:orientation="vertical"
     tools:context=".activities.MainActivity">
 
+<!--    <Button-->
+<!--        android:id="@+id/logout_button_home_port"-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="120dp"-->
+<!--        android:layout_marginTop="@dimen/portrait_margin_top"-->
+<!--        android:background="@drawable/rounded_corner_button"-->
+<!--        android:text="@string/logout"-->
+<!--        android:textColor="@color/whiteFont"-->
+<!--        android:textSize="50sp"-->
+<!--        app:fontFamily="@string/font"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.95"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/title_textView_home_port" />-->
+
+    <!--        app:layout_constraintTop_toBottomOf="@+id/logout_button_home_port"-->
+
     <TextView
         android:id="@+id/title_textView_home_port"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/background"
         android:layout_marginTop="@dimen/portrait_margin_top"
+        android:background="@drawable/background"
         android:padding="5dp"
         android:text="@string/app_name"
         android:textAlignment="center"
@@ -21,10 +38,11 @@
         android:textSize="120sp"
         app:fontFamily="@string/fontTitle"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/select_textView_home_port"
@@ -104,19 +122,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saved_button_home_port" />
 
+
 <!--    <Button-->
-<!--        android:id="@+id/instruction_button"-->
-<!--        android:layout_width="214dp"-->
-<!--        android:layout_height="155dp"-->
-<!--        android:layout_marginTop="72dp"-->
-<!--        android:background="@color/colorPrimaryDark"-->
-<!--        android:text="@string/instruction_button"-->
+<!--        android:id="@+id/signout_button_home_port"-->
+<!--        android:layout_width="250dp"-->
+<!--        android:layout_height="120dp"-->
+<!--        android:layout_marginTop="@dimen/portrait_margin_top"-->
+<!--        android:background="@drawable/rounded_corner_button"-->
+<!--        android:text="@string/logout"-->
 <!--        android:textColor="@color/whiteFont"-->
-<!--        android:textSize="30sp"-->
-<!--        app:fontFamily="@font/assistant"-->
+<!--        android:textSize="50sp"-->
+<!--        app:fontFamily="@string/font"-->
 <!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.5"-->
+<!--        app:layout_constraintHorizontal_bias="0.9"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/notes_button" />-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/provider_button_home_port" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

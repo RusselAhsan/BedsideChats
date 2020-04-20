@@ -5,6 +5,7 @@
     <string name="font">sans-serif-condensed-light</string>
     <string name="fontTitle">sans-serif-condensed</string>
     <string name="login">Iniciar sesión</string>
+    <string name="logout">Cerrar sesión</string>
     <string name="sign_up">Regístrate</string>
     <string name="already_have_an_account">¿Tienes una cuenta?</string>
     <string name="continue_guest">Continuar como invitado</string>
