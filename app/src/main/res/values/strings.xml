@@ -34,4 +34,16 @@
     <string name="done">Done</string>
     <string name="expand">Expand</string>
     <string name="collapse">Collapse</string>
+    <string name="no_recent_deck">You have no recently selected deck!</string>
+    <string name="no_saved_questions">You have no saved questions!</string>
+    <string name="no_saved_notes">No notes added for this question.</string>
+    <string name="question">Question</string>
+    <string name="failed_instructions">Failed to load instructions. Try going back a page and choosing a different provider.</string>
+    <string name="blank_field">One or more fields are blank!</string>
+    <string name="failed_auth">Authentication failed.</string>
+    <string name="loading_wait">Loading... Please wait.</string>
+    <string name="password_match">Passwords do not match.</string>
+    <string name="username_taken">Username is taken!</string>
+    <string name="user_created">User Created!</string>
+    <string name="write_notes_here">Write Notes Here:</string>
 </resources>

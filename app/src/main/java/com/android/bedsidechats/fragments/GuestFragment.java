@@ -1,6 +1,7 @@
 package com.android.bedsidechats.fragments;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,9 +17,13 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.bedsidechats.R;
 
+import java.util.TreeMap;
+
 public class GuestFragment extends Fragment implements View.OnClickListener {
     private String mLanguage;
     private String mProvider;
+    private TreeMap<String, String> mSavedQuestions;
+    private TreeMap<String, String> mSavedNotes;
     private static String TAG = "GUEST_FGMT";
 
     @Override
@@ -36,12 +41,14 @@ public class GuestFragment extends Fragment implements View.OnClickListener {
             }
         }
         else{
-            v = inflater.inflate(R.layout.activity_instructions, container, false);
+            v = inflater.inflate(R.layout.activity_guest, container, false);
         }
-        v = inflater.inflate(R.layout.activity_instructions, container, false);
+        v = inflater.inflate(R.layout.activity_guest, container, false);
 
         mProvider =  getArguments().getString("Provider") != null ? getArguments().getString("Provider") : "";
         mLanguage = getArguments().getString("Language") != null ? getArguments().getString("Language") : "";
+        mSavedQuestions = getArguments().getSerializable("Questions") != null ? (TreeMap) getArguments().getSerializable("Questions") : new TreeMap<>();
+        mSavedNotes = getArguments().getSerializable("Notes") != null ? (TreeMap) getArguments().getSerializable("Notes") : new TreeMap<>();
 
         Button continueButton = v.findViewById(R.id.continueGuest_button_guest_port);
         if (continueButton != null) {
@@ -66,16 +73,17 @@ public class GuestFragment extends Fragment implements View.OnClickListener {
             switch (view.getId()) {
                 case R.id.continueGuest_button_guest_port:
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    Fragment fragment = new HomeFragment();
+                    Fragment fragment = new GuestHomeFragment();
                     Bundle args = new Bundle();
                     args.putString("Language", mLanguage);
                     args.putString("Provider", mProvider);
-                    args.putString("Guest", "True");
+                    args.putSerializable("Questions", mSavedQuestions);
+                    args.putSerializable("Notes", mSavedNotes);
                     fragment.setArguments(args);
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.fragment_container, fragment)
-                                .addToBackStack("provider_fragment")
+                                .addToBackStack("guest_fragment")
                                 .commit();
                     }
                     break;
@@ -85,11 +93,13 @@ public class GuestFragment extends Fragment implements View.OnClickListener {
                     args = new Bundle();
                     args.putString("Language", mLanguage);
                     args.putString("Provider", mProvider);
+                    args.putSerializable("Questions", mSavedQuestions);
+                    args.putSerializable("Notes", mSavedNotes);
                     fragment.setArguments(args);
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.fragment_container, fragment)
-                                .addToBackStack("provider_fragment")
+                                .addToBackStack("guest_fragment")
                                 .commit();
                     }
                     break;
@@ -99,11 +109,13 @@ public class GuestFragment extends Fragment implements View.OnClickListener {
                     args = new Bundle();
                     args.putString("Language", mLanguage);
                     args.putString("Provider", mProvider);
+                    args.putSerializable("Questions", mSavedQuestions);
+                    args.putSerializable("Notes", mSavedNotes);
                     fragment.setArguments(args);
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.fragment_container, fragment)
-                                .addToBackStack("provider_fragment")
+                                .addToBackStack("guest_fragment")
                                 .commit();
                     }
                     break;

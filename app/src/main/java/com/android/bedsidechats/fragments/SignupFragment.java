@@ -33,6 +33,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 
 public class SignupFragment extends Fragment implements View.OnClickListener {
@@ -40,6 +41,10 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
     private EditText mUsernameEditText;
     private EditText mPasswordEditText;
     private EditText mConfirmPasswordEditText;
+    private String mProviderChoice = "";
+    private String mLanguageChoice = "";
+    private TreeMap<String, String> mSavedQuestions;
+    private TreeMap<String, String> mSavedNotes;
     private FirebaseAuth mAuth;
     private FirebaseFirestore mDatabase;
     private static String TAG = "SIGNUP_FGMT";
@@ -76,6 +81,11 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         mPasswordEditText = v.findViewById(R.id.password_editText_signup_port);
         mConfirmPasswordEditText = v.findViewById(R.id.confirmPassword_editText_signup_port);
 
+        mProviderChoice = getArguments().getString("Provider") != null ? getArguments().getString("Provider") : "";
+        mLanguageChoice = getArguments().getString("Language") != null ? getArguments().getString("Language") : "";
+        mSavedQuestions = getArguments().getSerializable("Questions") != null ? (TreeMap) getArguments().getSerializable("Questions") : new TreeMap<>();
+        mSavedNotes = getArguments().getSerializable("Notes") != null ? (TreeMap) getArguments().getSerializable("Notes") : new TreeMap<>();
+
         Button loginButton = v.findViewById(R.id.login_button_signup_port);
         if (loginButton != null) {
             loginButton.setOnClickListener(this);
@@ -97,6 +107,8 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
                 case R.id.login_button_signup_port:
                     FragmentManager fragmentManager = getFragmentManager();
                     Fragment fragment = new LoginFragment();
+                    Bundle args = new Bundle();
+                    fragment.setArguments(args);
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.fragment_container, fragment)
@@ -143,7 +155,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         if (activity != null) {
             if (password.equals(passwordConfirm) && !email.equals("") &&
                     !password.equals("") && !username.equals("")) {
-                Toast.makeText(activity.getApplicationContext(), "Loading... Please wait.",
+                Toast.makeText(activity.getApplicationContext(), getActivity().getString(R.string.loading_wait),
                         Toast.LENGTH_LONG).show();
 
                 User user = new User(email, username, password);
@@ -152,10 +164,10 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
 
 
             } else if ((email.equals("")) || (password.equals("")) || (passwordConfirm.equals(""))) {
-                Toast.makeText(activity.getApplicationContext(), "One or more entries are blank.",
+                Toast.makeText(activity.getApplicationContext(), getActivity().getString(R.string.blank_field),
                         Toast.LENGTH_SHORT).show();
             } else if (!password.equals(passwordConfirm)) {
-                Toast.makeText(activity.getApplicationContext(), "Passwords do not match.",
+                Toast.makeText(activity.getApplicationContext(), getActivity().getString(R.string.password_match),
                         Toast.LENGTH_SHORT).show();
             } else {
                 // TODO handle errors
@@ -197,6 +209,23 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
                         Log.w(TAG, "Error writing username", e);
                     }
                 });
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        Fragment fragment = new LoginFragment();
+        Bundle args = new Bundle();
+        if(mProviderChoice != "") { // already used the deck as a guest
+            args.putString("Language", mLanguageChoice);
+            args.putString("Provider", mProviderChoice);
+            args.putSerializable("Questions", mSavedQuestions);
+            args.putSerializable("Notes", mSavedNotes);
+        }
+        fragment.setArguments(args);
+        if (fragmentManager != null) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .addToBackStack("signup_fragment")
+                    .commit();
+        }
     }
 
     private void checkUniqueUsername(User user) {
@@ -212,7 +241,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Log.d(TAG, "username is not unique");
-                        Toast.makeText(activity.getApplicationContext(), "Username is taken!",
+                        Toast.makeText(activity.getApplicationContext(), getActivity().getString(R.string.username_taken),
                                 Toast.LENGTH_LONG).show();
                     } else {
                         Log.d(TAG, "creating firebase user");
@@ -236,14 +265,14 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            Toast.makeText(activity.getApplicationContext(), "User Created!",
+                            Toast.makeText(activity.getApplicationContext(), getActivity().getString(R.string.user_created),
                                     Toast.LENGTH_SHORT).show();
 
                             addUserToFirebase(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(activity.getApplicationContext(), "Authentication failed.",
+                            Toast.makeText(activity.getApplicationContext(), getActivity().getString(R.string.failed_auth),
                                     Toast.LENGTH_SHORT).show();
                         }
                     }

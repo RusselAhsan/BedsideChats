@@ -101,7 +101,7 @@ public class InstructionsFragment extends Fragment implements View.OnClickListen
                             mInstructionsTextView.setText(task.getResult().getString("instructions"));
                             Log.d(TAG, "Instructions: " + task.getResult().getString("instructions"));
                         } else {
-                            mInstructionsTextView.setText("Failed to load instructions. Try going back a page and choosing a different provider.");
+                            mInstructionsTextView.setText(getActivity().getString(R.string.failed_instructions));
                             Log.d(TAG, "Error getting data: ", task.getException());
                         }
                     }

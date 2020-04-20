@@ -137,7 +137,7 @@ public class SavedFragment extends Fragment implements View.OnClickListener {
                                                             if (mSavedNotes != null) {
                                                                 TreeMap<String, String> mNotesMap = new TreeMap<>(mSavedNotes);
                                                                 List<String> child = new ArrayList<String>();
-                                                                child.add(mNotesMap.get("n" + questions.getKey().substring(1)) != null ? mNotesMap.get("n" + questions.getKey().substring(1)) : "No notes added for this question.");
+                                                                child.add(mNotesMap.get("n" + questions.getKey().substring(1)) != null ? mNotesMap.get("n" + questions.getKey().substring(1)) : getString(R.string.no_saved_notes));
                                                                 listDataChild.put(questions.getKey().toUpperCase() + ": " + questions.getValue(), child);
                                                             }
                                                         }

@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/landscape_margin_top"
         android:background="@drawable/background"
-        android:text="Bedside Chats"
+        android:text="@string/app_name"
         android:textAlignment="center"
         android:textColor="@color/whiteFont"
         android:textSize="130sp"

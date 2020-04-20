@@ -34,4 +34,17 @@
     <string name="done">Hecho</string>
     <string name="expand">Ampliar</string>
     <string name="collapse">Colapso</string>
+    <string name="no_recent_deck">¡No has seleccionado mazo recientemente!</string>
+    <string name="no_saved_questions">¡No tienes preguntas guardadas!</string>
+    <string name="no_saved_notes">No se agregaron notas para esta pregunta.</string>
+    <string name="question">Pregunta</string>
+    <string name="failed_instructions">Error al cargar las instrucciones. Intente retroceder una página y elegir un proveedor diferente.</string>
+    <string name="blank_field">¡Uno o más campos están en blanco!</string>
+    <string name="failed_auth">Autenticación fallida.</string>
+    <string name="loading_wait">Cargando por favor espere.</string>
+    <string name="password_match">Las contraseñas no coinciden.</string>
+    <string name="username_taken">Nombre de usuario es tomado!</string>
+    <string name="user_created">Usuario creado!</string>
+    <string name="write_notes_here">Escriba notas aquí:</string>
+
 </resources>
