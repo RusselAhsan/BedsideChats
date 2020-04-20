@@ -145,7 +145,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         if (activity != null) {
             // check if fields are empty
             if (email.equals("") || password.equals("")) {
-                Toast.makeText(activity.getApplicationContext(), "One or more fields are blank!",
+                Toast.makeText(activity.getApplicationContext(), getActivity().getString(R.string.blank_field),
                         Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -160,7 +160,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                             } else {
                                 // If sign in fails, display a message to the user.
                                 //Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                Toast.makeText(activity, "Authentication failed.",
+                                Toast.makeText(activity, getActivity().getString(R.string.failed_auth),
                                         Toast.LENGTH_SHORT).show();
                             }
                         }

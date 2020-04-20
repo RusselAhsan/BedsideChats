@@ -83,7 +83,7 @@ public class GuestFragment extends Fragment implements View.OnClickListener {
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.fragment_container, fragment)
-                                .addToBackStack("provider_fragment")
+                                .addToBackStack("guest_fragment")
                                 .commit();
                     }
                     break;
@@ -99,7 +99,7 @@ public class GuestFragment extends Fragment implements View.OnClickListener {
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.fragment_container, fragment)
-                                .addToBackStack("provider_fragment")
+                                .addToBackStack("guest_fragment")
                                 .commit();
                     }
                     break;
@@ -115,7 +115,7 @@ public class GuestFragment extends Fragment implements View.OnClickListener {
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.fragment_container, fragment)
-                                .addToBackStack("provider_fragment")
+                                .addToBackStack("guest_fragment")
                                 .commit();
                     }
                     break;

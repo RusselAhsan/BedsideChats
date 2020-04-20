@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#547aa1">
 
 <!--    <ImageView-->
 <!--        android:id="@+id/topRightLogo"-->
@@ -23,10 +24,10 @@
         android:id="@+id/cards_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="100dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="140dp"
         android:padding="4dp"
         android:focusableInTouchMode="true"
         android:descendantFocusability="beforeDescendants"
@@ -36,12 +37,12 @@
         android:id="@+id/slider_cards_port"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="120dp"
         android:layout_marginRight="100dp"
         android:layout_marginLeft="100dp"
         android:layout_alignParentBottom="true"
-        app:ci_drawable="@drawable/blue_radius"
-        app:ci_drawable_unselected="@drawable/blue_radius"/>
+        app:ci_drawable="@drawable/white_radius"
+        app:ci_drawable_unselected="@drawable/white_radius"/>
 
 
     <Button
@@ -51,10 +52,12 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="300dp"
         android:layout_marginEnd="300dp"
-        android:fontFamily="@string/fontTitle"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/rounded_corner_button"
+        android:textColor="@color/whiteFont"
+        android:fontFamily="@string/font"
         android:padding="20dp"
         android:text="@string/done"
-        android:textColor="@android:color/black"
         android:textSize="40sp" />
 
     <!--placeholder text for button names EDIT SOON with images -->

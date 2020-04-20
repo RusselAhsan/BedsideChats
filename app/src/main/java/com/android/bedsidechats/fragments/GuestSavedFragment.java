@@ -10,6 +10,7 @@ import android.widget.ExpandableListView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.bedsidechats.R;
 import com.android.bedsidechats.data.SavedCardAdapter;
@@ -38,7 +39,7 @@ public class GuestSavedFragment extends Fragment implements View.OnClickListener
     private TreeMap<String, String> mSavedQuestions;
     private TreeMap<String, String> mSavedNotes;
 
-    Button expand, collapse;
+    Button expand, collapse, done;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,9 +67,11 @@ public class GuestSavedFragment extends Fragment implements View.OnClickListener
 
         expand = v.findViewById(R.id.expand_button);
         collapse = v.findViewById(R.id.collapse_button);
+        done = v.findViewById(R.id.done_button);
 
         expand.setOnClickListener(this);
         collapse.setOnClickListener(this);
+        done.setOnClickListener(this);
 
         // preparing list data
         prepareGuestData();
@@ -86,6 +89,22 @@ public class GuestSavedFragment extends Fragment implements View.OnClickListener
                     break;
                 case R.id.collapse_button:
                     collapseAll();
+                    break;
+                case R.id.done_button:
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    Fragment fragment = new GuestHomeFragment();
+                    Bundle args = new Bundle();
+                    args.putString("Language", mLanguageChoice);
+                    args.putString("Provider", mProviderChoice);
+                    args.putSerializable("Questions", mSavedQuestions);
+                    args.putSerializable("Notes", mSavedNotes);
+                    fragment.setArguments(args);
+                    if (fragmentManager != null) {
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, fragment)
+                                .addToBackStack("guestSaved_fragment")
+                                .commit();
+                    }
                     break;
             }
         }

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,8 +69,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     public void onBindViewHolder(CardViewHolder holder, int position) {
         Log.d(TAG, "inside onBindViewHolder");
         String key = mQuestionMap.keySet().toArray()[position].toString();
-        holder.mQuestionNumberTextView.setText("Question " + key.substring(1) + " / " + mQuestionMap.size());
+        String header = mContext.getString(R.string.question) + " " + key.substring(1) + " / " + mQuestionMap.size();
+        holder.mQuestionNumberTextView.setText(header);
         holder.mQuestionTextView.setText(mQuestionMap.get(key));
+        holder.addTextChangeListener();
     }
 
     @Override
@@ -110,6 +114,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             mFragmentManager = fragmentManager;
             mSavedButton = itemView.findViewById(R.id.card_save_button);
             mSavedButton.setOnClickListener(this);
+            mNotesEditText.setOnClickListener(this);
             mBackground = itemView.findViewById(R.id.card_inside);
             mSavedBorder = context.getResources().getIdentifier("card_border", "drawable", context.getPackageName());
             mUnsavedBorder = context.getResources().getIdentifier("card_no_border", "drawable", context.getPackageName());
@@ -163,25 +168,42 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
                         saved = true;
                     }
                     break;
+            }
+        }
 
-                // This probably wont work and will need to be updated to use some sort of onChange listener. If unsaved but notes exist, save question and save or update notes
-                case R.id.notes_EditText_card_port:
-                    if(mNotesEditText.getText().toString() != ""){
+        public void addTextChangeListener(){
+            String question = "q" + mQuestionNumberTextView.getText().toString().substring(9, 11);
+            String note = "n" + question.substring(1);
+            mNotesEditText.addTextChangedListener(new TextWatcher() {
+                public void afterTextChanged(Editable s) {
+                    if(mNotesEditText.getText().length() != 0){
                         if(!mSavedQuestions.containsKey(question)) {
                             mSavedQuestions.put(question, mQuestionTextView.getText().toString());
                         }
-                        if(!mSavedNotes.containsKey(question)) {
-                            mSavedNotes.put(question, mNotesEditText.getText().toString());
+                        if(!mSavedNotes.containsKey(note)) {
+                            mSavedNotes.put(note, mNotesEditText.getText().toString());
                         }
                         else{
-                            if(mSavedNotes.get(question) != mNotesEditText.getText().toString()) {
-                                mSavedNotes.remove(question);
-                                mSavedNotes.put(question, mNotesEditText.getText().toString());
+                            if(mSavedNotes.get(note) != mNotesEditText.getText().toString() && mNotesEditText.getText().length() != 0) {
+                                mSavedNotes.remove(note);
+                                mSavedNotes.put(note, mNotesEditText.getText().toString());
                             }
                         }
                     }
-                    break;
-            }
+                    else{
+                        if(!saved && mSavedQuestions.containsKey(question)){
+                            mSavedQuestions.remove(question);
+                        }
+                        if(mSavedNotes.containsKey(note)){
+                            mSavedNotes.remove(note);
+                        }
+                    }
+                }
+
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+                public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            });
         }
 
     }

@@ -108,13 +108,13 @@ public class GuestHomeFragment extends Fragment implements View.OnClickListener 
                         if (fragmentManager != null) {
                             fragmentManager.beginTransaction()
                                     .replace(R.id.fragment_container, fragment)
-                                    .addToBackStack("home_fragment")
+                                    .addToBackStack("guestHome_fragment")
                                     .commit();
                         }
                     }
                     break;
                 case R.id.saved_button_guestHome_port:
-                    if(mProviderChoice == ""){
+                    if(mSavedQuestions.size() == 0){
                         Toast.makeText(activity, R.string.no_saved_questions,
                                 Toast.LENGTH_SHORT).show();
                     }else {
@@ -130,7 +130,7 @@ public class GuestHomeFragment extends Fragment implements View.OnClickListener 
                         if (fragmentManager != null) {
                             fragmentManager.beginTransaction()
                                     .replace(R.id.fragment_container, fragment)
-                                    .addToBackStack("home_fragment")
+                                    .addToBackStack("guestHome_fragment")
                                     .commit();
                         }
                     }
@@ -144,7 +144,7 @@ public class GuestHomeFragment extends Fragment implements View.OnClickListener 
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.fragment_container, fragment)
-                                .addToBackStack("home_fragment")
+                                .addToBackStack("guestHome_fragment")
                                 .commit();
                     }
                     break;

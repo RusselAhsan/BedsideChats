@@ -90,7 +90,7 @@ public class SavedCardAdapter extends BaseExpandableListAdapter {
 
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.saved_cards_question);
-        lblListHeader.setTypeface(null, Typeface.BOLD);
+//        lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
 
         return convertView;
