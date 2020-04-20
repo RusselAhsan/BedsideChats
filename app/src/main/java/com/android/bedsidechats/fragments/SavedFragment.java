@@ -54,11 +54,11 @@ public class SavedFragment extends Fragment implements View.OnClickListener {
         mQuestionList = new HashMap<>();
         mSavedNotes = new HashMap<>();
 
-        mLanguageChoice = getArguments() != null ? getArguments().getString("Language") : "";
-        mProviderChoice = getArguments().getString("Provider");
-        mUsername = getArguments().getString("Username");
+        mLanguageChoice = getArguments().getString("Language") != null ? getArguments().getString("Language") : "";
+        mProviderChoice = getArguments().getString("Provider") != null ? getArguments().getString("Provider") : "";
+        mUsername = getArguments().getString("Username") != null ? getArguments().getString("Username") : "";
         mEmail = getArguments().getString("Email") != null ? getArguments().getString("Email") : "";
-        mSavedCards = getArguments().getString("Saved_Cards");
+        mSavedCards = getArguments().getString("Saved_Cards") != null ? getArguments().getString("Saved_Cards") : "";
 
         // get the listview
         expListView = (ExpandableListView) v.findViewById(R.id.saved_cards_list);

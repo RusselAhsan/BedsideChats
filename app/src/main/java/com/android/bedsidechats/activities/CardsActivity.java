@@ -11,18 +11,18 @@ import java.util.TreeMap;
 public class CardsActivity extends BaseFragmentActivity {
     @Override
     protected Fragment createFragment() {
-        Bundle bundle = new Bundle();
-        String language = getIntent().getStringExtra("Language");
-        String provider = getIntent().getStringExtra("Provider");
-        String email = getIntent().getStringExtra("Email") != null ? getIntent().getStringExtra("Email") : "";
-        String username = getIntent().getStringExtra("Username") != null ? getIntent().getStringExtra("Username") : "";
-        bundle.putString("Language", language);
-        bundle.putString("Provider", provider);
-        bundle.putString("Email", email);
-        bundle.putString("Username", username);
-        CardsFragment cardsFragment = new CardsFragment();
-        cardsFragment.setArguments(bundle);
-        return cardsFragment;
+        Bundle args = new Bundle();
+        String language = "English";
+        String provider = "Physician";
+        String email = "testing@test.com";
+        String username = "test";
+        args.putString("Language", language);
+        args.putString("Provider", provider);
+        args.putString("Email", email);
+        args.putString("Username", username);
+        CardsFragment cardFragment = new CardsFragment();
+        cardFragment.setArguments(args);
+        return cardFragment;
     }
 
 }
