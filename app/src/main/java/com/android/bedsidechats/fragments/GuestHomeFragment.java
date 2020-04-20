@@ -36,6 +36,7 @@ import java.util.TreeMap;
 
 public class GuestHomeFragment extends Fragment implements View.OnClickListener {
     private String mSavedCards = "";
+    private String mCategory = "";
     private String mProviderChoice = "";
     private String mLanguageChoice = "";
     private TreeMap<String, String> mSavedQuestions;
@@ -63,6 +64,7 @@ public class GuestHomeFragment extends Fragment implements View.OnClickListener 
         }
         v = inflater.inflate(R.layout.activity_guest_home, container, false);
 
+        mCategory = getArguments().getString("Category") != null ? getArguments().getString("Category") : "";
         mProviderChoice = getArguments().getString("Provider") != null ? getArguments().getString("Provider") : "";
         mLanguageChoice = getArguments().getString("Language") != null ? getArguments().getString("Language") : "";
         mSavedQuestions = getArguments().getSerializable("Questions") != null ? (TreeMap) getArguments().getSerializable("Questions") : new TreeMap<>();
@@ -104,6 +106,7 @@ public class GuestHomeFragment extends Fragment implements View.OnClickListener 
                         Bundle args = new Bundle();
                         args.putString("Language", mLanguageChoice);
                         args.putString("Provider", mProviderChoice);
+                        args.putString("Category", mCategory);
                         fragment.setArguments(args);
                         if (fragmentManager != null) {
                             fragmentManager.beginTransaction()
@@ -124,6 +127,7 @@ public class GuestHomeFragment extends Fragment implements View.OnClickListener 
                         Bundle args = new Bundle();
                         args.putString("Language", mLanguageChoice);
                         args.putString("Provider", mProviderChoice);
+                        args.putString("Category", mCategory);
                         args.putSerializable("Questions", mSavedQuestions);
                         args.putSerializable("Notes", mSavedNotes);
                         fragment.setArguments(args);

@@ -40,6 +40,7 @@ import java.util.TreeMap;
 public class LoginFragment extends Fragment implements View.OnClickListener {
     private EditText mEmailEditText;
     private EditText mPasswordEditText;
+    private String mCategory = "";
     private String mProviderChoice = "";
     private String mLanguageChoice = "";
     private TreeMap<String, String> mSavedQuestions;
@@ -71,6 +72,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         mDatabase = FirebaseFirestore.getInstance();
         mEmailEditText = v.findViewById(R.id.email_editText_login_port);
         mPasswordEditText = v.findViewById(R.id.password_editText_login_port);
+        mCategory = getArguments().getString("Category") != null ? getArguments().getString("Category") : "";
         mProviderChoice = getArguments().getString("Provider") != null ? getArguments().getString("Provider") : "";
         mLanguageChoice = getArguments().getString("Language") != null ? getArguments().getString("Language") : "";
         mSavedQuestions = getArguments().getSerializable("Questions") != null ? (TreeMap) getArguments().getSerializable("Questions") : new TreeMap<>();
@@ -113,6 +115,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     Fragment fragment = new SignupFragment();
                     Bundle args = new Bundle();
+                    args.putString("Language", mLanguageChoice);
+                    args.putString("Provider", mProviderChoice);
+                    args.putString("Category", mCategory);
+                    args.putSerializable("Questions", mSavedQuestions);
+                    args.putSerializable("Notes", mSavedNotes);
                     fragment.setArguments(args);
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()
@@ -280,7 +287,25 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         Log.w(TAG, "Error saving recent deck choice.", e);
                     }
                 });
-    transferToHome(email, username);
+    writeDeckCategoryToDatabase(email, username);
+    }
+
+    public void writeDeckCategoryToDatabase(String email, String username) {
+        mDatabase.collection("patients").document(email)
+                .update("deck_category", mCategory)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "Deck category successfully saved!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error saving deck category.", e);
+                    }
+                });
+        transferToHome(email, username);
     }
 
     private void transferToHome(String email, String username) {

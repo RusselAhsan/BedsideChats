@@ -28,6 +28,7 @@ import java.util.TreeMap;
 public class GuestSavedFragment extends Fragment implements View.OnClickListener {
     private String mLanguageChoice = "";
     private String mProviderChoice = "";
+    private String mCategory = "";
     private String mUsername = "";
     private String mEmail = "";
     private String mSavedCards = "";
@@ -56,6 +57,7 @@ public class GuestSavedFragment extends Fragment implements View.OnClickListener
 
         mLanguageChoice = getArguments() != null ? getArguments().getString("Language") : "";
         mProviderChoice = getArguments().getString("Provider");
+        mCategory = getArguments().getString("Category");
         mUsername = getArguments().getString("Username");
         mEmail = getArguments().getString("Email") != null ? getArguments().getString("Email") : "";
         mSavedQuestions = getArguments().getSerializable("Questions") != null ? (TreeMap) getArguments().getSerializable("Questions") : new TreeMap<>();
@@ -96,6 +98,7 @@ public class GuestSavedFragment extends Fragment implements View.OnClickListener
                     Bundle args = new Bundle();
                     args.putString("Language", mLanguageChoice);
                     args.putString("Provider", mProviderChoice);
+                    args.putString("Category", mCategory);
                     args.putSerializable("Questions", mSavedQuestions);
                     args.putSerializable("Notes", mSavedNotes);
                     fragment.setArguments(args);

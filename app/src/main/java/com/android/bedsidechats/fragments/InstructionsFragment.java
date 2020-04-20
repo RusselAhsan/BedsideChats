@@ -26,6 +26,7 @@ public class InstructionsFragment extends Fragment implements View.OnClickListen
     private FirebaseFirestore mDatabase;
     private String mLanguage;
     private String mProvider;
+    private String mCategory;
     private String mEmail = "";
     private String mUsername = "";
     private TextView mInstructionsTextView;
@@ -52,6 +53,7 @@ public class InstructionsFragment extends Fragment implements View.OnClickListen
 
         mDatabase = FirebaseFirestore.getInstance();
         mProvider =  getArguments().getString("Provider");
+        mCategory =  getArguments().getString("Category");
         mLanguage = getArguments().getString("Language");
         mEmail = getArguments().getString("Email") != null ? getArguments().getString("Email") : "";
         mUsername = getArguments().getString("Username") != null ? getArguments().getString("Username") : "";
@@ -80,6 +82,7 @@ public class InstructionsFragment extends Fragment implements View.OnClickListen
                     args.putString("Email", mEmail);
                     args.putString("Language", mLanguage);
                     args.putString("Provider", mProvider);
+                    args.putString("Category", mCategory);
                     fragment.setArguments(args);
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()
@@ -93,7 +96,7 @@ public class InstructionsFragment extends Fragment implements View.OnClickListen
     }
 
     public void getInstructions(String language, String provider){
-        mDatabase.collection("languages").document(language).collection("decks").document(provider).get()
+        mDatabase.collection("languages").document(language).collection("categories").document(mCategory).collection("decks").document(provider).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {

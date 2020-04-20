@@ -28,7 +28,6 @@ public class SavedFragment extends Fragment implements View.OnClickListener {
     private String mProviderChoice = "";
     private String mUsername = "";
     private String mEmail = "";
-    private String mSavedCards = "";
     SavedCardAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
@@ -58,7 +57,6 @@ public class SavedFragment extends Fragment implements View.OnClickListener {
         mProviderChoice = getArguments().getString("Provider") != null ? getArguments().getString("Provider") : "";
         mUsername = getArguments().getString("Username") != null ? getArguments().getString("Username") : "";
         mEmail = getArguments().getString("Email") != null ? getArguments().getString("Email") : "";
-        mSavedCards = getArguments().getString("Saved_Cards") != null ? getArguments().getString("Saved_Cards") : "";
 
         // get the listview
         expListView = (ExpandableListView) v.findViewById(R.id.saved_cards_list);
@@ -96,7 +94,6 @@ public class SavedFragment extends Fragment implements View.OnClickListener {
                     args.putString("Email", mEmail);
                     args.putString("Language", mLanguageChoice);
                     args.putString("Provider", mProviderChoice);
-                    args.putString("Saved_Cards", mSavedCards);
                     fragment.setArguments(args);
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()

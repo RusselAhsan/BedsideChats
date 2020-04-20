@@ -22,6 +22,7 @@ import java.util.TreeMap;
 public class GuestFragment extends Fragment implements View.OnClickListener {
     private String mLanguage;
     private String mProvider;
+    private String mCategory;
     private TreeMap<String, String> mSavedQuestions;
     private TreeMap<String, String> mSavedNotes;
     private static String TAG = "GUEST_FGMT";
@@ -45,6 +46,7 @@ public class GuestFragment extends Fragment implements View.OnClickListener {
         }
         v = inflater.inflate(R.layout.activity_guest, container, false);
 
+        mCategory =  getArguments().getString("Category") != null ? getArguments().getString("Category") : "";
         mProvider =  getArguments().getString("Provider") != null ? getArguments().getString("Provider") : "";
         mLanguage = getArguments().getString("Language") != null ? getArguments().getString("Language") : "";
         mSavedQuestions = getArguments().getSerializable("Questions") != null ? (TreeMap) getArguments().getSerializable("Questions") : new TreeMap<>();
@@ -77,6 +79,7 @@ public class GuestFragment extends Fragment implements View.OnClickListener {
                     Bundle args = new Bundle();
                     args.putString("Language", mLanguage);
                     args.putString("Provider", mProvider);
+                    args.putString("Category", mCategory);
                     args.putSerializable("Questions", mSavedQuestions);
                     args.putSerializable("Notes", mSavedNotes);
                     fragment.setArguments(args);
@@ -93,6 +96,7 @@ public class GuestFragment extends Fragment implements View.OnClickListener {
                     args = new Bundle();
                     args.putString("Language", mLanguage);
                     args.putString("Provider", mProvider);
+                    args.putString("Category", mCategory);
                     args.putSerializable("Questions", mSavedQuestions);
                     args.putSerializable("Notes", mSavedNotes);
                     fragment.setArguments(args);
@@ -109,6 +113,7 @@ public class GuestFragment extends Fragment implements View.OnClickListener {
                     args = new Bundle();
                     args.putString("Language", mLanguage);
                     args.putString("Provider", mProvider);
+                    args.putString("Category", mCategory);
                     args.putSerializable("Questions", mSavedQuestions);
                     args.putSerializable("Notes", mSavedNotes);
                     fragment.setArguments(args);

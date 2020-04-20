@@ -42,6 +42,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     //OnCardsSelectedListener callback;
     private String mLanguageChoice;
     private String mProviderChoice;
+    private String mCategory;
     private String mUsername;
     private String mEmail;
     private FirebaseFirestore mDatabase;
@@ -69,6 +70,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
         mLanguageChoice = getArguments().getString("Language") != null ? getArguments().getString("Language") : "";
         mProviderChoice = getArguments().getString("Provider") != null ? getArguments().getString("Provider") : "";
+        mCategory = getArguments().getString("Category") != null ? getArguments().getString("Category") : "";
         mUsername = getArguments().getString("Username") != null ? getArguments().getString("Username") : "";
         mEmail = getArguments().getString("Email") != null ? getArguments().getString("Email") : "";
 
@@ -108,6 +110,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                         args.putString("Email", mEmail);
                     }
                     else{ // guest
+                        args.putString("Category", mCategory);
                         args.putString("Provider", mProviderChoice);
                         args.putString("Language", mLanguageChoice);
                         args.putSerializable("Questions", mSavedQuestions);
@@ -126,7 +129,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     }
 
     public void getCardDeck() {
-        mDatabase.collection("languages").document(mLanguageChoice).collection("decks").document(mProviderChoice).get()
+        mDatabase.collection("languages").document(mLanguageChoice).collection("categories").document(mCategory).collection("decks").document(mProviderChoice).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -221,6 +224,24 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                         Log.w(TAG, "Error saving recent deck choice.", e);
                     }
                 });
+        writeDeckCategoryToDatabase();
+    }
+
+    public void writeDeckCategoryToDatabase() {
+        mDatabase.collection("patients").document(mEmail)
+                .update("deck_category", mCategory)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "Deck category successfully saved!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error saving deck category.", e);
+                    }
+                });
     }
 
     /**
@@ -229,7 +250,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     public void writeAnalyticsToDatabase() {
         for(String question : mSavedQuestions.keySet()) {
             // dont know if analytics collection and question document will be created if they dont exist or if call will fail
-            final DocumentReference analyticsRef = mDatabase.collection("languages").document(mLanguageChoice).collection("decks").document(mProviderChoice).collection("analytics").document(question);
+            final DocumentReference analyticsRef = mDatabase.collection("languages").document(mLanguageChoice).collection("categories").document(mCategory).collection("decks").document(mProviderChoice).collection("analytics").document(question);
             mDatabase.runTransaction(new Transaction.Function<Void>() {
                 @Override
                 public Void apply(Transaction transaction) throws FirebaseFirestoreException {

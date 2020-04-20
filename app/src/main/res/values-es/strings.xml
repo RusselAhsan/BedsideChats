@@ -15,7 +15,7 @@
     <string name="confirmPassword">Confirmar contraseña:</string>
     <string name="email">Email:</string>
     <string name="username">Nombre de usuario:</string>
-    <string name="select_provider">Seleccione un mazo de cartas basado en su proveedor de atención médica</string>
+    <string name="select_provider">Seleccione un mazo de una de las categorías a continuación</string>
     <string name="cards">Tarjetas</string>
     <string name="saved">Guardado</string>
     <string name="notes">Notas</string>

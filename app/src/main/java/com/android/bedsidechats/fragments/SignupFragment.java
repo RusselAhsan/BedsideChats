@@ -41,6 +41,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
     private EditText mUsernameEditText;
     private EditText mPasswordEditText;
     private EditText mConfirmPasswordEditText;
+    private String mCategory = "";
     private String mProviderChoice = "";
     private String mLanguageChoice = "";
     private TreeMap<String, String> mSavedQuestions;
@@ -81,6 +82,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         mPasswordEditText = v.findViewById(R.id.password_editText_signup_port);
         mConfirmPasswordEditText = v.findViewById(R.id.confirmPassword_editText_signup_port);
 
+        mCategory = getArguments().getString("Category") != null ? getArguments().getString("Category") : "";
         mProviderChoice = getArguments().getString("Provider") != null ? getArguments().getString("Provider") : "";
         mLanguageChoice = getArguments().getString("Language") != null ? getArguments().getString("Language") : "";
         mSavedQuestions = getArguments().getSerializable("Questions") != null ? (TreeMap) getArguments().getSerializable("Questions") : new TreeMap<>();
@@ -108,6 +110,11 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
                     FragmentManager fragmentManager = getFragmentManager();
                     Fragment fragment = new LoginFragment();
                     Bundle args = new Bundle();
+                    args.putString("Language", mLanguageChoice);
+                    args.putString("Provider", mProviderChoice);
+                    args.putString("Category", mCategory);
+                    args.putSerializable("Questions", mSavedQuestions);
+                    args.putSerializable("Notes", mSavedNotes);
                     fragment.setArguments(args);
                     if (fragmentManager != null) {
                         fragmentManager.beginTransaction()
@@ -216,6 +223,7 @@ public class SignupFragment extends Fragment implements View.OnClickListener {
         if(mProviderChoice != "") { // already used the deck as a guest
             args.putString("Language", mLanguageChoice);
             args.putString("Provider", mProviderChoice);
+            args.putString("Category", mCategory);
             args.putSerializable("Questions", mSavedQuestions);
             args.putSerializable("Notes", mSavedNotes);
         }

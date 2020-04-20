@@ -35,9 +35,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private String mLanguage = "";
     private String mProvider = "";
+    private String mCategory = "";
     private String mUsername = "";
     private String mEmail = "";
-    private String mSavedCards = "";
     private FirebaseAuth mAuth;
     private TextView lastDeck;
     private FirebaseFirestore mDatabase;
@@ -105,6 +105,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         args.putString("Email", mEmail);
                         args.putString("Language", mLanguage);
                         args.putString("Provider", mProvider);
+                        args.putString("Category", mCategory);
                         fragment.setArguments(args);
                         if (fragmentManager != null) {
                             fragmentManager.beginTransaction()
@@ -127,7 +128,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         args.putString("Email", mEmail);
                         args.putString("Language", mLanguage);
                         args.putString("Provider", mProvider);
-                        args.putString("Saved_Cards", mSavedCards);
+                        args.putString("Category", mCategory);
                         fragment.setArguments(args);
                         if (fragmentManager != null) {
                             fragmentManager.beginTransaction()
@@ -164,7 +165,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         if (task.isSuccessful()) {
                             mLanguage = (task.getResult().getString("language") != null ? task.getResult().getString("language") : "English");
                             mProvider = (task.getResult().getString("recent_deck") != null ? task.getResult().getString("recent_deck") : "");
-                            mSavedCards = (task.getResult().getString("saved_cards") != null ? task.getResult().getString("saved_cards") : "");
+                            mCategory = (task.getResult().getString("deck_category") != null ? task.getResult().getString("deck_category") : "");
                             lastDeck = v.findViewById(R.id.lastDeck_textView_home_port);
                             if(mProvider != "") {
                                 lastDeck.setText(lastDeck.getText().toString() + " " + mProvider);

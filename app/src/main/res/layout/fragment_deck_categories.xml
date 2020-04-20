@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout3"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/collapse_button"
+        android:layout_width="220dp"
+        android:layout_height="120dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="@dimen/portrait_margin_top"
+        android:background="@drawable/rounded_corner_button"
+        android:text="@string/collapse"
+        android:textColor="@color/whiteFont"
+        android:textSize="50sp"
+        app:fontFamily="@string/font"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deck_categories_list" />
+
+    <TextView
+        android:id="@+id/description_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/portrait_margin_top"
+        android:text="@string/select_provider"
+        android:textAlignment="center"
+        android:textColor="@color/whiteFont"
+        android:textSize="50sp"
+        app:fontFamily="@string/font"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ExpandableListView
+        android:id="@+id/deck_categories_list"
+        android:layout_width="600dp"
+        android:layout_height="800dp"
+        android:layout_marginTop="@dimen/portrait_margin_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description_textView" />
+
+    <Button
+        android:id="@+id/expand_button"
+        android:layout_width="220dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="@dimen/portrait_margin_top"
+        android:background="@drawable/rounded_corner_button"
+        android:text="@string/expand"
+        android:textColor="@color/whiteFont"
+        android:textSize="50sp"
+        app:fontFamily="@string/font"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deck_categories_list" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

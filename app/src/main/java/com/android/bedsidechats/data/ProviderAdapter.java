@@ -70,6 +70,7 @@ public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.Provid
     public class ProviderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         protected Button mProviderButton;
         private String TAG = "PRVDR_HLDR";
+        public String mCategory;
         public String mProviderChoice;
         public String mLanguageChoice;
         public String mEmail;
@@ -96,6 +97,7 @@ public class ProviderAdapter extends RecyclerView.Adapter<ProviderAdapter.Provid
             Bundle args = new Bundle();
             args.putString("Username", mUsername);
             args.putString("Email", mEmail);
+            args.putString("Category", mCategory);
             args.putString("Provider", mProviderChoice);
             args.putString("Language", mLanguageChoice);
             fragment.setArguments(args);

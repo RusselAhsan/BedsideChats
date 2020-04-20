@@ -79,7 +79,7 @@ public class LanguageFragment extends Fragment implements View.OnClickListener {
         if (activity != null) {
             switch (view.getId()) {
                 case R.id.login_button:
-                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     Fragment fragment = new LoginFragment();
                     Bundle args = new Bundle();
                     //Logging in directly upon opening app instead of using app as guest and then logging in later

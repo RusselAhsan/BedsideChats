@@ -15,7 +15,7 @@
     <string name="confirmPassword">Confirm Password:</string>
     <string name="email">Email:</string>
     <string name="username">Username:</string>
-    <string name="select_provider">Select a card deck based on your healthcare provider</string>
+    <string name="select_provider">Select one deck from one of the categories below</string>
     <string name="cards">Cards</string>
     <string name="saved">Saved</string>
     <string name="notes">Notes</string>
