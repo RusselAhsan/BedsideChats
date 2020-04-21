@@ -1,12 +1,12 @@
-package com.android.bedsidechats.UnitTests;
+package com.android.bedsidechats;
+
+import android.content.Intent;
+import android.os.SystemClock;
 
 import androidx.test.rule.ActivityTestRule;
 
-import com.android.bedsidechats.R;
 import com.android.bedsidechats.activities.HomeActivity;
-import com.android.bedsidechats.activities.MainActivity;
 import com.android.bedsidechats.fragments.HomeFragment;
-import com.android.bedsidechats.fragments.LanguageFragment;
 
 import org.junit.Test;
 
@@ -21,13 +21,23 @@ public class HomeUnitTest extends ActivityTestRule<HomeActivity> {
     public HomeUnitTest() {
         super(HomeActivity.class);
 
-        launchActivity(getActivityIntent());
-        mHomeActivity = getActivity();
-        mHomeFragment = (HomeFragment) mHomeActivity.getSupportFragmentManager()
-                .findFragmentById(R.id.fragment_container);
+        Intent intent = new Intent();
+        intent.putExtra("Language", "English");
+        intent.putExtra("Provider", "physician");
+        intent.putExtra("Category", "provider");
+        intent.putExtra("Email", "testing@test.com");
+        intent.putExtra("Username", "test");
+        launchActivity(intent);
 
         // Wait for the Activity to become idle so we don't have null Fragment references.
         getInstrumentation().waitForIdleSync();
+        SystemClock.sleep(500);
+        mHomeActivity = getActivity();
+        if(mHomeActivity != null) {
+            mHomeFragment = (HomeFragment) mHomeActivity.getSupportFragmentManager()
+                    .findFragmentById(R.id.fragment_container);
+        }
+
     }
 
 
@@ -42,6 +52,16 @@ public class HomeUnitTest extends ActivityTestRule<HomeActivity> {
     }
 
     @Test
+    public void testHomeLanguageArgumentEnglish() {
+        assertTrue(mHomeFragment.getArguments().getString("Language").equals("English"));
+    }
+
+    @Test
+    public void testHomeProviderArgumentPhysician() {
+        assertTrue(mHomeFragment.getArguments().getString("Provider").equals("physician"));
+    }
+
+    @Test
     public void testHomeUsernameArgument() {
         assertTrue(mHomeFragment.getArguments().getString("Username").equals("test"));
     }
@@ -49,6 +69,11 @@ public class HomeUnitTest extends ActivityTestRule<HomeActivity> {
     @Test
     public void testHomeEmailArgument() {
         assertTrue(mHomeFragment.getArguments().getString("Email").equals("testing@test.com"));
+    }
+
+    @Test
+    public void testHomeCategoryArgumentProvider() {
+        assertTrue(mHomeFragment.getArguments().getString("Category").equals("provider"));
     }
 
 

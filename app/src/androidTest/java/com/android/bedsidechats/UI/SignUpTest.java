@@ -44,8 +44,6 @@ public class SignUpTest {
             result.putExtra("Language", "English");
             result.putExtra("Provider", "physician");
             result.putExtra("Category", "provider");
-            result.putExtra("Email", "testing@test.com");
-            result.putExtra("Username", "test");
             return result;
         }
     };

@@ -29,15 +29,15 @@ public class MainActivityTest extends ActivityTestRule<MainActivity> {
     }
 
 
-    //@Test
-    //public void testActivityExists() {
-    //    assertNotNull(mMainActivity);
-    //}
+    @Test
+    public void testActivityExists() {
+        assertNotNull(mMainActivity);
+    }
 
-    //@Test
-    //public void testFragmentExists() {
-    //    assertNotNull(mLanguageFragment);
-    //}
+    @Test
+    public void testFragmentExists() {
+        assertNotNull(mLanguageFragment);
+    }
 
     @Test
     public void testLanguageRecyclerViewNotNull() {
@@ -45,7 +45,7 @@ public class MainActivityTest extends ActivityTestRule<MainActivity> {
     }
 
     @Test
-    public void testProviderArrayListNotNull() {
+    public void testLanguageListNotNull() {
         assertNotNull(mLanguageFragment.getLanguageList());
     }
 

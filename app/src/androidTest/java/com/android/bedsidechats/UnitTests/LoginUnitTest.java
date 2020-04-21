@@ -53,7 +53,7 @@ public class LoginUnitTest extends ActivityTestRule<LoginActivity> {
 
     @Test
     public void testLoginProviderArgument() {
-        assertTrue(mLoginFragment.getArguments().getString("Provider").equals("Physician"));
+        assertTrue(mLoginFragment.getArguments().getString("Provider").equals("physician"));
     }
 
 

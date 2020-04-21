@@ -18,8 +18,6 @@ public class SignUpActivity extends BaseFragmentActivity {
         args.putString("Language", getIntent().getStringExtra("Language"));
         args.putString("Provider", getIntent().getStringExtra("Provider"));
         args.putString("Category", getIntent().getStringExtra("Category"));
-        args.putString("Email", getIntent().getStringExtra("Email"));
-        args.putString("Username", getIntent().getStringExtra("Username"));
         SignupFragment signupFragment = new SignupFragment();
         signupFragment.setArguments(args);
         return signupFragment; }

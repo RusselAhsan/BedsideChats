@@ -51,7 +51,7 @@ public class CardUnitTest extends ActivityTestRule<CardsActivity> {
     }
 
     @Test
-    public void testCardsLanguageArgument() {
+    public void testCardsLanguageArgumentEnglish() {
         assertTrue(mCardsFragment.getArguments().getString("Language").equals("English"));
     }
 

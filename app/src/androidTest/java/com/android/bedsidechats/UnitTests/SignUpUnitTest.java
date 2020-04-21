@@ -25,7 +25,8 @@ public class SignUpUnitTest extends ActivityTestRule<SignUpActivity> {
 
         Intent intent = new Intent();
         intent.putExtra("Language", "English");
-        intent.putExtra("Provider", "Physician");
+        intent.putExtra("Provider", "physician");
+        intent.putExtra("Category", "provider");
         launchActivity(intent);
         mSignUpActivity = getActivity();
         mSignUpFragment = (SignupFragment) mSignUpActivity.getSupportFragmentManager()
@@ -53,10 +54,13 @@ public class SignUpUnitTest extends ActivityTestRule<SignUpActivity> {
 
     @Test
     public void testSignUpProviderArgument() {
-        assertTrue(mSignUpFragment.getArguments().getString("Provider").equals("Physician"));
+        assertTrue(mSignUpFragment.getArguments().getString("Provider").equals("physician"));
     }
 
-
+    @Test
+    public void testSignUpCategoryArgument() {
+        assertTrue(mSignUpFragment.getArguments().getString("Category").equals("provider"));
+    }
 
     protected void afterActivityFinished() {
         super.afterActivityFinished();

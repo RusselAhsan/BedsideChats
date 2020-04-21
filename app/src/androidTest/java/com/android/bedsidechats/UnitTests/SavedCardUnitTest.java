@@ -55,7 +55,7 @@ public class SavedCardUnitTest extends ActivityTestRule<SavedActivity> {
     }
 
     @Test
-    public void testSavedLanguageArgument() {
+    public void testSavedLanguageArgumentEnglish() {
         assertTrue(mSavedFragment.getArguments().getString("Language").equals("English"));
     }
 

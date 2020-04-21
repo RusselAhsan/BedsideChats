@@ -39,25 +39,29 @@ public class ProviderUnitTest extends ActivityTestRule<ProviderActivity> {
     }
 
 
-    //@Test
-    //public void testActivityExists() {
-    //    assertNotNull(mProviderActivity);
-    //}
-
-    //@Test
-    //public void testFragmentExists() {
-    //    assertNotNull(mProviderFragment);
-    //}
-
-    //@Test
-    //public void testProviderLanguageEnglish() {
-    //    assertTrue(mProviderFragment.getArguments().getString("Language").equals("English"));
-    //}
-
+    @Test
+    public void testActivityExists() {
+        assertNotNull(mProviderActivity);
+    }
 
     @Test
-    public void testProviderLanguageVariableEnglish() {
-        assertTrue(mProviderFragment.getLanguage().equals("English"));
+    public void testFragmentExists() {
+        assertNotNull(mProviderFragment);
+    }
+
+//    @Test
+//    public void testProviderLanguageEnglish() {
+//        assertTrue(mProviderFragment.getArguments().getString("Language").equals("English"));
+//    }
+
+    @Test
+    public void testProviderLanguageArgumentEspañol() {
+        assertTrue(mProviderFragment.getArguments().getString("Language").equals("Español"));
+    }
+
+    @Test
+    public void testProviderLanguageVariableEspañol() {
+        assertTrue(mProviderFragment.getLanguage().equals("Español"));
     }
 
     protected void afterActivityFinished() {
