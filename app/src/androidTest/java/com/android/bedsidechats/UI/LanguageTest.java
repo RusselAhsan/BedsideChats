@@ -1,19 +1,25 @@
-package com.android.bedsidechats.activities;
+package com.android.bedsidechats.UI;
 
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import androidx.test.espresso.Espresso;
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.matcher.RootMatchers;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 
 import com.android.bedsidechats.R;
+import com.android.bedsidechats.activities.MainActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
@@ -29,45 +35,47 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class HomeTest {
+public class LanguageTest {
 
     @Rule
-    public ActivityTestRule<HomeActivity> mActivityTestRule = new ActivityTestRule<>(HomeActivity.class, true, true);
+    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class, true, true);
+
 
     @Test
-    public void HomeTestTitle() {
+    public void languageViewTest() {
         ViewInteraction textView = onView(
-                allOf(withId(R.id.title_textView_home_port), withText("Bedside Chats")));
+                allOf(withId(R.id.title_textView), withText("Bedside Chats")));
         textView.check(matches(isDisplayed()));
-    }
 
-    @Test
-    public void HomeTestSelectTextView() {
         ViewInteraction textView2 = onView(
-                allOf(withId(R.id.select_textView_home_port), withText("Select an option")));
-        textView2.check(matches(isDisplayed()));
-    }
+                allOf(withId(R.id.title_textView), withText("Bedside Chats")));
+        textView2.check(matches(withText("Bedside Chats")));
 
-    @Test
-    public void HomeTestCardsButton() {
+        ViewInteraction textView3 = onView(
+                allOf(withId(R.id.language_textView), withText("New user? Select a language")));
+        textView3.check(matches(isDisplayed()));
+
+        ViewInteraction textView4 = onView(
+                allOf(withId(R.id.language_textView), withText("New user? Select a language")));
+        textView4.check(matches(withText("New user? Select a language")));
+
+        ViewInteraction recyclerView = onView(
+                allOf(withId(R.id.languages_list)));
+        recyclerView.check(matches(isDisplayed()));
+
+        ViewInteraction textView5 = onView(
+                allOf(withId(R.id.login_text), withText("Already have an account?")));
+        textView5.check(matches(isDisplayed()));
+
+        ViewInteraction textView6 = onView(
+                allOf(withId(R.id.login_text), withText("Already have an account?")));
+        textView6.check(matches(withText("Already have an account?")));
+
         ViewInteraction button = onView(
-                allOf(withId(R.id.cards_button_home_port)));
+                allOf(withId(R.id.login_button)));
         button.check(matches(isDisplayed()));
     }
 
-    @Test
-    public void HomeTestSavedButton() {
-        ViewInteraction button2 = onView(
-                allOf(withId(R.id.saved_button_home_port)));
-        button2.check(matches(isDisplayed()));
-    }
-
-    @Test
-    public void HomeTestProvidersButton() {
-        ViewInteraction button3 = onView(
-                allOf(withId(R.id.provider_button_home_port)));
-        button3.check(matches(isDisplayed()));
-    }
 
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {

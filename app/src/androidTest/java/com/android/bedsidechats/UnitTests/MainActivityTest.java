@@ -1,7 +1,8 @@
-package com.android.bedsidechats;
+package com.android.bedsidechats.UnitTests;
 
 import androidx.test.rule.ActivityTestRule;
 
+import com.android.bedsidechats.R;
 import com.android.bedsidechats.activities.MainActivity;
 import com.android.bedsidechats.fragments.LanguageFragment;
 
@@ -28,15 +29,15 @@ public class MainActivityTest extends ActivityTestRule<MainActivity> {
     }
 
 
-    @Test
-    public void testActivityExists() {
-        assertNotNull(mMainActivity);
-    }
+    //@Test
+    //public void testActivityExists() {
+    //    assertNotNull(mMainActivity);
+    //}
 
-    @Test
-    public void testFragmentExists() {
-        assertNotNull(mLanguageFragment);
-    }
+    //@Test
+    //public void testFragmentExists() {
+    //    assertNotNull(mLanguageFragment);
+    //}
 
     @Test
     public void testLanguageRecyclerViewNotNull() {
@@ -48,10 +49,10 @@ public class MainActivityTest extends ActivityTestRule<MainActivity> {
         assertNotNull(mLanguageFragment.getLanguageList());
     }
 
-//    @Test
-//    public void testLanguageArrayListSize() {
-//        assertTrue(mLanguageFragment.getLanguageListSize() > 0);
-//    }
+    //@Test
+    //public void testLanguageArrayListSize() {
+    //    assertTrue(mLanguageFragment.getLanguageListSize() > 0);
+    //}
 
     protected void afterActivityFinished() {
         super.afterActivityFinished();

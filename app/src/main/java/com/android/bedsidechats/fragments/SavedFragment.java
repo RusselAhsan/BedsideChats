@@ -62,7 +62,6 @@ public class SavedFragment extends Fragment implements View.OnClickListener {
 
         // get the listview
         expListView = (ExpandableListView) v.findViewById(R.id.saved_cards_list);
-
         expand = (Button) v.findViewById(R.id.expand_button);
         collapse = (Button) v.findViewById(R.id.collapse_button);
         done = (Button) v.findViewById(R.id.done_button);
