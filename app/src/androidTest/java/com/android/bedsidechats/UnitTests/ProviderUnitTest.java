@@ -1,4 +1,4 @@
-package com.android.bedsidechats;
+package com.android.bedsidechats.UnitTests;
 import android.content.Intent;
 import android.os.SystemClock;
 
@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.test.rule.ActivityTestRule;
+
+import com.android.bedsidechats.R;
 import com.android.bedsidechats.activities.ProviderActivity;
 import com.android.bedsidechats.fragments.ProviderFragment;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
@@ -37,29 +39,25 @@ public class ProviderUnitTest extends ActivityTestRule<ProviderActivity> {
     }
 
 
-    @Test
-    public void testActivityExists() {
-        assertNotNull(mProviderActivity);
-    }
+    //@Test
+    //public void testActivityExists() {
+    //    assertNotNull(mProviderActivity);
+    //}
+
+    //@Test
+    //public void testFragmentExists() {
+    //    assertNotNull(mProviderFragment);
+    //}
+
+    //@Test
+    //public void testProviderLanguageEnglish() {
+    //    assertTrue(mProviderFragment.getArguments().getString("Language").equals("English"));
+    //}
+
 
     @Test
-    public void testFragmentExists() {
-        assertNotNull(mProviderFragment);
-    }
-
-//    @Test
-//    public void testProviderLanguageEnglish() {
-//        assertTrue(mProviderFragment.getArguments().getString("Language").equals("English"));
-//    }
-
-    @Test
-    public void testProviderLanguageArgumentEspañol() {
-        assertTrue(mProviderFragment.getArguments().getString("Language").equals("Español"));
-    }
-
-    @Test
-    public void testProviderLanguageVariableEspañol() {
-        assertTrue(mProviderFragment.getLanguage().equals("Español"));
+    public void testProviderLanguageVariableEnglish() {
+        assertTrue(mProviderFragment.getLanguage().equals("English"));
     }
 
     protected void afterActivityFinished() {

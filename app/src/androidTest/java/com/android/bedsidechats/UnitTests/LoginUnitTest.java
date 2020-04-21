@@ -1,13 +1,16 @@
-package com.android.bedsidechats;
+package com.android.bedsidechats.UnitTests;
 import android.content.Intent;
 import android.os.SystemClock;
 
 import org.junit.Test;
 import androidx.test.rule.ActivityTestRule;
+
+import com.android.bedsidechats.R;
 import com.android.bedsidechats.activities.LoginActivity;
 import com.android.bedsidechats.fragments.LoginFragment;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class LoginUnitTest extends ActivityTestRule<LoginActivity> {
     private LoginActivity mLoginActivity;
@@ -36,7 +39,21 @@ public class LoginUnitTest extends ActivityTestRule<LoginActivity> {
     @Test
     public void testActivityExists() {
         assertNotNull(mLoginActivity);
+    }
+
+    @Test
+    public void testFragmentExists(){
         assertNotNull(mLoginFragment);
+    }
+
+    @Test
+    public void testLoginLanguageArgument() {
+        assertTrue(mLoginFragment.getArguments().getString("Language").equals("English"));
+    }
+
+    @Test
+    public void testLoginProviderArgument() {
+        assertTrue(mLoginFragment.getArguments().getString("Provider").equals("Physician"));
     }
 
 

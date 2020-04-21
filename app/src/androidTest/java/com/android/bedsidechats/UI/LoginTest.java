@@ -1,4 +1,4 @@
-package com.android.bedsidechats.activities;
+package com.android.bedsidechats.UI;
 
 
 import android.content.Context;
@@ -14,6 +14,7 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.android.bedsidechats.R;
+import com.android.bedsidechats.activities.LoginActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;

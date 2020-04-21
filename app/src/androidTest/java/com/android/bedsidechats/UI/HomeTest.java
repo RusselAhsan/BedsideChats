@@ -1,4 +1,4 @@
-package com.android.bedsidechats.activities;
+package com.android.bedsidechats.UI;
 
 
 import android.content.Context;
@@ -14,6 +14,7 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.android.bedsidechats.R;
+import com.android.bedsidechats.activities.HomeActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -32,14 +33,14 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SignUpTest {
+public class HomeTest {
 
     @Rule
-    public ActivityTestRule<SignUpActivity> mActivityTestRule = new ActivityTestRule(SignUpActivity.class, true, true){
+    public ActivityTestRule<HomeActivity> mActivityTestRule = new ActivityTestRule(HomeActivity.class, true, true){
         @Override
         protected Intent getActivityIntent() {
             Context targetContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-            Intent result = new Intent(targetContext, SignUpActivity.class);
+            Intent result = new Intent(targetContext, HomeActivity.class);
             result.putExtra("Language", "English");
             result.putExtra("Provider", "physician");
             result.putExtra("Category", "provider");
@@ -50,81 +51,38 @@ public class SignUpTest {
     };
 
     @Test
-    public void signUpViewTestTitlTextView() {
+    public void HomeTestTitle() {
         ViewInteraction textView = onView(
-                allOf(withId(R.id.title_textView_signup_port), withText("Bedside Chats")));
-        textView.check(matches(withText("Bedside Chats")));
+                allOf(withId(R.id.title_textView_home_port), withText("Bedside Chats")));
+        textView.check(matches(isDisplayed()));
     }
 
     @Test
-    public void signUpViewTestEmailTextView() {
+    public void HomeTestSelectTextView() {
         ViewInteraction textView2 = onView(
-                allOf(withId(R.id.email_textView_signup_port), withText("Email:")));
-        textView2.check(matches(withText("Email:")));
+                allOf(withId(R.id.select_textView_home_port), withText("Select an option")));
+        textView2.check(matches(isDisplayed()));
     }
 
     @Test
-    public void signUpViewTestEmailEditText() {
-        ViewInteraction editText = onView(
-                allOf(withId(R.id.email_editText_signup_port)));
-        editText.check(matches(withText("")));
+    public void HomeTestCardsButton() {
+        ViewInteraction button = onView(
+                allOf(withId(R.id.cards_button_home_port)));
+        button.check(matches(isDisplayed()));
     }
 
     @Test
-    public void signUpViewTestUsernameEditText() {
-        ViewInteraction editText2 = onView(
-                allOf(withId(R.id.username_editText_signup_port)));
-        editText2.check(matches(withText("")));;
-    }
-
-    @Test
-    public void signUpViewTestUsernameTextView() {
-        ViewInteraction editText2 = onView(
-                allOf(withId(R.id.username_editText_signup_port)));
-        editText2.check(matches(withText("")));;
-    }
-
-    @Test
-    public void signUpViewTestPasswordTextView() {
-        ViewInteraction textView4 = onView(
-                allOf(withId(R.id.password_textView_signup_port), withText("Password:")));
-        textView4.check(matches(withText("Password:")));
-    }
-
-    @Test
-    public void signUpViewTestPasswordEditText() {
-        ViewInteraction editText3 = onView(
-                allOf(withId(R.id.password_editText_signup_port)));
-        editText3.check(matches(withText("")));
-    }
-
-    @Test
-    public void signUpViewTestSignupButton() {
+    public void HomeTestSavedButton() {
         ViewInteraction button2 = onView(
-                allOf(withId(R.id.signup_button_signup_port)));
+                allOf(withId(R.id.saved_button_home_port)));
         button2.check(matches(isDisplayed()));
     }
 
     @Test
-    public void signUpViewTestLoginButton() {
+    public void HomeTestProvidersButton() {
         ViewInteraction button3 = onView(
-                allOf(withId(R.id.login_button_signup_port)));
+                allOf(withId(R.id.provider_button_home_port)));
         button3.check(matches(isDisplayed()));
-    }
-
-
-    @Test
-    public void signUpButtonSignUpTest() {
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.signup_button_signup_port), withText("Sign Up")));
-        appCompatButton2.perform(click());
-    }
-
-    @Test
-    public void signUpButtonLoginTest() {
-        ViewInteraction appCompatButton3 = onView(
-                allOf(withId(R.id.login_button_signup_port), withText("Login")));
-        appCompatButton3.perform(click());
     }
 
     private static Matcher<View> childAtPosition(

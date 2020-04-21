@@ -1,4 +1,4 @@
-package com.android.bedsidechats.activities;
+package com.android.bedsidechats.UI;
 
 
 import android.view.View;
@@ -15,6 +15,7 @@ import androidx.test.runner.AndroidJUnit4;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 
 import com.android.bedsidechats.R;
+import com.android.bedsidechats.activities.MainActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;

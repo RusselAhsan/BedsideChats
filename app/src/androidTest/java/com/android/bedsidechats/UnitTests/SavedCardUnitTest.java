@@ -1,4 +1,4 @@
-package com.android.bedsidechats;
+package com.android.bedsidechats.UnitTests;
 import android.content.Intent;
 import android.os.SystemClock;
 
@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.test.rule.ActivityTestRule;
+
+import com.android.bedsidechats.R;
 import com.android.bedsidechats.activities.SavedActivity;
 import com.android.bedsidechats.fragments.SavedFragment;
 
@@ -53,7 +55,7 @@ public class SavedCardUnitTest extends ActivityTestRule<SavedActivity> {
     }
 
     @Test
-    public void testCardsLanguageArgumentEnglish() {
+    public void testSavedLanguageArgument() {
         assertTrue(mSavedFragment.getArguments().getString("Language").equals("English"));
     }
 
@@ -62,17 +64,17 @@ public class SavedCardUnitTest extends ActivityTestRule<SavedActivity> {
         assertTrue(mSavedFragment.getArguments().getString("Provider").equals("physician"));
     }
 
-    
+    @Test
+    public void testSavedUsernameArgument() {
+        assertTrue(mSavedFragment.getArguments().getString("Username").equals("test"));
+    }
 
-//    @Test
-//    public void testCardDeckMapNotNull() {
-//        assertNotNull(mCardsFragment.getCardDeckMap());
-//    }
+    @Test
+    public void testSaveEmailArgument() {
+        assertTrue(mSavedFragment.getArguments().getString("Email").equals("testing@test.com"));
+    }
 
-//    @Test
-//    public void testCardDeckMapSize() {
-//        assertTrue(mCardsFragment.getCardDeckSize() > 0);
-//    }
+
 
     protected void afterActivityFinished() {
         super.afterActivityFinished();
