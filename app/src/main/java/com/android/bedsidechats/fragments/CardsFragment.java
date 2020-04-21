@@ -289,6 +289,8 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         return mProviderChoice;
     }
 
+    public String getCategory() { return mCategory; }
+
     public RecyclerView getRecyclerView(){
         return mCards;
     }

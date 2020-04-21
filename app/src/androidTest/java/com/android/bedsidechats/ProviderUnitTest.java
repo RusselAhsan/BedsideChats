@@ -57,15 +57,15 @@ public class ProviderUnitTest extends ActivityTestRule<ProviderActivity> {
         assertTrue(mProviderFragment.getLanguage().equals("Español"));
     }
 
-    @Test
-    public void testProviderRecyclerViewNotNull() {
-        assertNotNull(mProviderFragment.getRecyclerView());
-    }
-
-    @Test
-    public void testProviderArrayListNotNull() {
-        assertNotNull(mProviderFragment.getProviderList());
-    }
+//    @Test
+//    public void testProviderRecyclerViewNotNull() {
+//        assertNotNull(mProviderFragment.getRecyclerView());
+//    }
+//
+//    @Test
+//    public void testProviderArrayListNotNull() {
+//        assertNotNull(mProviderFragment.getProviderList());
+//    }
 
 //    @Test
 //    public void testProviderArrayListSize() {
