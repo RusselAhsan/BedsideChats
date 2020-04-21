@@ -1,12 +1,15 @@
 package com.android.bedsidechats.activities;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
@@ -32,7 +35,19 @@ import static org.hamcrest.Matchers.allOf;
 public class LoginTest {
 
     @Rule
-    public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class, true, true);
+    public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule(LoginActivity.class, true, true){
+    @Override
+    protected Intent getActivityIntent() {
+        Context targetContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        Intent result = new Intent(targetContext, LoginActivity.class);
+        result.putExtra("Language", "English");
+        result.putExtra("Provider", "physician");
+        result.putExtra("Category", "provider");
+        result.putExtra("Email", "testing@test.com");
+        result.putExtra("Username", "test");
+        return result;
+        }
+    };
 
     @Test
     public void loginViewTestTitle() {

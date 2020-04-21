@@ -70,7 +70,7 @@ public class SavedFragment extends Fragment implements View.OnClickListener {
         done.setOnClickListener(this);
 
         // preparing list data
-        prepareListData();
+        prepareListData(mEmail, mProviderChoice);
 
         return v;
     }
@@ -109,10 +109,10 @@ public class SavedFragment extends Fragment implements View.OnClickListener {
     /*
      * Preparing the list data
      */
-    private void prepareListData() {
+    private void prepareListData(String email, String provider) {
 
-        mDatabase.collection("patients").document(mEmail)
-                .collection("saved").document(mProviderChoice).collection("data")
+        mDatabase.collection("patients").document(email)
+                .collection("saved").document(provider).collection("data")
                 .document("questions").get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -120,8 +120,8 @@ public class SavedFragment extends Fragment implements View.OnClickListener {
                         if (task.isSuccessful()) {
                             mQuestionList = (HashMap) task.getResult().getData();
                             if(mQuestionList != null) {
-                                    mDatabase.collection("patients").document(mEmail)
-                                            .collection("saved").document(mProviderChoice).collection("data")
+                                    mDatabase.collection("patients").document(email)
+                                            .collection("saved").document(provider).collection("data")
                                             .document("notes").get()
                                             .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                                 @Override

@@ -1,5 +1,6 @@
 package com.android.bedsidechats;
 import android.content.Intent;
+import android.os.SystemClock;
 
 import org.junit.Test;
 
@@ -22,14 +23,18 @@ public class CardUnitTest extends ActivityTestRule<CardsActivity> {
 
         Intent intent = new Intent();
         intent.putExtra("Language", "English");
-        intent.putExtra("Provider", "Physician");
+        intent.putExtra("Provider", "physician");
+        intent.putExtra("Category", "provider");
+        intent.putExtra("Email", "testing@test.com");
+        intent.putExtra("Username", "test");
         launchActivity(intent);
-        mCardsActivity = getActivity();
-        mCardsFragment = (CardsFragment) mCardsActivity.getSupportFragmentManager()
-                .findFragmentById(R.id.fragment_container);
 
         // Wait for the Activity to become idle so we don't have null Fragment references.
         getInstrumentation().waitForIdleSync();
+        SystemClock.sleep(100);
+        mCardsActivity = getActivity();
+        mCardsFragment = (CardsFragment) mCardsActivity.getSupportFragmentManager()
+                .findFragmentById(R.id.fragment_container);
     }
 
 
@@ -50,7 +55,7 @@ public class CardUnitTest extends ActivityTestRule<CardsActivity> {
 
     @Test
     public void testProviderProviderArgumentPhysician() {
-        assertTrue(mCardsFragment.getArguments().getString("Provider").equals("Physician"));
+        assertTrue(mCardsFragment.getArguments().getString("Provider").equals("physician"));
     }
 
     @Test
@@ -60,7 +65,7 @@ public class CardUnitTest extends ActivityTestRule<CardsActivity> {
 
     @Test
     public void testCardsProviderVariablePhysician() {
-        assertTrue(mCardsFragment.getProvider().equals("Physician"));
+        assertTrue(mCardsFragment.getProvider().equals("physician"));
     }
 
     @Test
@@ -68,15 +73,17 @@ public class CardUnitTest extends ActivityTestRule<CardsActivity> {
         assertNotNull(mCardsFragment.getRecyclerView());
     }
 
-//    @Test
-//    public void testCardDeckMapNotNull() {
-//        assertNotNull(mCardsFragment.getCardDeckMap());
-//    }
+    @Test
+    public void testCardDeckMapNotNull() {
+        mCardsFragment.getCardDeck("English", "provider", "physician");
+        assertNotNull(mCardsFragment.getCardDeckMap());
+    }
 
-//    @Test
-//    public void testCardDeckMapSize() {
-//        assertTrue(mCardsFragment.getCardDeckSize() > 0);
-//    }
+    @Test
+    public void testCardDeckMapSizeEnglishProviderPhysician() {
+        mCardsFragment.getCardDeck("English", "provider", "physician");
+        assertTrue(mCardsFragment.getCardDeckSize() > 0);
+    }
 
     protected void afterActivityFinished() {
         super.afterActivityFinished();

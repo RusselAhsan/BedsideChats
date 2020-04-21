@@ -39,7 +39,6 @@ import java.util.TreeMap;
 import me.relex.circleindicator.CircleIndicator2;
 
 public class CardsFragment extends Fragment implements View.OnClickListener {
-    //OnCardsSelectedListener callback;
     private String mLanguageChoice;
     private String mProviderChoice;
     private String mCategory;
@@ -85,7 +84,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         if (mCards != null) {
             mLinearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             mCards.setLayoutManager(mLinearLayoutManager);
-            getCardDeck();
+            getCardDeck(mLanguageChoice, mCategory, mProviderChoice);
         }
 
         return v;
@@ -128,8 +127,8 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public void getCardDeck() {
-        mDatabase.collection("languages").document(mLanguageChoice).collection("categories").document(mCategory).collection("decks").document(mProviderChoice).get()
+    public void getCardDeck(String language, String category, String deck) {
+        mDatabase.collection("languages").document(language).collection("categories").document(category).collection("decks").document(deck).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -139,9 +138,10 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                                 mQuestionList.remove("instructions");
                                 TreeMap<String, String> mQuestionMap = new TreeMap<>(mQuestionList);
                                 Log.d(TAG, "" + mQuestionMap);
-                                mAdapter = new CardAdapter(getActivity(), mQuestionMap, getActivity().getSupportFragmentManager(), mLanguageChoice, mSavedQuestions, mSavedNotes);
+                                mAdapter = new CardAdapter(getActivity(), mQuestionMap, getFragmentManager(), language, mSavedQuestions, mSavedNotes);
                                 mCards.setAdapter(mAdapter);
                                 SnapHelper snapHelper = new PagerSnapHelper();
+                                mCards.setOnFlingListener(null);
                                 snapHelper.attachToRecyclerView(mCards);
                                 indicator.attachToRecyclerView(mCards, snapHelper);
                                 Log.d(TAG, task.getResult().getId() + " => " + task.getResult().getData());

@@ -19,9 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.bedsidechats.R;
 import com.android.bedsidechats.data.DeckCategoryAdapter;
-import com.android.bedsidechats.data.LanguageAdapter;
-import com.android.bedsidechats.data.ProviderAdapter;
-import com.android.bedsidechats.data.SavedCardAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -40,9 +37,6 @@ public class ProviderFragment extends Fragment implements View.OnClickListener {
     private String mUsername = "";
     private String mEmail = "";
     private FirebaseFirestore mDatabase;
-    //public ArrayList<String> providerOptions;
-    //public RecyclerView mProviders;
-    private RecyclerView.Adapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
     private static String TAG = "PRVDR_FGMT";
 
@@ -52,7 +46,6 @@ public class ProviderFragment extends Fragment implements View.OnClickListener {
     HashMap<String, List<String>> listDataChild;
 
     private ArrayList<String> mDecks;
-    //private HashMap<String, String> mDecks;
 
     Button expand, collapse;
 
@@ -76,7 +69,6 @@ public class ProviderFragment extends Fragment implements View.OnClickListener {
         v = inflater.inflate(R.layout.fragment_deck_categories, container, false);
 
         mDatabase = FirebaseFirestore.getInstance();
-        //providerOptions =  new ArrayList<>();
 
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
@@ -93,13 +85,8 @@ public class ProviderFragment extends Fragment implements View.OnClickListener {
         expand.setOnClickListener(this);
         collapse.setOnClickListener(this);
 
-        //mProviders = v.findViewById(R.id.providers_list);
-       // if (mProviders != null){
             mLinearLayoutManager =  new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        //    mProviders.setLayoutManager(mLinearLayoutManager);
-            //getListOfProviders(mLanguage);
             getCategoriesAndDecks(mLanguage);
-        //}
 
 
         return v;
@@ -122,25 +109,6 @@ public class ProviderFragment extends Fragment implements View.OnClickListener {
             }
         }
     }
-
-//    public void getListOfProviders(String language){
-//        mDatabase.collection("languages").document(language).collection("decks").get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                providerOptions.add(document.getId());
-//                                mAdapter = new ProviderAdapter(getActivity(), providerOptions, getActivity().getSupportFragmentManager(), mLanguage, mEmail, mUsername);
-//                                mProviders.setAdapter(mAdapter);
-//                                Log.d(TAG, document.getId() + " => " + document.getData());
-//                            }
-//                        } else {
-//                            Log.d(TAG, "Error getting documents: ", task.getException());
-//                        }
-//                    }
-//                });
-//    }
 
         public void getCategoriesAndDecks(String language){
         mDatabase.collection("languages").document(language).collection("categories").get()
@@ -168,7 +136,7 @@ public class ProviderFragment extends Fragment implements View.OnClickListener {
                                     }
                                 });
                             }
-                            listAdapter = new DeckCategoryAdapter(getContext(), listDataHeader, listDataChild, mEmail, mUsername, mLanguage, getActivity().getSupportFragmentManager());
+                            listAdapter = new DeckCategoryAdapter(getContext(), listDataHeader, listDataChild, mEmail, mUsername, mLanguage, getFragmentManager());
 
                             // setting list adapter
                             expListView.setAdapter(listAdapter);
@@ -179,21 +147,9 @@ public class ProviderFragment extends Fragment implements View.OnClickListener {
                 });
     }
 
-//    public int getProviderListSize(){
-//        return providerOptions.size();
-//    }
-
     public String getLanguage(){
         return mLanguage;
     }
-
-//    public RecyclerView getRecyclerView(){
-//        return mProviders;
-//    }
-
-//    public ArrayList<String> getProviderList(){
-//        return providerOptions;
-//    }
 
     //method to expand all groups
     private void expandAll() {

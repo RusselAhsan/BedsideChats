@@ -82,7 +82,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         mEmail = getArguments().getString("Email") != null ? getArguments().getString("Email") : "";
         mUsername = getArguments().getString("Username") != null ? getArguments().getString("Username") : "";
-        getUserPreferences(mEmail, v);
+        getUserPreferences(v);
 
         return v;
     }
@@ -157,8 +157,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public void getUserPreferences(String email, View v){
-        mDatabase.collection("patients").document(email).get()
+    public void getUserPreferences(View v){
+        mDatabase.collection("patients").document(mEmail).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {

@@ -1,5 +1,6 @@
 package com.android.bedsidechats;
 import android.content.Intent;
+import android.os.SystemClock;
 
 import org.junit.Test;
 import androidx.test.rule.ActivityTestRule;
@@ -17,14 +18,18 @@ public class LoginUnitTest extends ActivityTestRule<LoginActivity> {
 
         Intent intent = new Intent();
         intent.putExtra("Language", "English");
-        intent.putExtra("Provider", "Physician");
+        intent.putExtra("Provider", "physician");
+        intent.putExtra("Category", "provider");
+        intent.putExtra("Email", "testing@test.com");
+        intent.putExtra("Username", "test");
         launchActivity(intent);
-        mLoginActivity = getActivity();
-        mLoginFragment = (LoginFragment) mLoginActivity.getSupportFragmentManager()
-                .findFragmentById(R.id.fragment_container);
 
         // Wait for the Activity to become idle so we don't have null Fragment references.
         getInstrumentation().waitForIdleSync();
+        SystemClock.sleep(100);
+        mLoginActivity = getActivity();
+        mLoginFragment = (LoginFragment) mLoginActivity.getSupportFragmentManager()
+                .findFragmentById(R.id.fragment_container);
     }
 
 

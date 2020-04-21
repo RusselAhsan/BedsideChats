@@ -48,10 +48,11 @@ public class MainActivityTest extends ActivityTestRule<MainActivity> {
         assertNotNull(mLanguageFragment.getLanguageList());
     }
 
-//    @Test
-//    public void testLanguageArrayListSize() {
-//        assertTrue(mLanguageFragment.getLanguageListSize() > 0);
-//    }
+    @Test
+    public void testLanguageArrayListSize() {
+        mLanguageFragment.getListOfLanguages();
+        assertTrue(mLanguageFragment.getLanguageListSize() > 0);
+    }
 
     protected void afterActivityFinished() {
         super.afterActivityFinished();

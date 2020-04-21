@@ -1,16 +1,20 @@
 package com.android.bedsidechats.activities;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.android.bedsidechats.R;
+import com.android.bedsidechats.fragments.InstructionsFragment;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -32,7 +36,19 @@ import static org.hamcrest.Matchers.allOf;
 public class HomeTest {
 
     @Rule
-    public ActivityTestRule<HomeActivity> mActivityTestRule = new ActivityTestRule<>(HomeActivity.class, true, true);
+    public ActivityTestRule<HomeActivity> mActivityTestRule = new ActivityTestRule(HomeActivity.class, true, true){
+        @Override
+        protected Intent getActivityIntent() {
+            Context targetContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+            Intent result = new Intent(targetContext, HomeActivity.class);
+            result.putExtra("Language", "English");
+            result.putExtra("Provider", "physician");
+            result.putExtra("Category", "provider");
+            result.putExtra("Email", "testing@test.com");
+            result.putExtra("Username", "test");
+            return result;
+        }
+    };
 
     @Test
     public void HomeTestTitle() {

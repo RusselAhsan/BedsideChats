@@ -1,5 +1,6 @@
 package com.android.bedsidechats;
 import android.content.Intent;
+import android.os.SystemClock;
 
 import org.junit.Test;
 
@@ -22,13 +23,17 @@ public class ProviderUnitTest extends ActivityTestRule<ProviderActivity> {
 
         Intent intent = new Intent();
         intent.putExtra("Language", "Español");
+        intent.putExtra("Username", "test");
+        intent.putExtra("Email", "testing@test.com");
         launchActivity(intent);
+
+        // Wait for the Activity to become idle so we don't have null Fragment references.
+        getInstrumentation().waitForIdleSync();
+        SystemClock.sleep(100);
         mProviderActivity = getActivity();
         mProviderFragment = (ProviderFragment) mProviderActivity.getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_container);
 
-        // Wait for the Activity to become idle so we don't have null Fragment references.
-        getInstrumentation().waitForIdleSync();
     }
 
 
@@ -56,21 +61,6 @@ public class ProviderUnitTest extends ActivityTestRule<ProviderActivity> {
     public void testProviderLanguageVariableEspañol() {
         assertTrue(mProviderFragment.getLanguage().equals("Español"));
     }
-
-//    @Test
-//    public void testProviderRecyclerViewNotNull() {
-//        assertNotNull(mProviderFragment.getRecyclerView());
-//    }
-//
-//    @Test
-//    public void testProviderArrayListNotNull() {
-//        assertNotNull(mProviderFragment.getProviderList());
-//    }
-
-//    @Test
-//    public void testProviderArrayListSize() {
-//        assertTrue(mProviderFragment.getProviderListSize() > 0);
-//    }
 
     protected void afterActivityFinished() {
         super.afterActivityFinished();

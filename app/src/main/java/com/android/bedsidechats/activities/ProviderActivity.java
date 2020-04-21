@@ -10,14 +10,12 @@ public class ProviderActivity extends BaseFragmentActivity {
     @Override
     protected Fragment createFragment() {
         Bundle args = new Bundle();
-        String language = "English";
-        String provider = "Physician";
-        String email = "testing@test.com";
-        String username = "test";
-        args.putString("Language", language);
-        args.putString("Provider", provider);
-        args.putString("Email", email);
-        args.putString("Username", username);
+//        String language = "English";
+//        String email = "testing@test.com";
+//        String username = "test";
+        args.putString("Language", getIntent().getStringExtra("Language"));
+        args.putString("Email", getIntent().getStringExtra("Email"));
+        args.putString("Username", getIntent().getStringExtra("Username"));
         ProviderFragment providerFragment = new ProviderFragment();
         providerFragment.setArguments(args);
         return providerFragment; }

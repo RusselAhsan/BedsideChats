@@ -1,5 +1,6 @@
 package com.android.bedsidechats;
 import android.content.Intent;
+import android.os.SystemClock;
 
 import org.junit.Test;
 
@@ -23,14 +24,21 @@ public class SavedCardUnitTest extends ActivityTestRule<SavedActivity> {
 
         Intent intent = new Intent();
         intent.putExtra("Language", "English");
-        intent.putExtra("Provider", "Physician");
+        intent.putExtra("Provider", "physician");
+        intent.putExtra("Category", "provider");
+        intent.putExtra("Email", "testing@test.com");
+        intent.putExtra("Username", "test");
         launchActivity(intent);
-        mSavedActivity = getActivity();
-        mSavedFragment = (SavedFragment) mSavedActivity.getSupportFragmentManager()
-                .findFragmentById(R.id.fragment_container);
 
         // Wait for the Activity to become idle so we don't have null Fragment references.
         getInstrumentation().waitForIdleSync();
+        SystemClock.sleep(100);
+        mSavedActivity = getActivity();
+        if(mSavedActivity != null) {
+            mSavedFragment = (SavedFragment) mSavedActivity.getSupportFragmentManager()
+                    .findFragmentById(R.id.fragment_container);
+        }
+
     }
 
 
@@ -51,7 +59,7 @@ public class SavedCardUnitTest extends ActivityTestRule<SavedActivity> {
 
     @Test
     public void testProviderProviderArgumentPhysician() {
-        assertTrue(mSavedFragment.getArguments().getString("Provider").equals("Physician"));
+        assertTrue(mSavedFragment.getArguments().getString("Provider").equals("physician"));
     }
 
     
